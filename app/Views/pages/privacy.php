@@ -11,7 +11,7 @@
 	<br/>
 
 	<p>
-		At Freezoz, accessible from <a href="<?= esc($base_uri); ?>" class="link blue">https://www.freezoz.com</a>, one of our main priorities is the privacy of our visitors.
+		At Freezoz, accessible from <a href="<?= esc($base_uri); ?>" class="link blue">www.freezoz.com</a>, one of our main priorities is the privacy of our visitors.
 		This Privacy Policy document contains types of information that is collected and recorded by Freezoz and how we use it.
 	</p>
 	<p>
