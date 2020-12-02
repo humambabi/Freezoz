@@ -20,7 +20,7 @@ $routes->setDefaultController('Pages');
 $routes->setDefaultMethod('home');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false); // Use only the defined routes
 
 /**
  * --------------------------------------------------------------------
@@ -30,12 +30,20 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/',				'Pages::home');
-$routes->get('/index',		'Pages::home');
-$routes->get('/home',		'Pages::home');
-$routes->get('/register',	'Pages::register');
-$routes->get('/terms',		'Pages::terms');
-$routes->get('/privacy',	'Pages::privacy');
+$routes->get('/',													'Pages::home');
+$routes->get('/index',											'Pages::home');
+$routes->get('/home',											'Pages::home');
+$routes->get('/register',										'Pages::register');
+$routes->get('/terms',											'Pages::terms');
+$routes->get('/privacy',										'Pages::privacy');
+$routes->get('/activation/(:segment)/(:segment)',		'Pages::activation/$1/$2');
+
+$routes->get('/assets/signin_form', 						'Assets::signin_form');
+$routes->get('/assets/categories_form', 					'Assets::categories_form');
+
+$routes->post('/requests/user_register',					'Requests::user_register');
+$routes->post('/requests/sign_in',							'Requests::sign_in');
+
 
 /**
  * --------------------------------------------------------------------

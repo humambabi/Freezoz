@@ -37,6 +37,12 @@ class BaseController extends Controller
 	 */
 	protected $base_uri = "";
 
+	/**
+	 * Session variable
+	 * 
+	 * @var Session
+	 */
+	protected $session = NULL;
 
 	/**
 	 * Constructor.
@@ -46,10 +52,10 @@ class BaseController extends Controller
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
 
-		// Initialize the $base_uri variable
+		// Initialize class member variables
 		$config = config(App::class);
 		$this->base_uri = new URI(rtrim($config->baseURL, '/'));
-
+		$this->session = \Config\Services::session();
 
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.

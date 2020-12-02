@@ -2,7 +2,7 @@
 	<div id="foot-foot">
 		<div id="foot-logodesc">
 			<div id="foot-logo-gototop">
-				<img alt="logo" width="144" height="36" src="img/footer-logo.png" />
+				<img alt="logo" width="144" height="36" src="/img/footer-logo.png" />
 				<div class="foot-gototop"><i class="far fa-arrow-alt-circle-up fa-2x"></i></div>
 			</div>
 
@@ -36,6 +36,7 @@
 <!-- JScript(s) -->
 <?php
 	include_jscript("main.js");
+	include_jscript("sweetalert.min.js");
 ?>
 </body>
 </html>

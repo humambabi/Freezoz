@@ -10,28 +10,29 @@
 	<meta name="description" content="FreeZoz is the free source of AE templates">
 	<meta name="keywords" content="FreeZoz, free templates, AE templates, AfterEffects templates">
 
-	<link rel="icon" type="image/x-icon" href="favicon.ico">
-	<link rel="shortcut icon" href="favicon.png">
-	<link rel="apple-touch-icon" href="favicon.png">
-	<link rel="apple-touch-icon-precomposed" href="favicon.png">
+	<link rel="icon" type="image/x-icon" href="/favicon.ico">
+	<link rel="shortcut icon" href="/favicon.png">
+	<link rel="apple-touch-icon" href="/favicon.png">
+	<link rel="apple-touch-icon-precomposed" href="/favicon.png">
 
 	<!-- STYLES -->
 	<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/burger.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/css/burger.css">
+	<link rel="stylesheet" type="text/css" href="/css/components.css">
 
 	<!-- Manifest file of 'Progressive app' for Google Chrome browsers -->
-	<link rel="manifest" href="manifest.json">
+	<link rel="manifest" href="/manifest.json">
 	<meta name="theme-color" content="#C3C3C3">
 
 	<!-- IE 10 Metro tile icon -->
 	<meta name="msapplication-TileColor" content="#C3C3C3">
-	<meta name="msapplication-TileImage" content="favicon.png">
+	<meta name="msapplication-TileImage" content="/favicon.png">
 
 	<!-- IE 11 Tile for Windows 8.1 Start Screen -->
 	<meta name="application-name" content="FreeZoz">
 	<meta name="msapplication-tooltip" content="FreeZoz, your free source of AE templates!">
-	<meta name="msapplication-config" content="ieconfig.xml">
+	<meta name="msapplication-config" content="/ieconfig.xml">
 
 	<!-- Localized versions ->
 	<link rel="alternate" href="https://www.filezigzag.com/online-converter" hreflang="x-default" />
@@ -63,8 +64,27 @@
 	echo '<script src="https://kit.fontawesome.com/4ebc6d856a.js" crossorigin="anonymous"></script>';
 	echo PHP_EOL;
 	?>
-	<?='<script type="text/javascript">' . PHP_EOL .
-	"\t\t" . 'var SITE_ROOT = "' . esc($base_uri) . '";' . PHP_EOL .
-	"\t" . '</script>'. PHP_EOL ?>
+
+
+<?php # Convert PHP constants to JS (Password's min & max limits are defined in the sign-in form)
+	echo "<script type='text/javascript'>" . PHP_EOL;
+	echo "\tconst BASE_URI = '" . esc($base_uri) . "';" . PHP_EOL;
+	echo "\tconst FORM_USERNAME_MINLENGTH = " . FORM_USERNAME_MINLENGTH . ";" . PHP_EOL;
+	echo "\tconst FORM_EMAIL_MAXLENGTH = " . FORM_EMAIL_MAXLENGTH . ";" . PHP_EOL;
+	echo "\tconst FORM_PASSWORD_MINLENGTH = " . FORM_PASSWORD_MINLENGTH . ";" . PHP_EOL;
+	echo "\tconst FORM_PASSWORD_MAXLENGTH = " . FORM_PASSWORD_MAXLENGTH . ";" . PHP_EOL;
+	echo "\tconst STATUS_SUCCESS = " . STATUS_SUCCESS . ";" . PHP_EOL;
+	echo "\tconst STATUS_GENERROR = " . STATUS_GENERROR . ";" . PHP_EOL;
+	echo "\tconst STATUS_USERNAME_INVALID = " . STATUS_USERNAME_INVALID . ";" . PHP_EOL;
+	echo "\tconst STATUS_USERNAME_EXISTS = " . STATUS_USERNAME_EXISTS . ";" . PHP_EOL;
+	echo "\tconst STATUS_EMAIL_INVALID = " . STATUS_EMAIL_INVALID . ";" . PHP_EOL;
+	echo "\tconst STATUS_EMAIL_EXISTS = " . STATUS_EMAIL_EXISTS . ";" . PHP_EOL;
+	echo "\tconst STATUS_PASSWORD_INVALID = " . STATUS_PASSWORD_INVALID . ";" . PHP_EOL;
+	echo "\tconst STATUS_TERMS_INVALID = " . STATUS_TERMS_INVALID . ";" . PHP_EOL;
+	echo "\tconst STATUS_RECAPTCHA_INVALID = " . STATUS_RECAPTCHA_INVALID . ";" . PHP_EOL;
+	echo "\tconst STATUS_ACTEMAIL_FAILED = " . STATUS_ACTEMAIL_FAILED . ";" . PHP_EOL;
+	echo "\tconst STATUS_BAD_REMEMBERME = " . STATUS_BAD_REMEMBERME . ";" . PHP_EOL;
+	echo "</script>" . PHP_EOL;
+?>
 </head>
 <body>

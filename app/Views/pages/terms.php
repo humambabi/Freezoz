@@ -11,7 +11,7 @@
 	<br/>
 
 	<h3>Welcome to Freezoz!</h3>
-	<p>These terms and conditions outline the rules and regulations for the use of Freezoz's Website, located at <a href="<?= esc($base_uri); ?>" class="link blue">www.freezoz.com</a>.</p>
+	<p>These terms and conditions outline the rules and regulations for the use of Freezoz's Website, located at <a href="<?= esc($base_uri); ?>" class="link blue"><?= FREEZOZ_LIVE_BASEURL_NOPROTO ?></a>.</p>
 	<p>
 		By accessing this website we assume you accept these terms and conditions. Do not continue to use Freezoz if you do not agree to take all of the terms and conditions stated on this page.
 	</p>

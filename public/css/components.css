@@ -1,0 +1,264 @@
+/*
+Components Style Sheet; Freezoz
+*/
+
+@font-face {
+	font-family: 'fa_pwf';
+	src: url('./pwfont/fa_pwf.eot?34534762');
+	src: url('./pwfont/fa_pwf.eot?34534762#iefix') format('embedded-opentype'),
+		  url('./pwfont/fa_pwf.woff2?34534762') format('woff2'),
+		  url('./pwfont/fa_pwf.woff?34534762') format('woff'),
+		  url('./pwfont/fa_pwf.ttf?34534762') format('truetype'),
+		  url('./pwfont/fa_pwf.svg?34534762#fontello') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+/************************************************
+Buttons
+************************************************/
+button.solid {
+	font-family: 'Balsamiq Sans', cursive;
+	color: white;
+	border-style: solid;
+	border-color: #01baef;
+	background-color: #01baef;
+	cursor: pointer;
+	outline-style: none;
+	transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+}
+button.solid:hover {
+	color: #01baef;
+	background-color: white;
+}
+
+button.medium {
+	font-size: 1.1rem;
+	font-weight: bold;
+	border-width: 2px;
+	border-radius: 1.3rem;
+	padding: 0.6rem 1.5rem 0.5rem 1.5rem;
+}
+
+
+
+
+button.btn-outline-med {
+	color: #01baef;
+	font-family: 'Balsamiq Sans', cursive;
+	font-size: 0.9rem;
+	font-weight: bold;
+	border: 2px solid #01baef;
+	border-radius: 1rem;
+	padding: 0.4rem 0.7rem 0.3rem 0.7rem;
+	cursor: pointer;
+	background-color: white;
+	outline-style: none;
+	transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+}
+button.btn-outline-med:hover {
+	color: white;
+	background-color: #01baef;
+}
+
+button.btn-solid-lrg {
+	color: white;
+	font-family: 'Balsamiq Sans', cursive;
+	font-size: 1.1rem;
+	font-weight: bold;
+	border: 2px solid #01baef;
+	border-radius: 1.35rem;
+	padding: 0.6rem 1.5rem 0.5rem 1.5rem;
+	cursor: pointer;
+	background-color: #01baef;
+	outline-style: none;
+	transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+}
+button.btn-solid-lrg:hover {
+	color: #01baef;
+	background-color: white;
+}
+
+
+
+/************************************************
+Overlays
+************************************************/
+div.overlay#overlay-full {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	transition: all 500ms ease;
+	background-color: rgba(0, 0, 0, 0.45);
+	visibility: visible;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+div.overlay#overlay-full.hidden {
+	background-color: rgba(0, 0, 0, 0.0);
+	visibility: hidden;
+}
+
+div.overlay#overlay-body {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+	transition: all 500ms ease;
+	background-color: rgba(0, 0, 0, 0.45);
+	visibility: visible;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+div.overlay#overlay-body.hidden {
+	background-color: rgba(0, 0, 0, 0.0);
+	visibility: hidden;
+}
+
+
+/************************************************
+Hyperlinks
+************************************************/
+a.link {
+	text-decoration: none;
+	display: inline-flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	margin: 0.25rem 0;
+}
+a.link svg {
+	margin-right: 3px;
+}
+a.link:hover {
+	text-decoration: underline;
+}
+
+a.link.white { color: #c3c3c3; }
+a.link.white svg { fill: rgb(121, 121, 121); }
+a.link.white:hover { color: #eee; }
+a.link.white:hover svg { fill: #999; }
+
+a.link.blue { color: hsl(193deg 99% 47%); }
+a.link.blue svg { fill: #01baef; }
+a.link.blue:hover { color: hsl(193deg 99% 77%); }
+a.link.blue:hover svg { fill: #b3eeff; }
+
+
+
+/************************************************
+Edit inputs
+************************************************/
+@keyframes shake {
+	10%, 90% { transform: translate3d(-1px, 0, 0); }
+	20%, 80% { transform: translate3d(2px, 0, 0); }
+	30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+	40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+.editinput {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	
+	transition: all 333ms ease; /* Same as childs */
+	width: 100%; /* Inside edit-container */
+}
+.editinput input {
+	transition: all 333ms ease; /* Same as siblings and parent */
+	outline-style: none;
+	font-family: 'Balsamiq Sans', cursive;
+	border: 1px solid #aaa;
+	z-index: 1;
+}
+.editinput svg {
+	color: #999;
+	position: absolute;
+	transition: all 333ms ease; /* Same as siblings and parent */
+	z-index: 1;
+}
+.editinput .errmsg {
+	opacity: 0;
+	position: absolute;
+	color: rgba(239, 1, 1, 0.8);
+	text-align: left; /* For when the text is wrapped */
+	transition: all 333ms ease; /* Same as siblings and parent */
+	z-index: 0;
+}
+
+
+.editinput.size-l.error {
+	animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+	transform: translate3d(0, 0, 0);
+	backface-visibility: hidden;
+	perspective: 1000px;
+}
+.editinput.size-l input {
+	border-width: 2px;
+	border-radius: 1.33rem;
+	padding: 0.3rem 0.3rem 0.3rem 2.3rem;
+	width: 100%;
+	height: 2.5rem;
+	font-size: 1rem;
+}
+.editinput.size-l svg {
+	margin-left: 0.85rem;
+	font-size: 1.1rem;
+}
+.editinput.size-l .errmsg {
+	top: 2rem;
+	left: 2.4rem;
+	font-size: 0.7rem;
+}
+.editinput.size-l.error .errmsg {
+	top: 2.7rem;
+}
+
+
+.editinput.error {
+	margin-bottom: 1rem;
+}
+.editinput.error input {
+	border-color: rgba(239, 1, 1, 0.5);
+	box-shadow: 0 0px 4px 0px rgba(239, 1, 1, 0.5);
+}
+.editinput.error input ~ svg {
+	color: rgb(239 1 1 / 60%);
+}
+.editinput.error .errmsg {
+	opacity: 1;
+}
+
+
+.editinput input:focus {
+	border-color: rgb(1, 186, 239);
+}
+.editinput input:focus ~ svg {
+	color: rgb(1, 186, 239);
+}
+.editinput.size-l input:focus {
+	box-shadow: 0 0px 4px 0px rgba(1, 186, 239, 0.5);
+}
+
+.editinput input[type="password"] {
+	font-family: 'fa_pwf', 'Balsamiq Sans', cursive;
+}
+
+.edit-container {
+	height: 3.8rem;
+	display: flex;
+	align-items: flex-start;
+}

@@ -22,6 +22,7 @@ class App extends BaseConfig
 	|
 	*/
 	public $baseURL = 'http://localhost:8080/';
+#	public $baseURL = 'https://www.freezoz.com/';
 
 	/*
 	|--------------------------------------------------------------------------
@@ -125,6 +126,7 @@ class App extends BaseConfig
 	| and the HTTP Strict Transport Security header will be set.
 	*/
 	public $forceGlobalSecureRequests = false;
+#	public $forceGlobalSecureRequests = true;
 
 	/*
 	|--------------------------------------------------------------------------
@@ -182,7 +184,7 @@ class App extends BaseConfig
 	|
 	*/
 	public $sessionDriver            = 'CodeIgniter\Session\Handlers\FileHandler';
-	public $sessionCookieName        = 'ci_session';
+	public $sessionCookieName        = 'frz_session';
 	public $sessionExpiration        = 7200;
 	public $sessionSavePath          = WRITEPATH . 'session';
 	public $sessionMatchIP           = false;
@@ -243,9 +245,9 @@ class App extends BaseConfig
 	| CSRFRegenerate  = Regenerate token on every submission
 	| CSRFRedirect    = Redirect to previous page with error on failure
 	*/
-	public $CSRFTokenName  = 'csrf_test_name';
+	public $CSRFTokenName  = 'csrf_fz_token';
 	public $CSRFHeaderName = 'X-CSRF-TOKEN';
-	public $CSRFCookieName = 'csrf_cookie_name';
+	public $CSRFCookieName = 'csrf_fz_cookie';
 	public $CSRFExpire     = 7200;
 	public $CSRFRegenerate = true;
 	public $CSRFRedirect   = true;

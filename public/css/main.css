@@ -192,120 +192,18 @@ div.navbar-navitemsep-inner {
 	}
 }
 
-
-/************************************************
-Styled buttons
-************************************************/
-button.btn-outline-med {
-	color: #01baef;
-	font-family: 'Balsamiq Sans', cursive;
-	font-size: 0.9rem;
-	font-weight: bold;
-	border: 2px solid #01baef;
-	border-radius: 1rem;
-	padding: 0.4rem 0.7rem 0.3rem 0.7rem;
-	cursor: pointer;
-	background-color: white;
-	outline-style: none;
-	transition: color 333ms ease-in-out, background-color 333ms ease-in-out;
-}
-button.btn-outline-med:hover {
-	color: white;
-	background-color: #01baef;
-}
-
-button.btn-solid-lrg {
-	color: white;
-	font-family: 'Balsamiq Sans', cursive;
-	font-size: 1.1rem;
-	font-weight: bold;
-	border: 2px solid #01baef;
-	border-radius: 1.35rem;
-	padding: 0.6rem 1.5rem 0.5rem 1.5rem;
-	cursor: pointer;
-	background-color: #01baef;
-	outline-style: none;
-	transition: color 333ms ease-in-out, background-color 333ms ease-in-out;
-}
-button.btn-solid-lrg:hover {
-	color: #01baef;
-	background-color: white;
-}
-
-
-/************************************************
-Overlays
-************************************************/
-div.overlay#overlay-full {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 10;
-	transition: all 500ms ease;
-	background-color: rgba(0, 0, 0, 0.45);
-	visibility: visible;
+#navbar-userbtn {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	font-size: 1.7rem;
+	cursor: pointer;
 }
-
-div.overlay#overlay-full.hidden {
-	background-color: rgba(0, 0, 0, 0.0);
-	visibility: hidden;
+#navbar-userbtn svg {
+	color: #999;
+	transition: color 333ms ease-in-out;
 }
-
-div.overlay#overlay-body {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 0;
-	transition: all 500ms ease;
-	background-color: rgba(0, 0, 0, 0.45);
-	visibility: visible;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+#navbar-userbtn:hover svg {
+	color: #000;
 }
-
-div.overlay#overlay-body.hidden {
-	background-color: rgba(0, 0, 0, 0.0);
-	visibility: hidden;
-}
-
-
-/************************************************
-Styled links
-************************************************/
-a.link {
-	text-decoration: none;
-	display: inline-flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-items: center;
-	margin: 0.25rem 0;
-}
-a.link svg {
-	margin-right: 3px;
-}
-a.link:hover {
-	text-decoration: underline;
-}
-
-a.link.white { color: #c3c3c3; }
-a.link.white svg { fill: rgb(121, 121, 121); }
-a.link.white:hover { color: #eee; }
-a.link.white:hover svg { fill: #999; }
-
-a.link.blue { color: hsl(193deg 99% 47%); }
-a.link.blue svg { fill: #01baef; }
-a.link.blue:hover { color: hsl(193deg 99% 77%); }
-a.link.blue:hover svg { fill: #b3eeff; }
 
 
 /************************************************
@@ -321,7 +219,6 @@ Sign-in form
 	0% { transform: scale(1); opacity: 1 }
 	100% { transform:scale(.5); opacity: 0 }
 }
-
 .popup-show {
     animation: popup-show .3s;
     animation-duration: 0.3s;
@@ -337,20 +234,41 @@ Sign-in form
 	animation: popup-hide .15s forwards;
 }
 
-div#signinform {
+#signinform {
+	position: relative; /* To allow positioning childs (e.g. the close button) */
 	background-color: white;
+	padding: 0 .5rem;
 	width: 25rem;
 	max-width: 90%;
 	height: 34rem;
-	border-radius: 0.5rem;
+	border-radius: .5rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
 	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	overflow: hidden;
 }
 
-div#signinform-title {
+#signin-close {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	width: 25px;
+	height: 25px;
+	align-items: center;
+	justify-content: center;
+	background-color: #e9e9e9; /* As #signinform -> background-color */
+	transition: background-color 333ms ease;
+}
+#signin-close:hover {
+	background-color: #ccc;
+}
+
+#signinform-title {
 	font-size: 2.1rem;
 	font-weight: 900;
 	color: #157e38;
@@ -392,90 +310,21 @@ div.social-item#socialbtn-google {
 	background-color: #EA4235;
 }
 
-
-div.inpemail_container {
-	margin: 0.35rem 0.5rem;
-	width: 80%;
-	position: relative;
+#forget-password {
+	font-size: .9rem;
+}
+#remember-me, #terms-read-agree {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
-input.inpemail {
-	border: 2px solid #aaa;
-	border-radius: 1.33rem;
-	padding: 0.3rem 0.3rem 0.3rem 2.3rem;
-	width: 100%;
-	height: 2.5rem;
-	transition: all 333ms ease; /* Same as the sibling svg */
-	outline-style: none;
-	font-size: 1rem;
-	font-family: 'Balsamiq Sans', cursive;
-}
-input.inpemail:focus {
-	border-color: #01baef;
-	box-shadow: 0 0px 4px 0px rgb(1 186 239 / .5);
-}
-div.inpemail_container svg {
-	color: #999;
-	position: absolute;
-	margin-left: 0.85rem;
-	transition: all 333ms ease; /* Same as the sibling input */
-	font-size: 1.1rem;
-}
-input.inpemail:focus ~ svg {
-	color: #01baef;
-}
-
-div.inppassword_container {
-	margin: 0.35rem 0.5rem;
-	width: 80%;
-	position: relative;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-input.inppassword {
-	border: 2px solid #aaa;
-	border-radius: 1.33rem;
-	padding: 0.3rem 0.3rem 0.3rem 2.3rem;
-	width: 100%;
-	height: 2.5rem;
-	transition: all 333ms ease; /* Same as the sibling svg */
-	outline-style: none;
-	font-size: 1rem;
-	font-family: 'Balsamiq Sans', cursive;
-}
-input.inppassword:focus {
-	border-color: #01baef;
-	box-shadow: 0 0px 4px 0px rgb(1 186 239 / .5);
-}
-div.inppassword_container svg {
-	color: #999;
-	position: absolute;
-	margin-left: 0.85rem;
-	transition: all 333ms ease; /* Same as the sibling input */
-	font-size: 1.1rem;
-}
-input.inppassword:focus ~ svg {
-	color: #01baef;
-}
-
-div#forget-password {
-	font-size: 0.9rem;
-}
-div#remember-me, div#terms-read-agree {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-div#remember-me label, div#terms-read-agree label {
+#remember-me label, #terms-read-agree label {
 	flex-grow: 1;
 	text-align: left;
-	font-size: 0.9rem;
+	font-size: .9rem;
 	font-weight: bold;
 }
-div#remember-me input#chk-remember-me, div#terms-read-agree input#chk-terms-read-agree {
+#remember-me input#chk-remember-me, #terms-read-agree #chk-terms-read-agree {
 	flex-grow: 0;
 	width: unset;
 }
@@ -484,6 +333,32 @@ button#signinform-loginbtn {
 	width: 7.5rem;
 }
 
+#signinform .back-bubble {
+	position: absolute;
+	border-radius: 50%;
+	opacity: .13;
+}
+#signinform .back-bubble:nth-child(1) {
+	left: -6rem;
+	top: -6rem;
+	width: 15rem;
+	height: 15rem;
+	background-color: #20bf55;
+}
+#signinform .back-bubble:nth-child(2) {
+	right: -9rem;
+	top: 7rem;
+	width: 20rem;
+	height: 20rem;
+	background-color: #01baef;
+}
+#signinform .back-bubble:nth-child(3) {
+	left: 0;
+	bottom: 0;
+	width: 8rem;
+	height: 8rem;
+	background-color: #757575;
+}
 
 /************************************************
 Categories form
@@ -671,44 +546,37 @@ div.foot-gototop svg:hover {
 /************************************************
 Registration page
 ************************************************/
-
-div#reg-container {
+#reg-container {
 	border: 1px solid #ddd;
 	margin: 5rem 0 7rem 0;
-
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
-
 	border-radius: 1.5rem;
 	overflow: hidden;
 	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 25px 50px -12px rgba(0, 0, 0, 0.1);
 }
 
-div#reg-img {
+#reg-img {
 	overflow: hidden;
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-
 	width: 45%;
 }
 
-div#reg-img div#img-responsive {
+#reg-img div#img-responsive {
 	background: url(../img/register.jpg) no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-
 	width: 100%;
 	height: 100%;
 }
 
-
-div#reg-formcontainer {
+#reg-formcontainer {
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -718,72 +586,56 @@ div#reg-formcontainer {
 	padding: 0 7%;
 }
 
-div#regform-title {
+#regform-title {
 	font-size: 2.1rem;
 	font-weight: 900;
 	color: #157e38;
 	margin: 1.5rem 0;
 }
 
-div.inpname_container {
-	margin: 0.35rem 0.5rem;
-	width: 80%;
-	position: relative;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-input.inpname {
-	border: 2px solid #aaa;
-	border-radius: 1.33rem;
-	padding: 0.3rem 0.3rem 0.3rem 2.3rem;
-	width: 100%;
-	height: 2.5rem;
-	transition: all 333ms ease; /* Same as the sibling svg */
-	outline-style: none;
-	font-size: 1rem;
-	font-family: 'Balsamiq Sans', cursive;
-}
-input.inpname:focus {
-	border-color: #01baef;
-	box-shadow: 0 0px 4px 0px rgb(1 186 239 / .5);
-}
-div.inpname_container svg {
-	color: #999;
-	position: absolute;
-	margin-left: 0.85rem;
-	transition: all 333ms ease; /* Same as the sibling input */
-	font-size: 1.2rem;
-}
-input.inpname:focus ~ svg {
-	color: #01baef;
-}
-
-div#reg-formcontainer input#chk-terms-read-agree {
+#reg-formcontainer #chk-terms-read-agree {
 	margin-right: 0.5rem;
 }
 
-button#register-regbtn {
+#register-regbtn {
 	width: 8.5rem;
 }
 
+#reg-formcontainer .editinput { width: 80%; }
+#signinform .edit-container { width: 80%; }
+
 @media all and (max-width: 768px) {
-	div#reg-container {
+	#reg-container {
 		flex-direction: column;
 		align-items: center;
 	}
 
-	div#reg-img {
+	#reg-img {
 		height: 15rem;
 		width: 100%;
 	}
 
-	div#reg-formcontainer {
+	#reg-formcontainer {
 		width: 100%;
 	}
 
-	div#reg-formcontainer div.inpname_container { width: 100%; }
-	div#reg-formcontainer div.inpemail_container { width: 100%; }
-	div#reg-formcontainer div.inppassword_container { width: 100%; }
+	#reg-formcontainer .editinput { width: 100%; }
 }
 
+
+
+/************************************************
+General SweetAlert customization
+************************************************/
+.swal-footer {
+	background-color: rgb(245, 248, 250);
+	margin-top: 32px;
+	border-top: 1px solid #E9EEF1;
+	overflow: hidden;
+}
+.swal-text {
+	display: block;
+	text-align: center;
+	font-size: 1.25rem;
+	font-weight: bold;
+}

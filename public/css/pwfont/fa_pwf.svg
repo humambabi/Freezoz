@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2020 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="pw" unicode="&#x2022;" d="M1000 506c0-190-154-343-344-343-22 0-43 2-64 6l-47-53a47 47 0 0 0-35-16h-72v-78c0-26-21-47-47-47h-78v-78c0-26-21-47-47-47h-219c-26 0-47 21-47 47v152c0 13 5 25 14 34l316 316c-11 33-17 70-17 107 0 190 153 344 343 344 191 0 344-153 344-344z m-344 94c0-52 42-94 94-94s94 42 94 94-42 94-94 94-94-42-94-94z" horiz-adv-x="1000" />
+
+<glyph glyph-name="pw-1" unicode="&#x25cf;" d="M1000 506c0-190-154-343-344-343-22 0-43 2-64 6l-47-53a47 47 0 0 0-35-16h-72v-78c0-26-21-47-47-47h-78v-78c0-26-21-47-47-47h-219c-26 0-47 21-47 47v152c0 13 5 25 14 34l316 316c-11 33-17 70-17 107 0 190 153 344 343 344 191 0 344-153 344-344z m-344 94c0-52 42-94 94-94s94 42 94 94-42 94-94 94-94-42-94-94z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>

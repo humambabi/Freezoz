@@ -4,7 +4,7 @@
 # By: Humam Babi (humam_babi@yahoo.com), 2020
 #
 
-//include_once(__DIR__ . '/sysphp/functions.php'); // Helper functions
+define('FREEZOZ_LIVE_BASEURL', "https://www.freezoz.com"); # The base_uri of the live version
 
 // General constants
 define('OUTPUT_FILENAME', 'sitemap.xml');
@@ -37,8 +37,8 @@ function CreateSiteMap() {
 	$Str .= '>' . NL . NL;
 
 	// Add known pages
-	$Str .= AddURL('https://www.freezoz.com/', 'index.php', 'weekly', '1.0') . NL;
-//	$Str .= AddURL('https://www.freezoz.com/online-converter', 'index.php', 'weekly', '1.0') . NL;
+	$Str .= AddURL(FREEZOZ_LIVE_BASEURL, 'index.php', 'weekly', '1.0') . NL;
+//	$Str .= AddURL(FREEZOZ_LIVE_BASEURL . '/online-converter', 'index.php', 'weekly', '1.0') . NL;
 //	$Str .= AddURL('https://www.freezoz.com/file-type', 'pages/convtypes.php', 'weekly', '1.0') . NL;
 //	$Str .= AddURL('https://www.freezoz.com/privacy', 'pages/privacy.php', 'weekly', '1.0') . NL;
 //	$Str .= AddURL('https://www.freezoz.com/faq', 'pages/faqs.php', 'weekly', '1.0') . NL;

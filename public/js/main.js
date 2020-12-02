@@ -8,6 +8,41 @@ var g_iStopScrollPos = 0;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+function scroll_page(elmid) {
+	var bodyRect = document.body.getBoundingClientRect(),
+		elemRect = document.getElementById(elmid).getBoundingClientRect(),
+		offset = elemRect.top - bodyRect.top;
+
+	window.scrollBy({
+		top:			(offset - window.scrollY - 79),
+		left:			0,
+		behavior:	'smooth'
+	});
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function isEmail(email) {
+	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	return regex.test(email);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function isJson(response) {
+	return (typeof(response) === "object") ? true : false;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function isInViewport(elmid) {
+	var bounding = document.getElementById(elmid).getBoundingClientRect();
+	return (
+		bounding.top >= 69 && // NavBar's height is 69px
+		bounding.left >= 0 &&
+		bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+		bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+	);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 function categories_open() {
 	// Go to the top
 	window.scrollBy({ top: -window.scrollY, left: 0, behavior: 'smooth' });
@@ -20,8 +55,8 @@ function categories_open() {
 		$("#overlay-body").html(ELM_SPINNER);
 		$("#overlay-body").removeClass("hidden");
 
-		$.get(SITE_ROOT + "/assets/categories_form", function(data) { /* The asset must be contained within an element with id="categoriesform" */
-			$("#overlay-body").html(data);
+		$.get(BASE_URI + "/assets/categories_form", function(response) { /* The asset must be contained within an element with id="categoriesform" */
+			$("#overlay-body").html(response);
 
 			// Set the close event's function
 			$("#categoriesform").on("close_event", function() {
@@ -35,11 +70,13 @@ function categories_open() {
 			// Save the form's id in the overlay's data
 			$("#overlay-body").data("child-DOM-id", "categoriesform");
 
+			// Allow close on click
+			$("#overlay-body").data("can-close-on-click", true);
+
 			$("#keyword-search").focus();
 		});
 	}
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function adjust_footerPos() {
@@ -51,14 +88,12 @@ function adjust_footerPos() {
 }
 
 
-
 /*
 General section
 */
 
 // When the page is loaded into the browser
 $(window).on("load", function() { adjust_footerPos(); });
-
 
 // When the window is scrolled
 $(window).scroll(function() {
@@ -114,41 +149,55 @@ $(".foot-gototop").click(function() {
 
 // When the overlay (overlay-full) is clicked
 $("#overlay-full").click(function(ev) {
-	// Prevent Click event from propagation (from the child elemet into the overlay)
-	if (ev.target != this) return;
+	// Consider it a "click" only if clicked on the overlay or the spinner (maybe "svg" or "path" tags) (think of event propagation too)
+	if ((ev.target == this) ||
+			((ev.target.nodeName.toUpperCase() == "PATH") && (ev.target.parentNode.nodeName.toUpperCase() == "SVG") && (ev.target.parentNode.parentNode == this)) ||
+			((ev.target.nodeName.toUpperCase() == "SVG") && (ev.target.parentNode == this))) {
+		// Also prevent Click event when not allowed to close on click
+		if ($(this).data("can-close-on-click")) {
+			// Call the function needed to close the opened form
+			var childDomId = $("#overlay-full").data("child-DOM-id");
+			if (childDomId) $("#" + childDomId).trigger("close_event");
 
-	// Call the function needed to close the opened form
-	var childDomId = $("#overlay-full").data("child-DOM-id");
-	$("#" + childDomId).trigger("close_event");
+			// De-activate the full-screen overlay
+			if (!$("#overlay-full").hasClass("hidden")) $("#overlay-full").addClass("hidden");
 
-	// De-activate the full-screen overlay
-	if (!$("#overlay-full").hasClass("hidden")) $("#overlay-full").addClass("hidden");
+			// Reset the can-close-on-click data value
+			$("#overlay-full").data("can-close-on-click", false);
 
-	// Re-allow scrolls
-	g_bStopScroll = false;
+			// Re-allow scrolls
+			g_bStopScroll = false;
+		}
+	}
 });
+
 
 // When the overlay (overlay-body) is clicked
 $("#overlay-body").click(function(ev) {
-	// Prevent Click event from propagation (from the child elemet into the overlay)
-	if (ev.target != this) return;
+	// Consider it a "click" only if clicked on the overlay or the spinner (maybe "svg" or "path" tags) (think of event propagation too)
+	if ((ev.target == this) ||
+			((ev.target.nodeName.toUpperCase() == "PATH") && (ev.target.parentNode.nodeName.toUpperCase() == "SVG") && (ev.target.parentNode.parentNode == this)) ||
+			((ev.target.nodeName.toUpperCase() == "SVG") && (ev.target.parentNode == this))) {
+		// Also prevent Click event when not allowed to close on click
+		if ($(this).data("can-close-on-click")) {
+			// Call the function needed to close the opened form
+			var childDomId = $("#overlay-body").data("child-DOM-id");
+			if (childDomId) $("#" + childDomId).trigger("close_event");
 
-	// Call the function needed to close the opened form
-	var childDomId = $("#overlay-body").data("child-DOM-id");
-	$("#" + childDomId).trigger("close_event");
+			// De-activate the body overlay
+			if (!$("#overlay-body").hasClass("hidden")) $("#overlay-body").addClass("hidden");
 
-	// De-activate the body overlay
-	if (!$("#overlay-body").hasClass("hidden")) $("#overlay-body").addClass("hidden");
+			// Remove the navbar's shadow (if needed)
+			if ($(window)[0].scrollY <= 10) if ($('#navbar').hasClass('navbar-shadow')) $('#navbar').removeClass('navbar-shadow');
 
-	// Remove the navbar's shadow (if needed)
-	if ($(window)[0].scrollY <= 10) if ($('#navbar').hasClass('navbar-shadow')) $('#navbar').removeClass('navbar-shadow');
-
-	// Re-allow scrolls
-	g_bStopScroll = false;
+			// Re-allow scrolls
+			g_bStopScroll = false;
+		}
+	}
 });
 
 
-// A Click event on the "Sign in" button
+// A click event on the "Sign in" button
 $("#navbar-signinbtn").click(function() {
 	g_bStopScroll = true;
 	g_iStopScrollPos = $(window).scrollTop();
@@ -161,8 +210,8 @@ $("#navbar-signinbtn").click(function() {
 		$("#overlay-full").html(ELM_SPINNER);
 		$("#overlay-full").removeClass("hidden");
 
-		$.get(SITE_ROOT + "/assets/signin_form", function(data) { /* The asset must be contained within an element with id="signinform" */
-			$("#overlay-full").html(data);
+		$.get(BASE_URI + "/assets/signin_form", function(response) { /* The asset must be contained within an element with id="signinform" */
+			$("#overlay-full").html(response);
 
 			// Set the close event's function
 			$("#signinform").on("close_event", function() {
@@ -172,11 +221,20 @@ $("#navbar-signinbtn").click(function() {
 
 			// Save the form's id in the overlay's data
 			$("#overlay-full").data("child-DOM-id", "signinform");
+
+			// Allow close on click
+			$("#overlay-full").data("can-close-on-click", true);
 		});
 	}
 });
 
 
-// A Click event on the "Categories" link(s)
+// A click on the user button on the navbar
+$("#navbar-userbtn").click(function() {
+
+});
+
+
+// A click event on the "Categories" link(s)
 $("#navbar-categories").click(function() { categories_open(); });
 $("#footer-categories").click(function() { categories_open(); });
