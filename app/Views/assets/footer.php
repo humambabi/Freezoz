@@ -2,7 +2,7 @@
 	<div id="foot-foot">
 		<div id="foot-logodesc">
 			<div id="foot-logo-gototop">
-				<img alt="logo" width="144" height="36" src="/img/footer-logo.png" />
+				<img alt="logo" width="144" height="36" src="<?= esc($base_uri) ?>/img/footer-logo.png" />
 				<div class="foot-gototop"><i class="far fa-arrow-alt-circle-up fa-2x"></i></div>
 			</div>
 
@@ -20,9 +20,9 @@
 				&nbsp;&bull;&nbsp;
 				<a class="link white" href="#">FAQs</a>
 				&nbsp;&bull;&nbsp;
-				<a class="link white" href="<?= esc("$base_uri/terms"); ?>">Terms</a>
+				<a class="link white" href="<?= esc($base_uri) ?>/terms">Terms</a>
 				&nbsp;&bull;&nbsp;
-				<a class="link white" href="<?= esc("$base_uri/privacy"); ?>">Privacy</a>
+				<a class="link white" href="<?= esc($base_uri) ?>/privacy">Privacy</a>
 			</div>
 			<br/>
 			<div id="foot-contactus-title">Contact us:</div>

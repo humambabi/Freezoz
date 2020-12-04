@@ -16,8 +16,11 @@ if (!function_exists('include_jscript')) {
 	# @return null
 	#
 	function include_jscript($filename) {
+		$config = config(App::class);
+		$base_uri = new URI(rtrim($config->baseURL, '/'));
+
 		try {
-			$str = "<script type='text/javascript' src='/js/$filename";
+			$str = "<script type='text/javascript' src='$base_uri/js/$filename";
 			$str .= "?t=" . filemtime(FCPATH . "/js/$filename") . "'></script>" . PHP_EOL;
 
 			echo $str;

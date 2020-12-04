@@ -7,14 +7,14 @@
 					<div class="hamburger-label">MENU</div>
 				</button>
 			</div>
-			<div id="navbar-logo"><a href="<?= esc($base_uri); ?>"><img alt="logo" width="191" height="48" src="/img/nav-logo.png" /></a></div>
+			<div id="navbar-logo"><a href="<?= esc($base_uri) ?>"><img alt="logo" width="191" height="48" src="<?= esc($base_uri) ?>/img/nav-logo.png" /></a></div>
 		</div>
 
 		<div id="navbar-menu">
 			<?php if ($is_home) { ?>
 			<a class="navbar-navitem" href="javascript:void(0);" id="navbar-categories">CATEGORIES<div class="navbar-itemselection"></div></a>
 			<?php } else { ?>
-			<a class="navbar-navitem" href="<?= esc($base_uri); ?>" id="navbar-home">HOME<div class="navbar-itemselection"></div></a>
+			<a class="navbar-navitem" href="<?= esc($base_uri) ?>" id="navbar-home">HOME<div class="navbar-itemselection"></div></a>
 			<?php } ?>
 
 			<a class="navbar-navitem" href="#">FAQs<div class="navbar-itemselection"></div></a>

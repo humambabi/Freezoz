@@ -4,7 +4,7 @@
 	<div class="back-bubble"></div>
 
 	<div id="signin-close">
-		<img src="/img/times.png" width="15" height="15" alt="Close" />
+		<img src="<?= esc($base_uri) ?>/img/times.png" width="15" height="15" alt="Close" />
 	</div>
 
 	<div id="signinform-title">Sign in</div>
@@ -47,7 +47,7 @@
 	<button type="button" id="signinform-loginbtn" class="btn-solid-lrg">SIGN IN</button>
 
 	<?php insert_hspace("0.9rem"); ?>
-	<div>Don't have an account yet? <a href="<?= esc("$base_uri/register"); ?>" class="link blue">Register</a></div>
+	<div>Don't have an account yet? <a href="<?= esc($base_uri) ?>/register" class="link blue">Register</a></div>
 </div>
 
 
