@@ -13,6 +13,12 @@ class Pages extends BaseController {
 
 	##############################################
 	public function register() {
+		// If user is logged-in, redirect to the home page
+		if (!empty(session(SESSION_USERID))) {
+			header('Location: ' . $this->base_uri);
+			exit();
+		}
+
 		echo view('assets/header', array("base_uri" => $this->base_uri));
 		echo view('assets/navbar', array("base_uri" => $this->base_uri, "is_home" => FALSE));
 		echo view('pages/register', array("base_uri" => $this->base_uri));

@@ -43,6 +43,7 @@ $routes->get('/assets/categories_form', 					'Assets::categories_form');
 
 $routes->post('/requests/user_register',					'Requests::user_register');
 $routes->post('/requests/sign_in',							'Requests::sign_in');
+$routes->post('/requests/sign_out',							'Requests::sign_out');
 
 
 /**

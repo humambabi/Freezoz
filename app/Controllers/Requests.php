@@ -148,4 +148,21 @@ class Requests extends BaseController {
 		return $this->response->setJSON(['retcode' => STATUS_SUCCESS, 'retdata' => NULL]);
 	}
 
+	################################################################################################
+	# Sign the current user out (clear session + cookies)
+	################################################################################################
+	public function sign_out() {
+		if (!$this->request->isAJAX()) return "Bad request!";
+		if ($this->request->getMethod() != 'post') return "Bad method!";
+
+		// Destroy the cookie
+
+
+
+		// Destroy the session
+		$this->session->stop();
+		$this->session->destroy(); // Kill session, destroy data, and destroy the cookie that contains the session id
+
+		return $this->response->setJSON(['retcode' => STATUS_SUCCESS, 'retdata' => NULL]);
+	}
 }

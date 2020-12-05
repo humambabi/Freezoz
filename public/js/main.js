@@ -8,19 +8,6 @@ var g_iStopScrollPos = 0;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function scroll_page(elmid) {
-	var bodyRect = document.body.getBoundingClientRect(),
-		elemRect = document.getElementById(elmid).getBoundingClientRect(),
-		offset = elemRect.top - bodyRect.top;
-
-	window.scrollBy({
-		top:			(offset - window.scrollY - 79),
-		left:			0,
-		behavior:	'smooth'
-	});
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 function isEmail(email) {
 	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	return regex.test(email);
@@ -40,6 +27,28 @@ function isInViewport(elmid) {
 		bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
 		bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
 	);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function scroll_page(elmid) {
+	var bodyRect = document.body.getBoundingClientRect(),
+		elemRect = document.getElementById(elmid).getBoundingClientRect(),
+		offset = elemRect.top - bodyRect.top;
+
+	window.scrollBy({
+		top:			(offset - window.scrollY - 79),
+		left:			0,
+		behavior:	'smooth'
+	});
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function adjust_footerPos() {
+	if (parseInt(getComputedStyle($("body")[0]).height) > window.innerHeight) {
+		$("footer").css("position", "relative");
+	} else {
+		$("footer").css("position", "fixed");
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,12 +88,93 @@ function categories_open() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-function adjust_footerPos() {
-	if (parseInt(getComputedStyle($("body")[0]).height) > window.innerHeight) {
-		$("footer").css("position", "relative");
-	} else {
-		$("footer").css("position", "fixed");
+function signinform_open() {
+	g_bStopScroll = true;
+	g_iStopScrollPos = $(window).scrollTop();
+
+	// If the burger menu is opened, close it
+	if ($('#btn-burger').hasClass('is-active')) $('#btn-burger').click();
+
+	// Activate the full-screen overlay
+	if ($("#overlay-full").hasClass("hidden")) {
+		$("#overlay-full").html(ELM_SPINNER);
+		$("#overlay-full").removeClass("hidden");
+
+		$.get(BASE_URI + "/assets/signin_form", function(response) { /* The asset must be contained within an element with id="signinform" */
+			$("#overlay-full").html(response);
+
+			// Set the close event's function
+			$("#signinform").on("close_event", function() {
+				$("#signinform").removeClass("popup-show");
+				$("#signinform").addClass("popup-hide");
+			});
+
+			// Save the form's id in the overlay's data
+			$("#overlay-full").data("child-DOM-id", "signinform");
+
+			// Allow close on click
+			$("#overlay-full").data("can-close-on-click", true);
+		});
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function usermenu_open() {
+	g_bStopScroll = true;
+	g_iStopScrollPos = $(window).scrollTop();
+
+	// Activate the full-screen overlay
+	if ($("#overlay-full").hasClass("hidden")) {
+		$("#overlay-full").removeClass("hidden");
+
+		$('#usermenu-container').css('display', "flex");
+
+		var elmBtn = document.getElementById('navbar-userbtn'), elmMenu = document.getElementById('usermenu-container');
+		var addTop = 15, addLeft = 8;
+		var mTop = (parseInt(elmBtn.offsetTop) + parseInt(getComputedStyle(elmBtn).height) + addTop) + 'px';
+		var mLeft = (parseInt(elmBtn.offsetLeft) - parseInt(getComputedStyle(elmMenu).width) + parseInt(getComputedStyle(elmBtn).width) + addLeft) + 'px';
+		$('#usermenu-container').css('top', mTop);
+		$('#usermenu-container').css('left', mLeft);
+
+		$('#usermenu-container').css('opacity', 1);
+		
+		// Set the close event's function
+		$("#usermenu-container").on("close_event", function() {
+			$("#usermenu-container").css('opacity', 0);
+			setTimeout(function() {
+				$('#usermenu-container').css('display', "none");
+				$('#usermenu-container').css('top', '25px'); // Sync with main.css -> #usermenu-container
+			}, 500); // A little more than the transition (opacity) time interval -- not too important!
+		});
+
+		// Save the form's id in the overlay's data
+		$("#overlay-full").data("child-DOM-id", "usermenu-container");
+
+		// Allow close on click
+		$("#overlay-full").data("can-close-on-click", true);
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function user_signout() {
+	// Close the user menu (without closing the overlay)
+	$("#usermenu-container").trigger("close_event");
+
+	// Set the overlay to not close on click
+	$("#overlay-full").data("can-close-on-click", false);
+
+	// Show the spinner in the overlay
+	$("#overlay-full").html(ELM_SPINNER);
+
+	// Send the request
+	$.post(BASE_URI + "/requests/sign_out", function(response) {
+		if (!isJson(response) || response.retcode != STATUS_SUCCESS) {
+			console.log(response);
+			return;
+		}
+		
+		window.location.href = BASE_URI;
+	});
 }
 
 
@@ -109,7 +199,6 @@ $(window).scroll(function() {
 		if ($('#navbar').hasClass('navbar-shadow')) $('#navbar').removeClass('navbar-shadow');
 	}
 });
-
 
 // When the window is resized  (rare, but nicer to have)
 $(window).resize(function() {
@@ -197,44 +286,9 @@ $("#overlay-body").click(function(ev) {
 });
 
 
-// A click event on the "Sign in" button
-$("#navbar-signinbtn").click(function() {
-	g_bStopScroll = true;
-	g_iStopScrollPos = $(window).scrollTop();
-
-	// If the burger menu is opened, close it
-	if ($('#btn-burger').hasClass('is-active')) $('#btn-burger').click();
-
-	// Activate the full-screen overlay
-	if ($("#overlay-full").hasClass("hidden")) {
-		$("#overlay-full").html(ELM_SPINNER);
-		$("#overlay-full").removeClass("hidden");
-
-		$.get(BASE_URI + "/assets/signin_form", function(response) { /* The asset must be contained within an element with id="signinform" */
-			$("#overlay-full").html(response);
-
-			// Set the close event's function
-			$("#signinform").on("close_event", function() {
-				$("#signinform").removeClass("popup-show");
-				$("#signinform").addClass("popup-hide");
-			});
-
-			// Save the form's id in the overlay's data
-			$("#overlay-full").data("child-DOM-id", "signinform");
-
-			// Allow close on click
-			$("#overlay-full").data("can-close-on-click", true);
-		});
-	}
-});
-
-
-// A click on the user button on the navbar
-$("#navbar-userbtn").click(function() {
-
-});
-
-
-// A click event on the "Categories" link(s)
-$("#navbar-categories").click(function() { categories_open(); });
-$("#footer-categories").click(function() { categories_open(); });
+// Define click events handlers
+$("#navbar-categories").click(function() { categories_open(); }); // Categories (on the navbar)
+$("#footer-categories").click(function() { categories_open(); }); // Categories (on the footer)
+$("#navbar-signinbtn").click(function() { signinform_open(); }); // Sign-in button (on the navbar)
+$("#navbar-userbtn").click(function() { usermenu_open(); }); // User button (on the navbar)
+$("#usermenu_signout").click(function() { user_signout(); }); // SignOut (on the user menu)
