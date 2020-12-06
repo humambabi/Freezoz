@@ -182,4 +182,11 @@ $("#signin-email").keyup(function() {
 $("#signin-password").keyup(function() {
 	if ($("#signin-password").parent().hasClass("error")) $("#signin-password").parent().removeClass("error");
 });
+
+$('#signinform').on('keypress', function(e) {
+	if (e.keyCode == 13) {
+		e.preventDefault(); // On keyup -> error message is removed
+		$('#signinform-loginbtn').trigger('click');
+	}
+});
 </script>

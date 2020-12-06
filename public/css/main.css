@@ -345,6 +345,7 @@ div.social-container {
 	width: 33%;
 	min-width: 7rem;
 	justify-content: space-between;
+	z-index: 1; /* At least in front of the .back-bubble(s) */
 }
 div.social-item {
 	display: flex;
@@ -375,11 +376,13 @@ div.social-item#socialbtn-google {
 
 #forget-password {
 	font-size: .9rem;
+	z-index: 1; /* At least in front of the .back-bubble(s) */
 }
 #remember-me, #terms-read-agree {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	z-index: 1; /* At least in front of the .back-bubble(s) */
 }
 #remember-me label, #terms-read-agree label {
 	flex-grow: 1;
@@ -394,12 +397,14 @@ div.social-item#socialbtn-google {
 
 button#signinform-loginbtn {
 	width: 7.5rem;
+	z-index: 1; /* At least in front of the .back-bubble(s) */
 }
 
 #signinform .back-bubble {
 	position: absolute;
 	border-radius: 50%;
 	opacity: .13;
+	z-index: 0;
 }
 #signinform .back-bubble:nth-child(1) {
 	left: -6rem;
