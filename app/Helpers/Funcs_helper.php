@@ -137,3 +137,45 @@ if (!function_exists('userid_decode')) {
 		return ($e - $r);
 	}
 }
+
+
+###################################################################################################
+if (!function_exists('user_loggedin')) {
+	#
+	# Checks Session and Cookies for a previous sign in (user_id),
+	# and checks their data against the db contents.
+	#
+	function user_loggedin() {
+		$db_users = new Users();
+		$session = \Config\Services::session();
+		helper('cookie');
+
+		$userid_ss = $session->get(SESSION_USERID);
+		$userid_ck = get_cookie(COOKIE_USERID, true); ### XSS-Clean
+		$rowid_ss = empty($userid_ss) ? NULL : userid_decode($userid_ss);
+		$rowid_ck = empty($userid_ck) ? NULL : userid_decode($userid_ck);
+
+		// If both session and cookies CONTAIN data, they must be identical, or else order the user to log in again!
+		if ((!empty($rowid_ss) && !empty($rowid_ck)) && ($rowid_ss != $rowid_ck)) return FALSE;
+
+		if (!empty($rowid_ss)) { // Session
+			if (!empty($db_users->where('rowid', $rowid_ss)->first())) return TRUE; else return FALSE;
+		}
+
+		// Session doesn't contain the user_id, search cookeis
+
+		if (!empty($rowid_ck)) { // Cookies
+			if (!empty($db_users->where('rowid', $rowid_ck)->first())) {
+				// Cookie is OK, Session is empty => create a session variable, and return OK (Previous sign-in)
+				$session->set([SESSION_USERID => $userid_ck]);
+				return TRUE;
+			} else {
+				// Cookie is wrong, session is empty
+				return FALSE;
+			}
+		}
+
+		// Cookies and Session don't contain user_id !
+		return FALSE;
+	}
+}

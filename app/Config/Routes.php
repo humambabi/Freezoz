@@ -37,6 +37,7 @@ $routes->get('/register',										'Pages::register');
 $routes->get('/terms',											'Pages::terms');
 $routes->get('/privacy',										'Pages::privacy');
 $routes->get('/activation/(:segment)/(:segment)',		'Pages::activation/$1/$2');
+$routes->get('/forgot_pw',										'Pages::forgot_pw');
 
 $routes->get('/assets/signin_form', 						'Assets::signin_form');
 $routes->get('/assets/categories_form', 					'Assets::categories_form');

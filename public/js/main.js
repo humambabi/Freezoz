@@ -1,11 +1,39 @@
 /* ----------------------------------------------
 Main JavaScript codes - Freezoz
 ---------------------------------------------- */
+
+// The 'spinner' icon to be shown centered in the overlay
 const ELM_SPINNER = '<i style="color:#fff" class="fas fa-5x fa-fan fa-spin"></i>';
 
+// Global variables to enable/disable page scroll
 var g_bStopScroll = false;
 var g_iStopScrollPos = 0;
 
+// Globals related to the user-menu
+const UMTOP_BEFORE = 25; // Pixels
+var g_iUserMenu_top = 0;
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function updateUserMenuPosition() {
+	var elmBtn = document.getElementById('navbar-userbtn'), elmMenu = document.getElementById('usermenu-container');
+	var addTop = 15, addLeft = 9, mLeft;
+
+	if ($(window).innerWidth() <= 768) {
+		mLeft = parseInt(elmBtn.offsetLeft) - (parseInt(getComputedStyle(elmMenu).width) / 2.0) + (parseInt(getComputedStyle(elmBtn).width) / 2.0);
+	} else {
+		mLeft = parseInt(elmBtn.offsetLeft) - parseInt(getComputedStyle(elmMenu).width) + parseInt(getComputedStyle(elmBtn).width) + addLeft;
+	}
+
+	g_iUserMenu_top = parseInt(elmBtn.offsetTop) + parseInt(getComputedStyle(elmBtn).height) + addTop + parseInt($(window).scrollTop());
+
+	$('#usermenu-container').css('left', mLeft.toString() + 'px');
+	if ($('#usermenu-container').css('display') == "none") {
+		$('#usermenu-container').css('top', (g_iUserMenu_top - UMTOP_BEFORE).toString() + 'px');
+	} else {
+		$('#usermenu-container').css('top', g_iUserMenu_top.toString() + 'px');
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function isEmail(email) {
@@ -122,28 +150,29 @@ function signinform_open() {
 function usermenu_open() {
 	g_bStopScroll = true;
 	g_iStopScrollPos = $(window).scrollTop();
+	updateUserMenuPosition();
 
 	// Activate the full-screen overlay
 	if ($("#overlay-full").hasClass("hidden")) {
 		$("#overlay-full").removeClass("hidden");
 
 		$('#usermenu-container').css('display', "flex");
+		setTimeout(function() {
+			$('#usermenu-container').css('opacity', 1);
+			$('#usermenu-container').css('top', g_iUserMenu_top);
+		}, 50); // Just a while after 'displaying' it transparently
 
-		var elmBtn = document.getElementById('navbar-userbtn'), elmMenu = document.getElementById('usermenu-container');
-		var addTop = 15, addLeft = 8;
-		var mTop = (parseInt(elmBtn.offsetTop) + parseInt(getComputedStyle(elmBtn).height) + addTop) + 'px';
-		var mLeft = (parseInt(elmBtn.offsetLeft) - parseInt(getComputedStyle(elmMenu).width) + parseInt(getComputedStyle(elmBtn).width) + addLeft) + 'px';
-		$('#usermenu-container').css('top', mTop);
-		$('#usermenu-container').css('left', mLeft);
-
-		$('#usermenu-container').css('opacity', 1);
-		
 		// Set the close event's function
 		$("#usermenu-container").on("close_event", function() {
 			$("#usermenu-container").css('opacity', 0);
+			$('#usermenu-container').css('top', (g_iUserMenu_top - UMTOP_BEFORE).toString() + 'px');
 			setTimeout(function() {
 				$('#usermenu-container').css('display', "none");
-				$('#usermenu-container').css('top', '25px'); // Sync with main.css -> #usermenu-container
+
+				// Mark the burger button as if  the burger menu was closed (sync with #btn-burger.click)
+				$('#btn-burger').removeClass('is-active');
+				if ($('#navbar-container').hasClass('navbar-menuopen')) $('#navbar-container').removeClass('navbar-menuopen');
+				if ($(window)[0].scrollY <= 10) if ($('#navbar').hasClass('navbar-shadow')) $('#navbar').removeClass('navbar-shadow');
 			}, 500); // A little more than the transition (opacity) time interval -- not too important!
 		});
 
@@ -152,6 +181,11 @@ function usermenu_open() {
 
 		// Allow close on click
 		$("#overlay-full").data("can-close-on-click", true);
+
+		// Mark the burger button as if  the burger menu was opened (sync with #btn-burger.click)
+		$('#btn-burger').addClass('is-active');
+		if (!$('#navbar-container').hasClass('navbar-menuopen')) $('#navbar-container').addClass('navbar-menuopen');
+		if (($(window).innerWidth() <= 768) && !$('#navbar').hasClass('navbar-shadow')) $('#navbar').addClass('navbar-shadow');
 	}
 }
 
@@ -182,11 +216,9 @@ function user_signout() {
 General section
 */
 
-// When the page is loaded into the browser
-$(window).on("load", function() { adjust_footerPos(); });
-
 // When the window is scrolled
-$(window).scroll(function() {
+$(window).scroll(function(e) {
+	e.preventDefault();
 	if (g_bStopScroll) $(window).scrollTop(g_iStopScrollPos);
 
 	if (
@@ -207,8 +239,13 @@ $(window).resize(function() {
 	}
 
 	adjust_footerPos();
-})
+	updateUserMenuPosition();
+});
 
+// When the page is loaded into the browser
+$(window).on("load", function() {
+	adjust_footerPos();
+});
 
 // A click event on the 'burger' button (only for screens <= 768px in width)
 $('#btn-burger').click(function() {

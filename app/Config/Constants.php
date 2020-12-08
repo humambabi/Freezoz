@@ -102,8 +102,10 @@ defined('SUBSCRIPTION_PAID')                 || define('SUBSCRIPTION_PAID', 1);
 # Google reCAPTCHA v2
 defined('RECAPTCHA_V2_SECRETKEY_FREEZOZ')    || define('RECAPTCHA_V2_SECRETKEY_FREEZOZ', '6LdHvd8ZAAAAAIGvaUGS1eV8PBtiGdAFHKbd_TZc');
 
-# Session items
+# Session & Cookie items
+defined('COOKIE_EXPIRY_TIME')                || define('COOKIE_EXPIRY_TIME', 30 * 24 * 60 * 60); # 30 Days
 defined('SESSION_USERID')                    || define('SESSION_USERID', "UserID");
+defined('COOKIE_USERID')                     || define('COOKIE_USERID', "UserID");
 
 # Status constants
 defined('STATUS_SUCCESS')                    || define('STATUS_SUCCESS', 0); # Success

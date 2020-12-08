@@ -21,18 +21,11 @@
 			<a class="navbar-navitem" href="mailto:<?= FREEZOZ_EMAIL_SUPPORT ?>">CONTACT US<div class="navbar-itemselection"></div></a>
 			<div class="navbar-navitemsep"><div class="navbar-navitemsep-inner"></div></div>
 
-			<?php 
-			$user_id = session(SESSION_USERID);
-			if (empty($user_id)) {
-			?>
-				<button type="button" id="navbar-signinbtn" class="btn-outline-med">SIGN IN</button>
-			<?php
-			} else {
-			?>
+			<?php if ($user_loggedin) { ?>
 				<div id="navbar-userbtn"><i class="fas fa-user-circle"></i></div>
-			<?php
-			}
-			?>
+			<?php } else { ?>
+				<button type="button" id="navbar-signinbtn" class="btn-outline-med">SIGN IN</button>
+			<?php } ?>
 		</div>
 	</div>
 </nav>

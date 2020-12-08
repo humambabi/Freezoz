@@ -19,7 +19,6 @@ use CodeIgniter\HTTP\URI;
 
 class BaseController extends Controller
 {
-
 	/**
 	 * An array of helpers to be loaded automatically upon
 	 * class instantiation. These helpers will be available
@@ -27,26 +26,22 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['Helpers\Funcs_helper.php'];
+	protected $helpers = ['Helpers\Funcs_helper.php', 'cookie'];
 
-	/**
-	 * The site's root url
-	 * To be used in all descendant classes
-	 *
-	 * @var string
-	 */
+
+	# The site's root url (To be used in all descendant classes)
 	protected $base_uri = "";
 
-	/**
-	 * Session variable
-	 * 
-	 * @var Session
-	 */
+	# Session variable
 	protected $session = NULL;
 
-	/**
-	 * Constructor.
-	 */
+	# Is the user logged in?
+	protected $bLoggedIn = FALSE;
+
+
+	/* 
+	Constructor
+	*/
 	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
 	{
 		// Do Not Edit This Line
@@ -56,6 +51,7 @@ class BaseController extends Controller
 		$config = config(App::class);
 		$this->base_uri = new URI(rtrim($config->baseURL, '/'));
 		$this->session = \Config\Services::session();
+		$this->bLoggedIn = user_loggedin();
 
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.

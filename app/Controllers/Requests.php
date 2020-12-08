@@ -142,9 +142,12 @@ class Requests extends BaseController {
 		$this->session->set([SESSION_USERID => $user_id]);
 
 		// Only if the user requested to 'remember' them, save the user_id in cookies too
+		if (!empty($param_remember) && ($param_remember == 'true')) {
+			$this->response->setcookie(COOKIE_USERID, $user_id, COOKIE_EXPIRY_TIME);
+		}
 		
-		
-
+		// Return OK
+		$this->bLoggedIn = user_loggedin();
 		return $this->response->setJSON(['retcode' => STATUS_SUCCESS, 'retdata' => NULL]);
 	}
 
@@ -156,13 +159,18 @@ class Requests extends BaseController {
 		if ($this->request->getMethod() != 'post') return "Bad method!";
 
 		// Destroy the cookie
+		helper('cookie');
+		delete_cookie(COOKIE_USERID);
 
-
-
+		/*
+		NOTE: Think about when we need to preserve other data of the session, like number of downloads for the days...etc
+		*/
+		
 		// Destroy the session
 		$this->session->stop();
 		$this->session->destroy(); // Kill session, destroy data, and destroy the cookie that contains the session id
 
+		$this->bLoggedIn = user_loggedin();
 		return $this->response->setJSON(['retcode' => STATUS_SUCCESS, 'retdata' => NULL]);
 	}
 }

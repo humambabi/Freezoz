@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
 
-	<title>FreeZoz | Your free source of AE templates!</title>
-	<meta name="description" content="FreeZoz is the free source of AE templates">
-	<meta name="keywords" content="FreeZoz, free templates, AE templates, AfterEffects templates">
+	<title>Freezoz | Your free source of AE templates!</title>
+	<meta name="description" content="Freezoz is the free source of AE templates">
+	<meta name="keywords" content="Freezoz, free templates, AE templates, AfterEffects templates">
 
 	<link rel="icon" type="image/x-icon" href="<?= esc($base_uri) ?>/favicon.ico">
 	<link rel="shortcut icon" href="<?= esc($base_uri) ?>/favicon.png">
