@@ -161,7 +161,7 @@ class Requests extends BaseController {
 		if (!$this->request->isAJAX()) return "Bad request!";
 		if ($this->request->getMethod() != 'post') return "Bad method!";
 
-		user_signout($this);
+		$this->bLoggedIn = user_signout();
 
 		return $this->response->setJSON(['retcode' => STATUS_SUCCESS, 'retdata' => NULL]);
 	}
@@ -269,12 +269,12 @@ class Requests extends BaseController {
 		}
 
 		// Now, sign the user out
-		user_signout($this);
+		$this->bLoggedIn = user_signout();
 		
 		// Return the message to display "success" (and then redirect)
 		return $this->response->setJSON([
 			'retcode' => STATUS_SUCCESS,
-			'retdata' => "Your password was reset successfully.\r\nYou can login now using your credentials."
+			'retdata' => "Your password was reset successfully.\r\nYou can now use it to login."
 		]);
 	}
 }

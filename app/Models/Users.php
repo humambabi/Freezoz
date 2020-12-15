@@ -86,7 +86,6 @@ class Users extends Model {
 		*/
 		$ret = $this->update($row['rowid'], [
 			"pw_hash"				=> $pw_hash,
-			"resetpw_datetime"	=> NULL,
 			"resetpw_code"			=> NULL
 		]);
 

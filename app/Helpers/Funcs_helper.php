@@ -191,11 +191,11 @@ if (!function_exists('user_signout')) {
 	#
 	# Stop and destroy the seeion, and delete the cookie if it exists
 	#
-	# @param Object $calling_class is the class of the request to set its bLoggedIn member (or null if not needed)
+	# @param null
 	#
-	# @return null
+	# @return bool the sign-in status
 	#
-	function user_signout($calling_class) {
+	function user_signout() {
 		$session = \Config\Services::session();
 		helper('cookie');
 
@@ -210,7 +210,9 @@ if (!function_exists('user_signout')) {
 		$session->stop();
 		$session->destroy(); // Kill session, destroy data, and destroy the cookie that contains the session id
 
-		if ($calling_class) $calling_class->bLoggedIn = user_loggedin();
+		// BaseController->bIsLoggedIn is NOT accessible outside of it & its decendant classes (protected)
+		// Just return the value to remember to update the protected variable
+		return user_loggedin();
 	}
 }
 
