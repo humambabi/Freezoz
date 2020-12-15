@@ -688,10 +688,8 @@ Registration page
 		width: 100%;
 	}
 
-	#reg-formcontainer {
-		width: 100%;
-	}
-
+	#reg-formcontainer { width: 100%; }
+	
 	#reg-formcontainer .editinput { width: 100%; }
 }
 

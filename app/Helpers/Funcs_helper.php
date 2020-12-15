@@ -69,6 +69,10 @@ if (!function_exists('sendemail_accountactivation')) {
 		$base_uri = new URI(rtrim($config->baseURL, '/'));
 		$act_link = $base_uri . "/activation/$useremail/$act_code";
 
+		$validity = sprintf("%.1f", ACTIVATION_EMAIL_VALIDITY_MINUTES / 60); // Precision should be kept .1f
+		if (strpos($validity, ".0")) $validity = substr($validity, 0, strlen($validity) - 2);
+		$validity = "$validity hour" . ($validity == "1" ? "" : "s");
+
 		$email = \Config\Services::email();
 		$email->setFrom(FREEZOZ_EMAIL_SUPPORT, 'Freezoz');
 		$email->setTo($useremail);
@@ -79,7 +83,7 @@ if (!function_exists('sendemail_accountactivation')) {
 			'<p>' .
 				'Click the following link to continue your registration and activate your account:' . '<br/>' .
 				'<a href="' . $act_link . '">Activate my account</a>' . '<br/>' .
-				'<strong>(This link is valid only if used within an hour from the time of registration)</strong>' .
+				'<strong>(This link is valid only if used within ' . $validity . ' from the time of registration)</strong>' .
 			'</p>' .
 			'<br/>' .
 			'<p>For any questions, contact us at <a href="mailto:support@freezoz.com">support@freezoz.com</a>.</p>' .
@@ -177,5 +181,86 @@ if (!function_exists('user_loggedin')) {
 
 		// Cookies and Session don't contain user_id !
 		return FALSE;
+	}
+}
+
+###################################################################################################
+if (!function_exists('user_signout')) {
+	#
+	# Sign the user out
+	#
+	# Stop and destroy the seeion, and delete the cookie if it exists
+	#
+	# @param Object $calling_class is the class of the request to set its bLoggedIn member (or null if not needed)
+	#
+	# @return null
+	#
+	function user_signout($calling_class) {
+		$session = \Config\Services::session();
+		helper('cookie');
+
+		// Destroy the cookie
+		delete_cookie(COOKIE_USERID);
+
+		/*
+		NOTE: Think about when we need to preserve other data of the session, like number of downloads for the days...etc
+		*/
+		
+		// Destroy the session
+		$session->stop();
+		$session->destroy(); // Kill session, destroy data, and destroy the cookie that contains the session id
+
+		if ($calling_class) $calling_class->bLoggedIn = user_loggedin();
+	}
+}
+
+###################################################################################################
+if (!function_exists('sendemail_resetpassword')) {
+	#
+	# Send Email (Reset Password)
+	#
+	# Sends an email with a link to reset the user's password
+	#
+	# @param string $email the user email to send this email to (must be already sanitized)
+	#
+	# @return bool (success or failure)
+	#
+	function sendemail_resetpassword($useremail) {
+		$db_users = new Users();
+		$resetpw_code = $db_users->createSaveGet_resetpwcode($useremail);
+
+		// Construct the url for both live and localhost version (to allow testing & debugging)
+		$config = config(App::class);
+		$base_uri = new URI(rtrim($config->baseURL, '/'));
+		$resetpw_link = $base_uri . "/reset_pw/$useremail/$resetpw_code";
+
+		$validity = sprintf("%.1f", RESETPW_EMAIL_VALIDITY_MINUTES / 60); // Precision should be kept .1f
+		if (strpos($validity, ".0")) $validity = substr($validity, 0, strlen($validity) - 2);
+		$validity = "$validity hour" . ($validity == "1" ? "" : "s");
+
+		$email = \Config\Services::email();
+		$email->setFrom(FREEZOZ_EMAIL_SUPPORT, 'Freezoz');
+		$email->setTo($useremail);
+		$email->setSubject('Reset your password at Freezoz.com');
+		$email->setMessage(
+			'<h1>Hello from Freezoz!</h1>' .
+			'<br/>' .
+			'<p>' .
+				'We have received a request to reset your password.<br/>' .
+				'<br/>' .
+				'If you did not requested that, you can ignore this email.<br/>' .
+				'<br/>' .
+				'Click the following link to reset your password. You will be redirected to the website to enter a new one:<br/>' .
+				'<a href="' . $resetpw_link . '">Reset my password</a>' . '<br/>' .
+				'<strong>(This link is valid only if used within ' . $validity . ' from the time of request)</strong>' .
+			'</p>' .
+			'<br/>' .
+			'<p>For any questions, contact us at <a href="mailto:support@freezoz.com">support@freezoz.com</a>.</p>' .
+			'<p>' .
+			   'With our best regards,<br/>Freezoz support team' .
+			'</p>'
+		);
+
+		return $email->send();
 	}
 }

@@ -35,7 +35,7 @@
 		</div>
 	</div>
 
-	<div id="forget-password">Forgot your password? <a href="#" class="link blue">Click here</a></div>
+	<div id="forget-password">Forgot your password? <a href="<?= esc($base_uri) ?>/forgot_pw" class="link blue">Click here</a></div>
 
 	<?php insert_hspace("1rem"); ?>
 	<div id="remember-me">

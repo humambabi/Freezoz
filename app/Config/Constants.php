@@ -83,41 +83,47 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest auto
 |--------------------------------------------------------------------------
 */
 
-defined('FREEZOZ_LIVE_BASEURL')              || define('FREEZOZ_LIVE_BASEURL', "https://www.freezoz.com"); # The base_uri of the live version
-defined('FREEZOZ_LIVE_BASEURL_NOPROTO')      || define('FREEZOZ_LIVE_BASEURL_NOPROTO', "www.freezoz.com"); # The base_uri of the live version - without protocol
-defined('FREEZOZ_EMAIL_SUPPORT')             || define('FREEZOZ_EMAIL_SUPPORT', "support@freezoz.com"); # The support email address of Freezoz
+defined('FREEZOZ_NAME')                         || define('FREEZOZ_NAME', "Freezoz"); # Project name (only for display)
+defined('FREEZOZ_LIVE_BASEURL')                 || define('FREEZOZ_LIVE_BASEURL', "https://www.freezoz.com"); # The base_uri of the live version (only for display - not for the app)
+defined('FREEZOZ_LIVE_BASEURL_NOPROTO')         || define('FREEZOZ_LIVE_BASEURL_NOPROTO', "www.freezoz.com"); # The base_uri of the live version - without protocol
+defined('FREEZOZ_EMAIL_SUPPORT')                || define('FREEZOZ_EMAIL_SUPPORT', "support@freezoz.com"); # The support email address of Freezoz
+
+defined('VALIDATION_EMAILCODE_LENGTH')          || define('VALIDATION_EMAILCODE_LENGTH', 15); # Character count of the email validation codes
+defined('ACTIVATION_EMAIL_VALIDITY_MINUTES')    || define('ACTIVATION_EMAIL_VALIDITY_MINUTES', 60 * 24); # Activation email link validity deadline (minutes)
+defined('RESETPW_EMAIL_VALIDITY_MINUTES')       || define('RESETPW_EMAIL_VALIDITY_MINUTES', 60 * 1); # Activation email link validity deadline (minutes)
 
 # Forms constants
-defined('FORM_USERNAME_MINLENGTH')           || define('FORM_USERNAME_MINLENGTH', 3); # UserName minimum length
-defined('FORM_USERNAME_MAXLENGTH')           || define('FORM_USERNAME_MAXLENGTH', 32); # UserName maximum length
-defined('FORM_EMAIL_MAXLENGTH')              || define('FORM_EMAIL_MAXLENGTH', 45); # EMail maximum length
-defined('FORM_PASSWORD_MINLENGTH')           || define('FORM_PASSWORD_MINLENGTH', 4); # Password minimum length
-defined('FORM_PASSWORD_MAXLENGTH')           || define('FORM_PASSWORD_MAXLENGTH', 99); # Password maximum length
+defined('FORM_USERNAME_MINLENGTH')              || define('FORM_USERNAME_MINLENGTH', 3); # UserName minimum length
+defined('FORM_USERNAME_MAXLENGTH')              || define('FORM_USERNAME_MAXLENGTH', 32); # UserName maximum length
+defined('FORM_EMAIL_MAXLENGTH')                 || define('FORM_EMAIL_MAXLENGTH', 45); # EMail maximum length
+defined('FORM_PASSWORD_MINLENGTH')              || define('FORM_PASSWORD_MINLENGTH', 4); # Password minimum length
+defined('FORM_PASSWORD_MAXLENGTH')              || define('FORM_PASSWORD_MAXLENGTH', 99); # Password maximum length
 
 # Subscription types
-defined('ACTIVATION_EMAIL_VALIDITY_MINUTES') || define('ACTIVATION_EMAIL_VALIDITY_MINUTES', 60); # Activation email link validity deadline (minutes)
-defined('SUBSCRIPTION_FREE')                 || define('SUBSCRIPTION_FREE', 0);
-defined('SUBSCRIPTION_PAID')                 || define('SUBSCRIPTION_PAID', 1);
+defined('SUBSCRIPTION_FREE')                    || define('SUBSCRIPTION_FREE', 0);
+defined('SUBSCRIPTION_PAID')                    || define('SUBSCRIPTION_PAID', 1);
 
 # Google reCAPTCHA v2
-defined('RECAPTCHA_V2_SECRETKEY_FREEZOZ')    || define('RECAPTCHA_V2_SECRETKEY_FREEZOZ', '6LdHvd8ZAAAAAIGvaUGS1eV8PBtiGdAFHKbd_TZc');
+defined('RECAPTCHA_V2_SECRETKEY_FREEZOZ')       || define('RECAPTCHA_V2_SECRETKEY_FREEZOZ', '6LdHvd8ZAAAAAIGvaUGS1eV8PBtiGdAFHKbd_TZc');
 
 # Session & Cookie items
-defined('COOKIE_EXPIRY_TIME')                || define('COOKIE_EXPIRY_TIME', 30 * 24 * 60 * 60); # 30 Days
-defined('SESSION_USERID')                    || define('SESSION_USERID', "UserID");
-defined('COOKIE_USERID')                     || define('COOKIE_USERID', "UserID");
+defined('COOKIE_EXPIRY_TIME')                   || define('COOKIE_EXPIRY_TIME', 30 * 24 * 60 * 60); # 30 Days
+defined('SESSION_USERID')                       || define('SESSION_USERID', "UserID");
+defined('COOKIE_USERID')                        || define('COOKIE_USERID', "UserID");
 
 # Status constants
-defined('STATUS_SUCCESS')                    || define('STATUS_SUCCESS', 0); # Success
-defined('STATUS_GENERROR')                   || define('STATUS_GENERROR', 1); # General error
+defined('STATUS_SUCCESS')                       || define('STATUS_SUCCESS', 0); # Success
+defined('STATUS_GENERROR')                      || define('STATUS_GENERROR', 1); # General error
 
 # Registration/Sign-in errors
-defined('STATUS_USERNAME_INVALID')           || define('STATUS_USERNAME_INVALID', 11); # Invalid user name
-defined('STATUS_USERNAME_EXISTS')            || define('STATUS_USERNAME_EXISTS', 12); # Status: User name already exists
-defined('STATUS_EMAIL_INVALID')              || define('STATUS_EMAIL_INVALID', 13); # Invalid emaiil
-defined('STATUS_EMAIL_EXISTS')               || define('STATUS_EMAIL_EXISTS', 14); # Status: Email already exists
-defined('STATUS_PASSWORD_INVALID')           || define('STATUS_PASSWORD_INVALID', 15); # Invalid password
-defined('STATUS_TERMS_INVALID')              || define('STATUS_TERMS_INVALID', 16); # User didn't agree to terms and conditions
-defined('STATUS_RECAPTCHA_INVALID')          || define('STATUS_RECAPTCHA_INVALID', 17); # Invalid reCAPTCHA response
-defined('STATUS_ACTEMAIL_FAILED')            || define('STATUS_ACTEMAIL_FAILED', 18); # Status: Sending activation email failed
-defined('STATUS_BAD_REMEMBERME')             || define('STATUS_BAD_REMEMBERME', 19); # Status: Sending activation email failed
+defined('STATUS_USERNAME_INVALID')              || define('STATUS_USERNAME_INVALID', 11); # Invalid user name
+defined('STATUS_USERNAME_EXISTS')               || define('STATUS_USERNAME_EXISTS', 12); # Status: User name already exists
+defined('STATUS_EMAIL_INVALID')                 || define('STATUS_EMAIL_INVALID', 13); # Invalid emaiil
+defined('STATUS_EMAIL_EXISTS')                  || define('STATUS_EMAIL_EXISTS', 14); # Status: Email already exists
+defined('STATUS_EMAIL_NOTFOUND')                || define('STATUS_EMAIL_NOTFOUND', 15); # Status: Email was not found in the DB
+defined('STATUS_PASSWORD_INVALID')              || define('STATUS_PASSWORD_INVALID', 16); # Invalid password
+defined('STATUS_TERMS_INVALID')                 || define('STATUS_TERMS_INVALID', 17); # User didn't agree to terms and conditions
+defined('STATUS_RECAPTCHA_INVALID')             || define('STATUS_RECAPTCHA_INVALID', 18); # Invalid reCAPTCHA response
+defined('STATUS_ACTEMAIL_FAILED')               || define('STATUS_ACTEMAIL_FAILED', 19); # Status: Sending activation email failed
+defined('STATUS_BAD_REMEMBERME')                || define('STATUS_BAD_REMEMBERME', 20); # Status: Sending activation email failed
+defined('STATUS_RESETPWCODE_INVALID')           || define('STATUS_RESETPWCODE_INVALID', 21); # Status: Invalid code for reset password

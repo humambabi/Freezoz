@@ -76,7 +76,7 @@
 	</p>
 	<p>
 		For more general information on cookies, please read "What Are Cookies" from
-		<a href="https://www.cookieconsent.com/what-are-cookies/" class="link blue" target="_blank">Cookie Consent&nbsp;<i class="fas fa-external-link-square-alt"></i></a>.
+		<a href="https://www.cookieconsent.com/what-are-cookies/" class="link blue" target="_blank" rel="noreferrer" rel="noopener">Cookie Consent&nbsp;<i class="fas fa-external-link-square-alt"></i></a>.
 	</p>
 
 	<br/>
@@ -85,7 +85,7 @@
 		Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to
 		<a href="<?= esc($base_uri); ?>" class="link blue"><?= FREEZOZ_LIVE_BASEURL_NOPROTO ?></a> and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting
 		the Google ad and content network Privacy Policy at the following URL –
-		<a href="https://policies.google.com/technologies/ads" class="link blue" target="_blank">Google Privacy &amp; Terms - Advertising&nbsp;<i class="fas fa-external-link-square-alt"></i></a>.
+		<a href="https://policies.google.com/technologies/ads" class="link blue" target="_blank" rel="noreferrer" rel="noopener">Google Privacy &amp; Terms - Advertising&nbsp;<i class="fas fa-external-link-square-alt"></i></a>.
 	</p>
 
 	<br/>

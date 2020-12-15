@@ -19,6 +19,8 @@ function updateUserMenuPosition() {
 	var elmBtn = document.getElementById('navbar-userbtn'), elmMenu = document.getElementById('usermenu-container');
 	var addTop = 15, addLeft = 9, mLeft;
 
+	if (!elmBtn) return; // User is not logged in (no user button)
+	
 	if ($(window).innerWidth() <= 768) {
 		mLeft = parseInt(elmBtn.offsetLeft) - (parseInt(getComputedStyle(elmMenu).width) / 2.0) + (parseInt(getComputedStyle(elmBtn).width) / 2.0);
 	} else {
