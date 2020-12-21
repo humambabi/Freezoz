@@ -112,14 +112,6 @@ class Pages extends BaseController {
 		echo view('assets/header', array("base_uri" => $this->base_uri));
 		echo view('assets/navbar', array("base_uri" => $this->base_uri, "is_home" => FALSE, "user_loggedin" => $this->bLoggedIn));
 
-				/*
-
-if already signed in
-
-show swal() "sure?": yes: remove swal & continue normally, no: redirect to home page
-		*/
-
-
 		while(TRUE) { // (Only to use 'break' when needed)
 			$db_users = new Users();
 			$row = $db_users->where('email', $email)->first();
