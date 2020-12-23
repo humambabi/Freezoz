@@ -2,7 +2,7 @@
 	<div id="foot-foot">
 		<div id="foot-logodesc">
 			<div id="foot-logo-gototop">
-				<img alt="logo" width="144" height="36" src="<?= esc($base_uri) ?>/img/footer-logo.png" />
+				<img alt="logo" width="144" height="36" src="<?= base_url() ?>/img/footer-logo.png" />
 				<div class="foot-gototop"><i class="far fa-arrow-alt-circle-up fa-2x"></i></div>
 			</div>
 
@@ -15,14 +15,14 @@
 				<?php if ($is_home) { ?>
 				<a class="link white" id="footer-categories" href="javascript:void(0);">Categories</a>
 				<?php } else { ?>
-				<a class="link white" id="footer-home" href="<?= esc($base_uri); ?>">Home</a>
+				<a class="link white" id="footer-home" href="<?= base_url() ?>">Home</a>
 				<?php } ?>
 				&nbsp;&bull;&nbsp;
 				<a class="link white" href="#">FAQs</a>
 				&nbsp;&bull;&nbsp;
-				<a class="link white" href="<?= esc($base_uri) ?>/terms">Terms</a>
+				<a class="link white" href="<?= base_url() ?>/terms">Terms</a>
 				&nbsp;&bull;&nbsp;
-				<a class="link white" href="<?= esc($base_uri) ?>/privacy">Privacy</a>
+				<a class="link white" href="<?= base_url() ?>/privacy">Privacy</a>
 			</div>
 			<br/>
 			<div id="foot-contactus-title">Contact us:</div>

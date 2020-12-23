@@ -5,46 +5,71 @@ use App\Models\Users;
 class Pages extends BaseController {
 	################################################################################################
 	public function home() {
-		echo view('assets/header', array("base_uri" => $this->base_uri));
-		echo view('assets/navbar', array("base_uri" => $this->base_uri, "is_home" => TRUE, "user_loggedin" => $this->bLoggedIn));
-		echo view('pages/home');
-		echo view('assets/footer', array("base_uri" => $this->base_uri, "is_home" => TRUE));
+		echo view('assets/header');
+		echo view('assets/navbar', array("is_home" => TRUE, "user_loggedin" => $this->bLoggedIn, "is_admin" => $this->bAdmin));
+
+		$Items = array(
+			[
+				'title'	=> "New item for 2021!"
+			],
+			[
+				'title'	=> "Another item for test!"
+			],
+			[
+				'title'	=> "Another item for test!"
+			],
+			[
+				'title'	=> "Another item for test!"
+			],
+			[
+				'title'	=> "Another item for test!"
+			],
+			[
+				'title'	=> "Another item for test!"
+			],
+			[
+				'title'	=> "Another item for test!"
+			]
+		);
+		echo view('pages/home', array("items" => $Items));
+
+		echo view('assets/footer', array("is_home" => TRUE));
 	}
 
 	################################################################################################
 	public function register() {
 		// If user is logged-in, redirect to the home page
 		if ($this->bLoggedIn) {
-			header('Location: ' . $this->base_uri);
+			header('Location: ' . base_url());
 			exit();
 		}
 
-		echo view('assets/header', array("base_uri" => $this->base_uri));
-		echo view('assets/navbar', array("base_uri" => $this->base_uri, "is_home" => FALSE, "user_loggedin" => $this->bLoggedIn));
-		echo view('pages/register', array("base_uri" => $this->base_uri));
-		echo view('assets/footer', array("base_uri" => $this->base_uri, "is_home" => FALSE));
+		echo view('assets/header');
+		echo view('assets/navbar', array("is_home" => FALSE, "user_loggedin" => $this->bLoggedIn, "is_admin" => $this->bAdmin));
+		echo view('pages/register');
+		echo view('assets/footer', array("is_home" => FALSE));
 	}
 
 	################################################################################################
 	public function terms() {
-		echo view('assets/header', array("base_uri" => $this->base_uri));
-		echo view('assets/navbar', array("base_uri" => $this->base_uri, "is_home" => FALSE, "user_loggedin" => $this->bLoggedIn));
-		echo view('pages/terms', array("base_uri" => $this->base_uri));
-		echo view('assets/footer', array("base_uri" => $this->base_uri, "is_home" => FALSE));
+		echo view('assets/header');
+		echo view('assets/navbar', array("is_home" => FALSE, "user_loggedin" => $this->bLoggedIn, "is_admin" => $this->bAdmin));
+		echo view('pages/terms');
+		echo view('assets/footer', array("is_home" => FALSE));
 	}
 
 	################################################################################################
 	public function privacy() {
-		echo view('assets/header', array("base_uri" => $this->base_uri));
-		echo view('assets/navbar', array("base_uri" => $this->base_uri, "is_home" => FALSE, "user_loggedin" => $this->bLoggedIn));
-		echo view('pages/privacy', array("base_uri" => $this->base_uri));
-		echo view('assets/footer', array("base_uri" => $this->base_uri, "is_home" => FALSE));
+		echo view('assets/header');
+		echo view('assets/navbar', array("is_home" => FALSE, "user_loggedin" => $this->bLoggedIn, "is_admin" => $this->bAdmin));
+		echo view('pages/privacy');
+		echo view('assets/footer', array("is_home" => FALSE));
 	}
 
 	################################################################################################
 	public function activation($email, $act_code) {
-		echo view('assets/header', array("base_uri" => $this->base_uri));
-		echo view('assets/navbar', array("base_uri" => $this->base_uri, "is_home" => FALSE, "user_loggedin" => $this->bLoggedIn));
+		echo view('assets/header');
+		echo view('assets/navbar', array("is_home" => FALSE, "user_loggedin" => $this->bLoggedIn, "is_admin" => $this->bAdmin));
 
 		while(TRUE) { // (Only to use 'break' when needed)
 			$db_users = new Users();
@@ -90,27 +115,27 @@ class Pages extends BaseController {
 			break; // Only one iteration intended
 		}
 
-		echo view('assets/footer', array("base_uri" => $this->base_uri, "is_home" => FALSE));
+		echo view('assets/footer', array("is_home" => FALSE));
 	}
 
 	################################################################################################
 	public function forgot_pw() {
 		// If user is logged-in, redirect to the home page
 		if ($this->bLoggedIn) {
-			header('Location: ' . $this->base_uri);
+			header('Location: ' . base_url());
 			exit();
 		}
 
-		echo view('assets/header', array("base_uri" => $this->base_uri));
-		echo view('assets/navbar', array("base_uri" => $this->base_uri, "is_home" => FALSE, "user_loggedin" => $this->bLoggedIn));
+		echo view('assets/header');
+		echo view('assets/navbar', array("is_home" => FALSE, "user_loggedin" => $this->bLoggedIn, "is_admin" => $this->bAdmin));
 		echo view('pages/forgot_pw');
-		echo view('assets/footer', array("base_uri" => $this->base_uri, "is_home" => FALSE));
+		echo view('assets/footer', array("is_home" => FALSE));
 	}
 
 	################################################################################################
 	public function reset_pw($email, $resetpw_code) {
-		echo view('assets/header', array("base_uri" => $this->base_uri));
-		echo view('assets/navbar', array("base_uri" => $this->base_uri, "is_home" => FALSE, "user_loggedin" => $this->bLoggedIn));
+		echo view('assets/header');
+		echo view('assets/navbar', array("is_home" => FALSE, "user_loggedin" => $this->bLoggedIn, "is_admin" => $this->bAdmin));
 
 		while(TRUE) { // (Only to use 'break' when needed)
 			$db_users = new Users();
@@ -150,6 +175,6 @@ class Pages extends BaseController {
 			break; // Only one iteration intended
 		}
 
-		echo view('assets/footer', array("base_uri" => $this->base_uri, "is_home" => FALSE));
+		echo view('assets/footer', array("is_home" => FALSE));
 	}
 }

@@ -11,7 +11,7 @@
 	<br/>
 
 	<h3>Welcome to Freezoz!</h3>
-	<p>These terms and conditions outline the rules and regulations for the use of Freezoz's Website, located at <a href="<?= esc($base_uri); ?>" class="link blue"><?= FREEZOZ_LIVE_BASEURL_NOPROTO ?></a>.</p>
+	<p>These terms and conditions outline the rules and regulations for the use of Freezoz's Website, located at <a href="<?= base_url() ?>" class="link blue"><?= FREEZOZ_LIVE_BASEURL_NOPROTO ?></a>.</p>
 	<p>
 		By accessing this website we assume you accept these terms and conditions. Do not continue to use Freezoz if you do not agree to take all of the terms and conditions stated on this page.
 	</p>
@@ -53,7 +53,7 @@
 
 	<br/>
 	<h2 style="color:#157e38;">Cookies</h2>
-	<p>We employ the use of cookies. By accessing Freezoz, you agreed to use cookies in agreement with the Freezoz's <a href="<?= esc("$base_uri/privacy"); ?>" class="link blue">Privacy Policy</a>.</p>
+	<p>We employ the use of cookies. By accessing Freezoz, you agreed to use cookies in agreement with the Freezoz's <a href="<?= base_url() ?>/privacy" class="link blue">Privacy Policy</a>.</p>
 	<p>
 		Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier
 		for people visiting our website. Some of our affiliate/advertising partners may also use cookies.

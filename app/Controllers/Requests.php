@@ -149,7 +149,7 @@ class Requests extends BaseController {
 		}
 		
 		// Return OK
-		$this->bLoggedIn = user_loggedin();
+		$this->bLoggedIn = user_loggedin()['is_loggedin'];
 		return $this->response->setJSON(['retcode' => STATUS_SUCCESS, 'retdata' => NULL]);
 	}
 

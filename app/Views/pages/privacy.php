@@ -11,7 +11,7 @@
 	<br/>
 
 	<p>
-		At Freezoz, accessible from <a href="<?= esc($base_uri); ?>" class="link blue"><?= FREEZOZ_LIVE_BASEURL_NOPROTO ?></a>, one of our main priorities is the privacy of our visitors.
+		At Freezoz, accessible from <a href="<?= base_url() ?>" class="link blue"><?= FREEZOZ_LIVE_BASEURL_NOPROTO ?></a>, one of our main priorities is the privacy of our visitors.
 		This Privacy Policy document contains types of information that is collected and recorded by Freezoz and how we use it.
 	</p>
 	<p>
@@ -26,7 +26,7 @@
 	<h2 style="color:#157e38;">Consent</h2>
 	<p>
 		By using our website, you hereby consent to our Privacy Policy and agree to its terms. For our Terms and Conditions, please visit the
-		<a href="<?= esc("$base_uri/terms"); ?>" class="link blue">Terms of use</a> page.
+		<a href="<?= base_url() ?>/terms" class="link blue">Terms of use</a> page.
 	</p>
 
 	<br/>
@@ -83,7 +83,7 @@
 	<h2 style="color:#157e38;">Google DoubleClick DART Cookie</h2>
 	<p>
 		Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to
-		<a href="<?= esc($base_uri); ?>" class="link blue"><?= FREEZOZ_LIVE_BASEURL_NOPROTO ?></a> and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting
+		<a href="<?= base_url() ?>" class="link blue"><?= FREEZOZ_LIVE_BASEURL_NOPROTO ?></a> and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting
 		the Google ad and content network Privacy Policy at the following URL –
 		<a href="https://policies.google.com/technologies/ads" class="link blue" target="_blank" rel="noreferrer" rel="noopener">Google Privacy &amp; Terms - Advertising&nbsp;<i class="fas fa-external-link-square-alt"></i></a>.
 	</p>

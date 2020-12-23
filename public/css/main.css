@@ -19,7 +19,7 @@ html {
 
 body {
 	position: relative;
-	background-color: #fff;
+	background-color: #f7f7f7;
 	height: 100%;
 	width: 100%;
 	overflow-x: hidden;
@@ -53,19 +53,21 @@ body {
 /************************************************
 Nav Bar
 ************************************************/
-nav#navbar {
-	background-color: white;
+#navbar {
+	background-color: #f7f7f7;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	z-index: 2; /* Same as the Footer */
+	transition: all 333ms ease;
 }
-nav#navbar.navbar-shadow {
+#navbar.navbar-shadow {
+	background-color: #fff;
 	box-shadow: 0px 1px 5px 0px rgba(119,119,119,0.5);
 }
 
-div#navbar-container {
+#navbar-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -78,62 +80,62 @@ div#navbar-container {
 	height: 4.3rem;
 	overflow: hidden;
 
-	transition: height 333ms ease;
+	transition: all 333ms ease;
 }
 @media all and (max-width: 768px) {
-	div#navbar-container {
+	#navbar-container {
 		flex-direction: column;
 		justify-content: flex-start;
 	}
 }
 
 @media all and (max-width: 768px) { /* Only open the menu if screen is compact */
-	div#navbar-container.navbar-menuopen {
+	#navbar-container.navbar-menuopen {
 		height: 20rem;
 	}
 }
 
-div#navbar-logoburger {
+#navbar-logoburger {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	height: 4.3rem;
 }
 @media all and (max-width: 768px) {
-	div#navbar-logoburger {
+	#navbar-logoburger {
 		justify-content: center;
 	}
 }
 
-div#navbar-burger {
+#navbar-burger {
 	display: none;
 	height: 4.3rem;
 }
 @media all and (max-width: 768px) {
-	div#navbar-burger {
+	#navbar-burger {
 		display: flex;
 	}
 }
 
-div#navbar-logo, div#navbar-logo a {
+#navbar-logo, #navbar-logo a {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 }
-div#navbar-logo img {
+#navbar-logo img {
 	height: 3rem;
 	width: auto;
 	cursor: pointer;
 }
 
-div#navbar-menu {
+#navbar-menu {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
 @media all and (max-width: 768px) {
-	div#navbar-menu {
+	#navbar-menu {
 		flex-direction: column;
 	}
 }

@@ -10,29 +10,29 @@
 	<meta name="description" content="Freezoz is the free source of AE templates">
 	<meta name="keywords" content="Freezoz, free templates, AE templates, AfterEffects templates">
 
-	<link rel="icon" type="image/x-icon" href="<?= esc($base_uri) ?>/favicon.ico">
-	<link rel="shortcut icon" href="<?= esc($base_uri) ?>/favicon.png">
-	<link rel="apple-touch-icon" href="<?= esc($base_uri) ?>/favicon.png">
-	<link rel="apple-touch-icon-precomposed" href="<?= esc($base_uri) ?>/favicon.png">
+	<link rel="icon" type="image/x-icon" href="<?= base_url() ?>/favicon.ico">
+	<link rel="shortcut icon" href="<?= base_url() ?>/favicon.png">
+	<link rel="apple-touch-icon" href="<?= base_url() ?>/favicon.png">
+	<link rel="apple-touch-icon-precomposed" href="<?= base_url() ?>/favicon.png">
 
 	<!-- STYLES -->
 	<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="<?= esc($base_uri) ?>/css/main.css">
-	<link rel="stylesheet" type="text/css" href="<?= esc($base_uri) ?>/css/burger.css">
-	<link rel="stylesheet" type="text/css" href="<?= esc($base_uri) ?>/css/components.css">
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/main.css">
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/burger.css">
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/components.css">
 
 	<!-- Manifest file of 'Progressive app' for Google Chrome browsers -->
-	<link rel="manifest" href="<?= esc($base_uri) ?>/manifest.json">
+	<link rel="manifest" href="<?= base_url() ?>/manifest.json">
 	<meta name="theme-color" content="#C3C3C3">
 
 	<!-- IE 10 Metro tile icon -->
 	<meta name="msapplication-TileColor" content="#C3C3C3">
-	<meta name="msapplication-TileImage" content="<?= esc($base_uri) ?>/favicon.png">
+	<meta name="msapplication-TileImage" content="<?= base_url() ?>/favicon.png">
 
 	<!-- IE 11 Tile for Windows 8.1 Start Screen -->
 	<meta name="application-name" content="FreeZoz">
 	<meta name="msapplication-tooltip" content="FreeZoz, your free source of AE templates!">
-	<meta name="msapplication-config" content="<?= esc($base_uri) ?>/ieconfig.xml">
+	<meta name="msapplication-config" content="<?= base_url() ?>/ieconfig.xml">
 
 	<!-- Localized versions ->
 	<link rel="alternate" href="https://www.filezigzag.com/online-converter" hreflang="x-default" />
@@ -68,7 +68,7 @@
 
 <?php # Convert PHP constants to JS (Password's min & max limits are defined in the sign-in form)
 	echo "<script type='text/javascript'>" . PHP_EOL;
-	echo "\tconst BASE_URI = '" . esc($base_uri) . "';" . PHP_EOL;
+	echo "\tconst BASE_URI = '" . base_url() . "';" . PHP_EOL;
 	echo "\tconst FORM_USERNAME_MINLENGTH = " . FORM_USERNAME_MINLENGTH . ";" . PHP_EOL;
 	echo "\tconst FORM_EMAIL_MAXLENGTH = " . FORM_EMAIL_MAXLENGTH . ";" . PHP_EOL;
 	echo "\tconst FORM_PASSWORD_MINLENGTH = " . FORM_PASSWORD_MINLENGTH . ";" . PHP_EOL;

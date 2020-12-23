@@ -28,15 +28,9 @@ class BaseController extends Controller
 	 */
 	protected $helpers = ['Helpers\Funcs_helper.php', 'cookie'];
 
-
-	# The site's root url (To be used in all descendant classes)
-	protected $base_uri = "";
-
-	# Session variable
-	protected $session = NULL;
-
-	# Is the user logged in?
-	protected $bLoggedIn = FALSE;
+	protected $session = NULL;				# Session variable
+	protected $bLoggedIn = FALSE;			# Is the user logged in?
+	protected $bAdmin = FALSE;				# Is the user an admin?
 
 
 	/* 
@@ -48,10 +42,13 @@ class BaseController extends Controller
 		parent::initController($request, $response, $logger);
 
 		// Initialize class member variables
-		$config = config(App::class);
-		$this->base_uri = new URI(rtrim($config->baseURL, '/'));
 		$this->session = \Config\Services::session();
-		$this->bLoggedIn = user_loggedin();
+		
+		$login_data = user_loggedin();
+		$this->bLoggedIn = $login_data['is_loggedin'];
+		$this->bAdmin = $login_data['is_admin'];
+
+
 
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.

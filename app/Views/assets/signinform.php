@@ -4,7 +4,7 @@
 	<div class="back-bubble"></div>
 
 	<div id="signin-close">
-		<img src="<?= esc($base_uri) ?>/img/times.png" width="15" height="15" alt="Close" />
+		<img src="<?= base_url() ?>/img/times.png" width="15" height="15" alt="Close" />
 	</div>
 
 	<div id="signinform-title">Sign in</div>
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 
-	<div id="forget-password">Forgot your password? <a href="<?= esc($base_uri) ?>/forgot_pw" class="link blue">Click here</a></div>
+	<div id="forget-password">Forgot your password? <a href="<?= base_url() ?>/forgot_pw" class="link blue">Click here</a></div>
 
 	<?php insert_hspace("1rem"); ?>
 	<div id="remember-me">
@@ -47,7 +47,7 @@
 	<button type="button" id="signinform-loginbtn" class="btn-solid-lrg">SIGN IN</button>
 
 	<?php insert_hspace("0.9rem"); ?>
-	<div>Don't have an account yet? <a href="<?= esc($base_uri) ?>/register" class="link blue">Register</a></div>
+	<div>Don't have an account yet? <a href="<?= base_url() ?>/register" class="link blue">Register</a></div>
 </div>
 
 

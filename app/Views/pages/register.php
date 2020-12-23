@@ -62,8 +62,8 @@
 				<input type="checkbox" id="chk-terms-read-agree" />
 				<label>
 					I have read and I agree to the
-					<a href="<?= esc("$base_uri/terms"); ?>" class="link blue" target="_blank">Terms of use&nbsp;<i class="fas fa-external-link-square-alt"></i></a> and
-					<a href="<?= esc("$base_uri/privacy"); ?>" class="link blue" target="_blank">Privacy Policy&nbsp;<i class="fas fa-external-link-square-alt"></i></a>.
+					<a href="<?= base_url() ?>/terms" class="link blue" target="_blank">Terms of use&nbsp;<i class="fas fa-external-link-square-alt"></i></a> and
+					<a href="<?= base_url() ?>/privacy" class="link blue" target="_blank">Privacy Policy&nbsp;<i class="fas fa-external-link-square-alt"></i></a>.
 				</label>
 			</div>
 			<?php insert_hspace("1.5rem"); ?>

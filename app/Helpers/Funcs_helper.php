@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Users;
-use CodeIgniter\HTTP\URI;
 
 ###################################################################################################
 if (!function_exists('include_jscript')) {
@@ -16,13 +15,9 @@ if (!function_exists('include_jscript')) {
 	# @return null
 	#
 	function include_jscript($filename) {
-		$config = config(App::class);
-		$base_uri = new URI(rtrim($config->baseURL, '/'));
-
 		try {
-			$str = "<script type='text/javascript' src='$base_uri/js/$filename";
+			$str = "<script type='text/javascript' src='" . base_url() . "/js/$filename";
 			$str .= "?t=" . filemtime(FCPATH . "/js/$filename") . "'></script>" . PHP_EOL;
-
 			echo $str;
 		} catch (\Throwable $e) {
 			return;
@@ -65,9 +60,7 @@ if (!function_exists('sendemail_accountactivation')) {
 		$act_code = $db_users->get_activationcode($useremail);
 
 		// Construct the url for both live and localhost version (to allow testing & debugging)
-		$config = config(App::class);
-		$base_uri = new URI(rtrim($config->baseURL, '/'));
-		$act_link = $base_uri . "/activation/$useremail/$act_code";
+		$act_link = base_url() . "/activation/$useremail/$act_code";
 
 		$validity = sprintf("%.1f", ACTIVATION_EMAIL_VALIDITY_MINUTES / 60); // Precision should be kept .1f
 		if (strpos($validity, ".0")) $validity = substr($validity, 0, strlen($validity) - 2);
@@ -148,11 +141,14 @@ if (!function_exists('user_loggedin')) {
 	#
 	# Checks Session and Cookies for a previous sign in (user_id),
 	# and checks their data against the db contents.
+	# Returns an array:
+	# ["is_loggedin" => (BOOL), "is_admin" => (BOOL)]
 	#
 	function user_loggedin() {
 		$db_users = new Users();
 		$session = \Config\Services::session();
 		helper('cookie');
+		$retdata = ['is_loggedin' => FALSE, 'is_admin' => FALSE]; // Initially
 
 		$userid_ss = $session->get(SESSION_USERID);
 		$userid_ck = get_cookie(COOKIE_USERID, true); ### XSS-Clean
@@ -160,27 +156,29 @@ if (!function_exists('user_loggedin')) {
 		$rowid_ck = empty($userid_ck) ? NULL : userid_decode($userid_ck);
 
 		// If both session and cookies CONTAIN data, they must be identical, or else order the user to log in again!
-		if ((!empty($rowid_ss) && !empty($rowid_ck)) && ($rowid_ss != $rowid_ck)) return FALSE;
+		if ((!empty($rowid_ss) && !empty($rowid_ck)) && ($rowid_ss != $rowid_ck)) return $retdata; // It's FALSE
 
 		if (!empty($rowid_ss)) { // Session
-			if (!empty($db_users->where('rowid', $rowid_ss)->first())) return TRUE; else return FALSE;
+			$dbrow = $db_users->where('rowid', $rowid_ss)->first();
+			if (empty($dbrow)) return $retdata; // It's FALSE
+			
+			$retdata = ['is_loggedin' => TRUE, 'is_admin' => empty($dbrow['is_admin']) ? FALSE : TRUE];
+			return $retdata;
 		}
 
 		// Session doesn't contain the user_id, search cookeis
 
 		if (!empty($rowid_ck)) { // Cookies
-			if (!empty($db_users->where('rowid', $rowid_ck)->first())) {
-				// Cookie is OK, Session is empty => create a session variable, and return OK (Previous sign-in)
-				$session->set([SESSION_USERID => $userid_ck]);
-				return TRUE;
-			} else {
-				// Cookie is wrong, session is empty
-				return FALSE;
-			}
+			$dbrow = $db_users->where('rowid', $rowid_ck)->first();
+			if (empty($dbrow)) return $retdata; // It's FALSE  (Cookie is wrong, session is empty)
+
+			// Cookie is OK, Session is empty => create a session variable, and return OK (Previous sign-in)
+			$session->set([SESSION_USERID => $userid_ck]);
+			$retdata = ['is_loggedin' => TRUE, 'is_admin' => empty($dbrow['is_admin']) ? FALSE : TRUE];
 		}
 
 		// Cookies and Session don't contain user_id !
-		return FALSE;
+		return $retdata; // It's FALSE
 	}
 }
 
@@ -212,7 +210,7 @@ if (!function_exists('user_signout')) {
 
 		// BaseController->bIsLoggedIn is NOT accessible outside of it & its decendant classes (protected)
 		// Just return the value to remember to update the protected variable
-		return user_loggedin();
+		return user_loggedin()['is_loggedin'];
 	}
 }
 
@@ -232,9 +230,7 @@ if (!function_exists('sendemail_resetpassword')) {
 		$resetpw_code = $db_users->createSaveGet_resetpwcode($useremail);
 
 		// Construct the url for both live and localhost version (to allow testing & debugging)
-		$config = config(App::class);
-		$base_uri = new URI(rtrim($config->baseURL, '/'));
-		$resetpw_link = $base_uri . "/reset_pw/$useremail/$resetpw_code";
+		$resetpw_link = base_url() . "/reset_pw/$useremail/$resetpw_code";
 
 		$validity = sprintf("%.1f", RESETPW_EMAIL_VALIDITY_MINUTES / 60); // Precision should be kept .1f
 		if (strpos($validity, ".0")) $validity = substr($validity, 0, strlen($validity) - 2);
