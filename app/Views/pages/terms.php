@@ -1,8 +1,3 @@
-<script type="text/javascript">
-</script>
-
-
-
 <div class="main-container" style="position: relative;">
 	<?php insert_hspace("4.3rem"); ?>
 

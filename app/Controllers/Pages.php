@@ -4,6 +4,14 @@ use App\Models\Users;
 
 class Pages extends BaseController {
 	################################################################################################
+	public function err404() {
+		echo view('assets/header');
+		echo view('assets/navbar', array("is_home" => FALSE, "user_loggedin" => $this->bLoggedIn, "is_admin" => $this->bAdmin));
+		echo view('pages/error404');
+		echo view('assets/footer', array("is_home" => FALSE));
+	}
+
+	################################################################################################
 	public function home() {
 		echo view('assets/header');
 		echo view('assets/navbar', array("is_home" => TRUE, "user_loggedin" => $this->bLoggedIn, "is_admin" => $this->bAdmin));
@@ -23,6 +31,15 @@ class Pages extends BaseController {
 			],
 			[
 				'title'	=> "Another item for test!"
+			],
+			[
+				'title'	=> "Another item for test!"
+			],
+			[
+				'title'	=> "Another item for test!"
+			],
+			[
+				'title'	=> "New item for 2021!"
 			],
 			[
 				'title'	=> "Another item for test!"
@@ -176,5 +193,22 @@ class Pages extends BaseController {
 		}
 
 		echo view('assets/footer', array("is_home" => FALSE));
+	}
+
+	################################################################################################
+	public function admincp() {
+		// If user is NOT logged-in, or logged-in but NOT an admin, show the 404 erro page
+		if (!$this->bLoggedIn || !$this->bAdmin) {
+			// This will not change the browser's url
+			return $this->err404();
+		}
+
+		
+		echo view('assets/admin_header');
+		echo view('assets/admin_navbar');
+
+		echo "Humam";
+
+		echo view('assets/admin_footer');
 	}
 }
