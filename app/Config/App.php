@@ -22,7 +22,7 @@ class App extends BaseConfig
 	|
 	*/
 	public $baseURL = 'http://localhost:8080/';
-#	public $baseURL = 'https://www.freezoz.com/';
+#	public $baseURL = 'https://www.freezoz.com/public/';
 
 	/*
 	|--------------------------------------------------------------------------
@@ -126,7 +126,6 @@ class App extends BaseConfig
 	| and the HTTP Strict Transport Security header will be set.
 	*/
 	public $forceGlobalSecureRequests = false;
-#	public $forceGlobalSecureRequests = true;
 
 	/*
 	|--------------------------------------------------------------------------
