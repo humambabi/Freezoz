@@ -1,6 +1,13 @@
 /*
 Main Style Sheet; Freezoz
 */
+:root {
+	--general-fontfamily: 'Balsamiq Sans', cursive;
+
+	--main-container-width: 83%;
+	--main-container-maxwidth: 1350px;
+}
+
 
 html {
 	-webkit-box-sizing: border-box;
@@ -25,14 +32,14 @@ body {
 	overflow-x: hidden;
 	margin: 0;
 	padding: 0;
-	font-family: 'Balsamiq Sans', cursive;
+	font-family: var(--general-fontfamily);
 }
 
 .main-container {
-	width: 83%;
+	width: var(--main-container-width);
 	margin-right: auto;
 	margin-left: auto;
-	max-width: 1200px;
+	max-width: var(--main-container-maxwidth);
 }
 @media all and (max-width: 768px) {
 	.main-container {
@@ -72,10 +79,10 @@ Nav Bar
 	flex-direction: row;
 	justify-content: space-between;
 
-	width: 83%;
+	width: var(--main-container-width);
 	margin-right: auto;
 	margin-left: auto;
-	max-width: 1200px;
+	max-width: var(--main-container-maxwidth);
 
 	height: 4.3rem;
 	overflow: hidden;
@@ -259,8 +266,8 @@ div.navbar-navitemsep-inner {
 }
 .usermenu-item[type='separator'] {
 	cursor: default;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 7px;
+	padding-bottom: 7px;
 }
 .usermenu-item svg {
 	font-size: 1.1rem;
@@ -543,10 +550,10 @@ footer {
 div#foot-foot {
 	display: flex;
 	flex-direction: row;
-	width: 83%;
+	width: var(--main-container-width);
 	margin-right: auto;
 	margin-left: auto;
-	max-width: 1200px;
+	max-width: var(--main-container-maxwidth);
 }
 @media all and (max-width: 768px) {
 	div#foot-foot {

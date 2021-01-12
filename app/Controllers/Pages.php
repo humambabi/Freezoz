@@ -17,36 +17,21 @@ class Pages extends BaseController {
 		echo view('assets/navbar', array("is_home" => TRUE, "user_loggedin" => $this->bLoggedIn, "is_admin" => $this->bAdmin));
 
 		$Items = array(
-			[
-				'title'	=> "New item for 2021!"
-			],
-			[
-				'title'	=> "Another item for test!"
-			],
-			[
-				'title'	=> "Another item for test!"
-			],
-			[
-				'title'	=> "Another item for test!"
-			],
-			[
-				'title'	=> "Another item for test!"
-			],
-			[
-				'title'	=> "Another item for test!"
-			],
-			[
-				'title'	=> "Another item for test!"
-			],
-			[
-				'title'	=> "New item for 2021!"
-			],
-			[
-				'title'	=> "Another item for test!"
-			],
-			[
-				'title'	=> "Another item for test!"
-			]
+			['title' => "New item for 2021!"],
+			['title' => "Another item for test!"],
+			['title' => "Another item for test!"],
+			['title' => "Another item for test!"],
+			['title' => "Another item for test!"],
+			['title' => "Another item for test!"],
+			['title' => "Another item for test!"],
+			['title' => "New item for 2021!"],
+			['title' => "Another item for test!"],
+			['title' => "Another item for test!"],
+			['title' => "Another item for test!"],
+			['title' => "Another item for test!"],
+			['title' => "Another item for test!"],
+			['title' => "Another item for test!"],
+			['title' => "Another item for test!"]
 		);
 		echo view('pages/home', array("items" => $Items));
 
