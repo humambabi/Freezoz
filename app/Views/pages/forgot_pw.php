@@ -21,7 +21,6 @@
 #page-msg-text {
 	width: 100%;
 	font-size: 1.2rem;
-	font-weight: lighter;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
@@ -38,7 +37,7 @@
 	min-width: 20rem;
 	max-width: 25rem;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	#page-msg-text .edit-container {
 		width: 95%;
 		max-width: 25rem;
@@ -51,12 +50,12 @@
 }
 </style>
 <script type="text/javascript">
-	var onloadCallback = function() {
-		grecaptcha.render('google-recaptcha', {
-			'sitekey': '6LdHvd8ZAAAAAFMgZKkFmVx8KkFZMBxdlGuGOYLj',
-			'size': window.innerWidth < 650 ? 'compact' : 'normal'
-		});
-	};
+var onloadCallback = function() {
+	grecaptcha.render('google-recaptcha', {
+		'sitekey': '6LdHvd8ZAAAAAFMgZKkFmVx8KkFZMBxdlGuGOYLj',
+		'size': window.innerWidth < 650 ? 'compact' : 'normal'
+	});
+};
 </script>
 
 
@@ -89,7 +88,7 @@
 	</div>
 
 	<div id="page-msg-retbtn" class="justify-content-center">
-		<button type="button" id="forgotpw_submit" class="solid medium">&nbsp;&nbsp;&nbsp;Submit&nbsp;&nbsp;&nbsp;</button>
+		<button type="button" id="forgotpw_submit" class="solid large">&nbsp;&nbsp;&nbsp;Submit&nbsp;&nbsp;&nbsp;</button>
 	</div>
 	
 	<div style="color:rgba(0,0,0,.01);">.</div>

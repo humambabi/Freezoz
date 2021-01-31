@@ -21,7 +21,7 @@ function updateUserMenuPosition() {
 
 	if (!elmBtn) return; // User is not logged in (no user button)
 	
-	if ($(window).innerWidth() <= 768) {
+	if ($(window).innerWidth() <= 800) {
 		mLeft = parseInt(elmBtn.offsetLeft) - (parseInt(getComputedStyle(elmMenu).width) / 2.0) + (parseInt(getComputedStyle(elmBtn).width) / 2.0);
 	} else {
 		mLeft = parseInt(elmBtn.offsetLeft) - parseInt(getComputedStyle(elmMenu).width) + parseInt(getComputedStyle(elmBtn).width) + addLeft;
@@ -187,7 +187,7 @@ function usermenu_open() {
 		// Mark the burger button as if  the burger menu was opened (sync with #btn-burger.click)
 		$('#btn-burger').addClass('is-active');
 		if (!$('#navbar-container').hasClass('navbar-menuopen')) $('#navbar-container').addClass('navbar-menuopen');
-		if (($(window).innerWidth() <= 768) && !$('#navbar').hasClass('navbar-shadow')) $('#navbar').addClass('navbar-shadow');
+		if (($(window).innerWidth() <= 800) && !$('#navbar').hasClass('navbar-shadow')) $('#navbar').addClass('navbar-shadow');
 	}
 }
 
@@ -225,7 +225,7 @@ $(window).scroll(function(e) {
 
 	if (
 		($(window)[0].scrollY > 10) || // After scrolling more than 10px vertically
-		(($('#navbar-container').hasClass('navbar-menuopen')) && ($(window).innerWidth() <= 768)) || // BurgerMenu is opened AND we are on a mobile phone
+		(($('#navbar-container').hasClass('navbar-menuopen')) && ($(window).innerWidth() <= 800)) || // BurgerMenu is opened AND we are on a mobile phone
 		($("#overlay-body").length && !$("#overlay-body").hasClass("hidden")) // BodyOverlay is shown
 	) {
 		if (!$('#navbar').hasClass('navbar-shadow')) $('#navbar').addClass('navbar-shadow');
@@ -236,7 +236,7 @@ $(window).scroll(function(e) {
 
 // When the window is resized  (rare, but nicer to have)
 $(window).resize(function() {
-	if (($(window).innerWidth() > 768) && ($(window)[0].scrollY <= 10)) {
+	if (($(window).innerWidth() > 800) && ($(window)[0].scrollY <= 10)) {
 		if ($('#navbar').hasClass('navbar-shadow')) $('#navbar').removeClass('navbar-shadow');
 	}
 
@@ -249,7 +249,7 @@ $(window).on("load", function() {
 	adjust_footerPos();
 });
 
-// A click event on the 'burger' button (only for screens <= 768px in width)
+// A click event on the 'burger' button (only for screens <= 800px in width)
 $('#btn-burger').click(function() {
 	if ($('#btn-burger').hasClass('is-active')) {
 		// Close the burger menu

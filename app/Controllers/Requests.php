@@ -277,4 +277,53 @@ class Requests extends BaseController {
 			'retdata' => "Your password was reset successfully.\r\nYou can now use it to login."
 		]);
 	}
+
+	################################################################################################
+	# Get a list of items (to be shown on the home page) (the FULL list of rowids)
+	# params: none
+	################################################################################################
+	public function items_getlist() {
+		if (!$this->request->isAJAX()) return "Bad request!";
+		if ($this->request->getMethod() != 'post') return "Bad method!";
+
+		// Return the rowids of all items (that match a specific query criteria [categories, serach word, etc])
+		$itemslist = [];
+		for ($i = 0; $i < 49; $i++) { // ASSUMPTION!
+			array_push($itemslist, rand(1, 99));
+		}
+
+		return $this->response->setJSON([
+			'retcode' => STATUS_SUCCESS,
+			'retdata' => [
+				'itemlist'				=> $itemslist,
+				'maxitemcountpercol'	=> HOMEPAGE_MAXITEMROWCOUNT
+			]
+		]);
+	}
+
+	################################################################################################
+	# Get the data that belongs to a single item (differentiate between data to be shown on the home page, or that to be shown on the item's page)
+	# params: rid (orig: rowid), dtype (orig: datatype)
+	################################################################################################
+	public function item_getdata() {
+		if (!$this->request->isAJAX()) return "Bad request!";
+		if ($this->request->getMethod() != 'post') return "Bad method!";
+
+
+
+		$itemdata = [];
+		// Should be loaded from the DB (using the rid param)
+
+		if ($this->request->getPost('dtype') == "home") { // Should be sanitized
+			$itemdata['imgelThumbnail'] = "<img title='Title of the item' alt='Title of the item' src='https://picsum.photos/seed/" . rand(10000, 99999) . "/590/332' />";
+
+
+
+		}
+
+		return $this->response->setJSON([
+			'retcode' => STATUS_SUCCESS,
+			'retdata' => $itemdata
+		]);
+	}
 }

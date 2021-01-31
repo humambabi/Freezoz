@@ -24,7 +24,7 @@
 			<?php if ($user_loggedin) { ?>
 				<div id="navbar-userbtn"><i class="fas fa-user-circle"></i></div>
 			<?php } else { ?>
-				<button type="button" id="navbar-signinbtn" class="btn-outline-med">SIGN IN</button>
+				<button type="button" id="navbar-signinbtn" class="solid medium">SIGN IN</button>
 			<?php } ?>
 		</div>
 	</div>

@@ -18,14 +18,14 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Consent</h2>
+	<h2 style="color:#20bf55;">Consent</h2>
 	<p>
 		By using our website, you hereby consent to our Privacy Policy and agree to its terms. For our Terms and Conditions, please visit the
 		<a href="<?= base_url() ?>/terms" class="link blue">Terms of use</a> page.
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Information we collect</h2>
+	<h2 style="color:#20bf55;">Information we collect</h2>
 	<p>
 		The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your
 		personal information.
@@ -39,7 +39,7 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">How we use your information</h2>
+	<h2 style="color:#20bf55;">How we use your information</h2>
 	<p>We use the information we collect in various ways, including to:</p>
 	<ul style="line-height:1.5rem;">
 		<li>Provide, operate, and maintain our website.</li>
@@ -55,7 +55,7 @@
 	</ul>
 
 	<br/>
-	<h2 style="color:#157e38;">Log Files</h2>
+	<h2 style="color:#20bf55;">Log Files</h2>
 	<p>
 		Freezoz follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics.
 		The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly
@@ -64,7 +64,7 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Cookies and Web Beacons</h2>
+	<h2 style="color:#20bf55;">Cookies and Web Beacons</h2>
 	<p>
 		Like any other website, Freezoz uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited.
 		The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.
@@ -75,7 +75,7 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Google DoubleClick DART Cookie</h2>
+	<h2 style="color:#20bf55;">Google DoubleClick DART Cookie</h2>
 	<p>
 		Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to
 		<a href="<?= base_url() ?>" class="link blue"><?= FREEZOZ_LIVE_BASEURL_NOPROTO ?></a> and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting
@@ -84,7 +84,7 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Advertising Partners Privacy Policies</h2>
+	<h2 style="color:#20bf55;">Advertising Partners Privacy Policies</h2>
 	<p>You may consult this list to find the Privacy Policy for each of the advertising partners of Freezoz.</p>
 	<p>
 		Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on Freezoz,
@@ -94,7 +94,7 @@
 	<p>Note that Freezoz has no access to or control over these cookies that are used by third-party advertisers.</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Third Party Privacy Policies</h2>
+	<h2 style="color:#20bf55;">Third Party Privacy Policies</h2>
 	<p>
 		Freezoz's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for
 		more detailed information. It may include their practices and instructions about how to opt-out of certain options.
@@ -105,7 +105,7 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
+	<h2 style="color:#20bf55;">CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
 	<p>Under the CCPA, among other rights, California consumers have the right to:</p>
 	<ul style="line-height:1.5rem;">
 		<li>Request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.</li>
@@ -115,7 +115,7 @@
 	<p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
 
 	<br/>
-	<h2 style="color:#157e38;">GDPR Data Protection Rights</h2>
+	<h2 style="color:#20bf55;">GDPR Data Protection Rights</h2>
 	<p>We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>
 	<ul style="line-height:1.5rem;">
 		<li>The right to access – You have the right to request copies of your personal data. We may charge you a small fee for this service.</li>
@@ -134,7 +134,7 @@
 	<p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Children's Information</h2>
+	<h2 style="color:#20bf55;">Children's Information</h2>
 	<p>
 		Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and
 		guide their online activity.

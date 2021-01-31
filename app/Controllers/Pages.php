@@ -15,26 +15,7 @@ class Pages extends BaseController {
 	public function home() {
 		echo view('assets/header');
 		echo view('assets/navbar', array("is_home" => TRUE, "user_loggedin" => $this->bLoggedIn, "is_admin" => $this->bAdmin));
-
-		$Items = array(
-			['title' => "New item for 2021!"],
-			['title' => "Another item for test!"],
-			['title' => "Another item for test!"],
-			['title' => "Another item for test!"],
-			['title' => "Another item for test!"],
-			['title' => "Another item for test!"],
-			['title' => "Another item for test!"],
-			['title' => "New item for 2021!"],
-			['title' => "Another item for test!"],
-			['title' => "Another item for test!"],
-			['title' => "Another item for test!"],
-			['title' => "Another item for test!"],
-			['title' => "Another item for test!"],
-			['title' => "Another item for test!"],
-			['title' => "Another item for test!"]
-		);
-		echo view('pages/home', array("items" => $Items));
-
+		echo view('pages/home');
 		echo view('assets/footer', array("is_home" => TRUE));
 	}
 

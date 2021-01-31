@@ -2,7 +2,7 @@
 Main Style Sheet; Freezoz
 */
 :root {
-	--general-fontfamily: 'Balsamiq Sans', cursive;
+	--general-fontfamily: 'Montserrat', sans-serif;
 
 	--main-container-width: 83%;
 	--main-container-maxwidth: 1350px;
@@ -41,7 +41,7 @@ body {
 	margin-left: auto;
 	max-width: var(--main-container-maxwidth);
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	.main-container {
 		width: 90%;
 	}
@@ -89,14 +89,14 @@ Nav Bar
 
 	transition: all 333ms ease;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	#navbar-container {
 		flex-direction: column;
 		justify-content: flex-start;
 	}
 }
 
-@media all and (max-width: 768px) { /* Only open the menu if screen is compact */
+@media all and (max-width: 800px) { /* Only open the menu if screen is compact */
 	#navbar-container.navbar-menuopen {
 		height: 20rem;
 	}
@@ -108,7 +108,7 @@ Nav Bar
 	align-items: center;
 	height: 4.3rem;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	#navbar-logoburger {
 		justify-content: center;
 	}
@@ -118,7 +118,7 @@ Nav Bar
 	display: none;
 	height: 4.3rem;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	#navbar-burger {
 		display: flex;
 	}
@@ -141,7 +141,7 @@ Nav Bar
 	flex-direction: row;
 	align-items: center;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	#navbar-menu {
 		flex-direction: column;
 	}
@@ -182,7 +182,7 @@ div.navbar-navitemsep {
 	flex-direction: column;
 	align-items: center;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	div.navbar-navitemsep {
 		height: 1.75rem;
 		width: 100%;
@@ -193,7 +193,7 @@ div.navbar-navitemsep-inner {
 	height: 0;
 	background-color: unset;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	div.navbar-navitemsep-inner {
 		width: 71%;
 		height: 1px;
@@ -243,7 +243,7 @@ div.navbar-navitemsep-inner {
 	right: 1rem;
 	transform: rotate(45deg);
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	#usermenu-container::before {
 		left: calc(50% - .35rem);
 	}
@@ -348,7 +348,7 @@ Sign-in form
 #signinform-title {
 	font-size: 2.1rem;
 	font-weight: 900;
-	color: #157e38;
+	color: #20bf55;
 	margin: 2rem 0;
 }
 
@@ -410,7 +410,6 @@ div.social-item#socialbtn-google {
 }
 
 button#signinform-loginbtn {
-	width: 7.5rem;
 	z-index: 1; /* At least in front of the .back-bubble(s) */
 }
 
@@ -494,7 +493,7 @@ div#categoriesform.slideL-show {
 div#categories-title {
 	font-size: 1.7rem;
 	font-weight: 900;
-	color: #157e38;
+	color: #20bf55;
 	margin: 0.5rem 0;
 }
 
@@ -517,7 +516,7 @@ input.inpsearch {
 	transition: all 333ms ease; /* Same as the sibling svg */
 	outline-style: none;
 	font-size: 1rem;
-	font-family: 'Balsamiq Sans', cursive;
+	font-family: var(--general-fontfamily);
 }
 input.inpsearch:focus {
 	border-color: #01baef;
@@ -555,7 +554,7 @@ div#foot-foot {
 	margin-left: auto;
 	max-width: var(--main-container-maxwidth);
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	div#foot-foot {
 		flex-direction: column;
 	}
@@ -574,7 +573,7 @@ div#foot-logo-gototop > div.foot-gototop {
 div#foot-foot > div.foot-gototop {
 	display: inline-block;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	div#foot-logo-gototop > div.foot-gototop {
 		display: inline-block;
 	}
@@ -601,13 +600,13 @@ div#foot-links {
 	div#foot-logodesc { margin-right: 1.5rem; }
 	div#foot-links { margin-right: 1.5rem; margin-top: 2rem; }
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	div#foot-logodesc { margin-right: 0; }
 	div#foot-links { margin-right: 0; }
 }
 
 div#foot-links-title, div#foot-contactus-title {
-	font-weight: bold;
+	font-weight: 600; /* Semi-bold */
 }
 
 div#foot-links-links, div#foot-links-contactus {
@@ -630,6 +629,7 @@ Registration page
 ************************************************/
 #reg-container {
 	border: 1px solid #ddd;
+	background-color: white;
 	margin: 5rem 0 7rem 0;
 	display: flex;
 	flex-direction: row;
@@ -671,7 +671,7 @@ Registration page
 #regform-title {
 	font-size: 2.1rem;
 	font-weight: 900;
-	color: #157e38;
+	color: #20bf55;
 	margin: 1.5rem 0;
 }
 
@@ -679,14 +679,10 @@ Registration page
 	margin-right: 0.5rem;
 }
 
-#register-regbtn {
-	width: 8.5rem;
-}
-
 #reg-formcontainer .editinput { width: 80%; }
 #signinform .edit-container { width: 80%; }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	#reg-container {
 		flex-direction: column;
 		align-items: center;

@@ -127,3 +127,6 @@ defined('STATUS_RECAPTCHA_INVALID')             || define('STATUS_RECAPTCHA_INVA
 defined('STATUS_ACTEMAIL_FAILED')               || define('STATUS_ACTEMAIL_FAILED', 19); # Status: Sending activation email failed
 defined('STATUS_BAD_REMEMBERME')                || define('STATUS_BAD_REMEMBERME', 20); # Status: Sending activation email failed
 defined('STATUS_RESETPWCODE_INVALID')           || define('STATUS_RESETPWCODE_INVALID', 21); # Status: Invalid code for reset password
+
+# Home page constants
+defined('HOMEPAGE_MAXITEMROWCOUNT')             || define('HOMEPAGE_MAXITEMROWCOUNT', 7); # Maximum item row count per page

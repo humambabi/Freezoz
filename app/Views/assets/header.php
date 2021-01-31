@@ -16,7 +16,8 @@
 	<link rel="apple-touch-icon-precomposed" href="<?= base_url() ?>/favicon.png">
 
 	<!-- STYLES -->
-	<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600;700;800;900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/main.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/burger.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/components.css">

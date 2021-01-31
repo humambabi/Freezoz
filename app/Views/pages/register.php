@@ -71,7 +71,7 @@
 			<div id="google-recaptcha"></div>
 
 			<?php insert_hspace("1.3rem"); ?>
-			<button type="button" id="register-regbtn" class="btn-solid-lrg">REGISTER</button>
+			<button type="button" id="register-regbtn" class="solid large">REGISTER</button>
 			<?php insert_hspace("2.5rem"); ?>
 		</div>
 	</div>

@@ -21,7 +21,6 @@
 #page-msg-text {
 	width: 100%;
 	font-size: 1.2rem;
-	font-weight: lighter;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
@@ -47,7 +46,7 @@
 
 	<?php insert_hspace("5rem"); ?>
 	<div class="justify-content-center">
-		<button type="button" class="solid medium return-home">Return to the Home page</button>
+		<button type="button" class="solid large return-home">Return to the Home page</button>
 	</div>
 	<?php insert_hspace("5rem"); ?>
 	

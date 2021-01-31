@@ -22,7 +22,7 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Access to the Site</h2>
+	<h2 style="color:#20bf55;">Access to the Site</h2>
 	<p>
 		<strong>Subject to these Terms.</strong> Company grants you a non-transferable, non-exclusive, revocable, limited license to access the Site solely for your own personal, noncommercial use.
 	</p>
@@ -47,7 +47,7 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Cookies</h2>
+	<h2 style="color:#20bf55;">Cookies</h2>
 	<p>We employ the use of cookies. By accessing Freezoz, you agreed to use cookies in agreement with the Freezoz's <a href="<?= base_url() ?>/privacy" class="link blue">Privacy Policy</a>.</p>
 	<p>
 		Most interactive websites use cookies to let us retrieve the user’s details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier
@@ -55,7 +55,7 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">License</h2>
+	<h2 style="color:#20bf55;">License</h2>
 	<p>
 		Unless otherwise stated, Freezoz and/or its licensors own the intellectual property rights for all material on Freezoz. All intellectual property rights are reserved. You may access this
 		from Freezoz for your own personal use subjected to restrictions set in these terms and conditions.
@@ -87,7 +87,7 @@
 	<p>You hereby grant Freezoz a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Hyperlinking to our Content</h2>
+	<h2 style="color:#20bf55;">Hyperlinking to our Content</h2>
 	<p>The following organizations may link to our Website without prior written approval:</p>
 	<ul style="line-height:1.5rem;">
 		<li>Government agencies;</li>
@@ -133,11 +133,11 @@
 	<p>No use of Freezoz's logo or other artwork will be allowed for linking absent a trademark license agreement.</p>
 
 	<br/>
-	<h2 style="color:#157e38;">iFrames</h2>
+	<h2 style="color:#20bf55;">iFrames</h2>
 	<p>Without prior approval and written permission, you may not create frames around our Webpages that alter in any way the visual presentation or appearance of our Website.</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Content Liability</h2>
+	<h2 style="color:#20bf55;">Content Liability</h2>
 	<p>
 		We shall not be hold responsible for any content that appears on your Website. You agree to protect and defend us against all claims that is rising on your Website. No link(s)
 		should appear on any Website that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of,
@@ -145,7 +145,7 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Reservation of Rights</h2>
+	<h2 style="color:#20bf55;">Reservation of Rights</h2>
 	<p>
 		We reserve the right to request that you remove all links or any particular link to our Website. You approve to immediately remove all links to our Website upon request. We also
 		reserve the right to amend these terms and conditions and it’s linking policy at any time. By continuously linking to our Website, you agree to be bound to and follow these linking
@@ -153,7 +153,7 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Removal of links from our website</h2>
+	<h2 style="color:#20bf55;">Removal of links from our website</h2>
 	<p>
 		If you find any link on our Website that is offensive for any reason, you are free to contact and inform us any moment. We will consider requests to remove links but we are not
 		obligated to or so or to respond to you directly.
@@ -164,7 +164,7 @@
 	</p>
 
 	<br/>
-	<h2 style="color:#157e38;">Disclaimer</h2>
+	<h2 style="color:#20bf55;">Disclaimer</h2>
 	<p>
 		To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this
 		disclaimer will:

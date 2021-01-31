@@ -19,7 +19,7 @@ Components Style Sheet; Freezoz
 Buttons
 ************************************************/
 button.solid {
-	font-family: 'Balsamiq Sans', cursive;
+	font-family: var(--general-fontfamily);
 	color: white;
 	border-style: solid;
 	border-color: #01baef;
@@ -30,56 +30,23 @@ button.solid {
 }
 button.solid:hover {
 	color: #01baef;
-	background-color: white;
+	background-color: transparent;
 }
 
 button.medium {
+	font-size: .9rem;
+	font-weight: bold;
+	border-width: 2px;
+	border-radius: 1rem;
+	padding: 0.35rem 0.7rem;
+}
+button.large {
 	font-size: 1.1rem;
 	font-weight: bold;
 	border-width: 2px;
-	border-radius: 1.3rem;
-	padding: 0.6rem 1.5rem 0.5rem 1.5rem;
-}
-
-
-
-
-button.btn-outline-med {
-	color: #01baef;
-	font-family: 'Balsamiq Sans', cursive;
-	font-size: 0.9rem;
-	font-weight: bold;
-	border: 2px solid #01baef;
-	border-radius: 1rem;
-	padding: 0.4rem 0.7rem 0.3rem 0.7rem;
-	cursor: pointer;
-	background-color: white;
-	outline-style: none;
-	transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
-}
-button.btn-outline-med:hover {
-	color: white;
-	background-color: #01baef;
-}
-
-button.btn-solid-lrg {
-	color: white;
-	font-family: 'Balsamiq Sans', cursive;
-	font-size: 1.1rem;
-	font-weight: bold;
-	border: 2px solid #01baef;
 	border-radius: 1.35rem;
-	padding: 0.6rem 1.5rem 0.5rem 1.5rem;
-	cursor: pointer;
-	background-color: #01baef;
-	outline-style: none;
-	transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+	padding: 0.55rem 1.5rem;
 }
-button.btn-solid-lrg:hover {
-	color: #01baef;
-	background-color: white;
-}
-
 
 
 /************************************************
@@ -180,7 +147,7 @@ Edit inputs
 .editinput input {
 	transition: all 333ms ease; /* Same as siblings and parent */
 	outline-style: none;
-	font-family: 'Balsamiq Sans', cursive;
+	font-family: var(--general-fontfamily);
 	border: 1px solid #aaa;
 	z-index: 1;
 }
@@ -254,7 +221,7 @@ Edit inputs
 }
 
 .editinput input[type="password"] {
-	font-family: 'fa_pwf', 'Balsamiq Sans', cursive;
+	font-family: 'fa_pwf', 'Montserrat', sans-serif; /* The rest are to be used for non-password edits */
 }
 
 .edit-container {

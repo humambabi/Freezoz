@@ -49,6 +49,8 @@ $routes->post('/requests/sign_in',							'Requests::sign_in');
 $routes->post('/requests/sign_out',							'Requests::sign_out');
 $routes->post('/requests/forgot_pw',						'Requests::forgot_pw');
 $routes->post('/requests/reset_pw',							'Requests::reset_pw');
+$routes->post('/requests/items_getlist',					'Requests::items_getlist');
+$routes->post('/requests/item_getdata',					'Requests::item_getdata');
 
 
 /**

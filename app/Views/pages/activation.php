@@ -21,7 +21,6 @@
 #page-msg-text {
 	width: 100%;
 	font-size: 1.2rem;
-	font-weight: lighter;
 	text-align: center;
 }
 #page-msg-retbtn {
@@ -107,7 +106,7 @@
 		<?php } ?>
 	<?php } ?>
 	<div id="page-msg-retbtn" class="justify-content-center">
-		<button type="button" id="return-home" class="solid medium"><?= empty($act_status) ? "Return" : "Go" ?>&nbsp;to the Home page</button>
+		<button type="button" id="return-home" class="solid large"><?= empty($act_status) ? "Return" : "Go" ?>&nbsp;to the Home page</button>
 	</div>
 	<div style="color:rgba(0,0,0,0);">.</div>
 </div>

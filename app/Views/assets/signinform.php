@@ -44,7 +44,7 @@
 	</div>
 	<?php insert_hspace(".85rem"); ?>
 
-	<button type="button" id="signinform-loginbtn" class="btn-solid-lrg">SIGN IN</button>
+	<button type="button" id="signinform-loginbtn" class="solid large">SIGN IN</button>
 
 	<?php insert_hspace("0.9rem"); ?>
 	<div>Don't have an account yet? <a href="<?= base_url() ?>/register" class="link blue">Register</a></div>

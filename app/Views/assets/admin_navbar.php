@@ -16,7 +16,7 @@
 
 			<div class="navbar-navitemsep"><div class="navbar-navitemsep-inner"></div></div>
 
-			<button type="button" class="btn-outline-med" onclick="window.location.href = BASE_URI">Back to Freezoz</button>
+			<button type="button" class="solid medium" onclick="window.location.href = BASE_URI">Back to Freezoz</button>
 		</div>
 	</div>
 </nav>

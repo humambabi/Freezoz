@@ -27,7 +27,6 @@
 #page-msg-text {
 	width: 100%;
 	font-size: 1.2rem;
-	font-weight: lighter;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
@@ -38,7 +37,7 @@
 	min-width: 20rem;
 	max-width: 25rem;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 800px) {
 	#page-msg-text .edit-container {
 		width: 95%;
 		max-width: 25rem;
@@ -129,7 +128,7 @@
 
 			<?php insert_hspace("5rem"); ?>
 			<div class="justify-content-center">
-				<button type="button" id="reset-save" class="solid medium">&nbsp;&nbsp;&nbsp;Save&nbsp;&nbsp;&nbsp;</button>
+				<button type="button" id="reset-save" class="solid large">&nbsp;&nbsp;&nbsp;Save&nbsp;&nbsp;&nbsp;</button>
 			</div>
 			<?php insert_hspace("5rem"); ?>
 		</div>
