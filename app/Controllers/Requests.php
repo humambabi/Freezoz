@@ -288,7 +288,7 @@ class Requests extends BaseController {
 
 		// Return the rowids of all items (that match a specific query criteria [categories, serach word, etc])
 		$itemslist = [];
-		for ($i = 0; $i < 49; $i++) { // ASSUMPTION!
+		for ($i = 0; $i < 25; $i++) { // ASSUMPTION!
 			array_push($itemslist, rand(1, 99));
 		}
 

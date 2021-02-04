@@ -74,10 +74,14 @@ function scroll_page(elmid) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function adjust_footerPos() {
-	if (parseInt(getComputedStyle($("body")[0]).height) > window.innerHeight) {
-		$("footer").css("position", "relative");
+	var contentBottom = $("body")[0].getBoundingClientRect().height;
+
+	if (contentBottom < window.innerHeight) {
+		//console.log("short");
+		$("footer").css("top", Math.ceil(window.innerHeight - contentBottom) + "px");
 	} else {
-		$("footer").css("position", "fixed");
+		//console.log("ok");
+		$("footer").css("top", 0);
 	}
 }
 

@@ -535,7 +535,8 @@ input.inpsearch:focus ~ svg {
 
 
 footer {
-	bottom: 0;
+	position: relative;
+	/*bottom: 0;*/
 	width: 100%;
 	background-color: #757575;
 	border-top: 1px solid #aaa;
