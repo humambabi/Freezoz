@@ -17,6 +17,8 @@
 
 	<!-- STYLES -->
 	<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="<?= '/vendor/fontawesome-free/css/all.' . (env('CI_ENVIRONMENT') == 'development' ? 'min.' : '') . 'css' ?>">
+	
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/main.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/burger.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/components.css">
@@ -29,11 +31,6 @@
 	}
 	echo PHP_EOL;
 	?>
-	<?php # Include Font-Awesome library
-	echo '<script src="https://kit.fontawesome.com/4ebc6d856a.js" crossorigin="anonymous"></script>';
-	echo PHP_EOL;
-	?>
-
 
 <?php # Convert PHP constants to JS (Password's min & max limits are defined in the sign-in form)
 	echo "<script type='text/javascript'>" . PHP_EOL;

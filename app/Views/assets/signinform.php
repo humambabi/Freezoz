@@ -81,7 +81,7 @@ function postData() {
 			// We are confident that response is a json object (returned gracefully from server)
 
 			if (response.retcode == STATUS_GENERROR) { // Error message should have been tagged along
-				$("#overlay-full > svg").remove();
+				$("#overlay-full > i").remove();
 				swal({
 					text: response.retdata, icon: "warning"
 				}).then(function() {

@@ -10,25 +10,53 @@ h1 {
 
 .item-container {
 	position: absolute;
-
 	border-radius: 5px;
 	overflow: hidden;
-
+	display: flex;
+	flex-direction: column; /* Elements will have full width, and stacked on top of each others */
 	background-color: white;
 	transform: translate3d(0, 0, 0);
 	box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
 	transition: all .3s ease;
 }
-.item-container:hover {
+
+/* Item, its data not loaded yet */
+.item-container[data-loaded='false'] {
+	align-items: center;
+	justify-content: center;
+}
+.item-container[data-loaded='false'] i {
+	color:#ddd;
+}
+.item-container[data-loaded='false'] div {
+	margin-top: .75rem;
+	color:#ccc;
+}
+
+/* Item, after its item is loaded */
+.item-container[data-loaded='true']:hover {
 	cursor: pointer;
 	transform: translate3d(0, -4px, 0);
 	box-shadow: 0 14px 30px rgb(0 0 0 / 20%);
 }
-
-.item-container img {
+.item-container[data-loaded='true'] img {
 	width: 100%;
-	height: 100%;
+	height: auto;
 }
+.item-container[data-loaded='true'] .infobar-title {
+	border: 1px solid red;
+	font-size: 1.1rem;
+	line-height: 1.1rem;
+	padding: .5rem .5rem;
+	height: calc(1.1rem + (2 * .5rem)); /* line-height + padding.vert */
+	font-weight: bold;
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
 
 
 
@@ -52,7 +80,7 @@ h1 {
 #pg-wrapper:before, #pg-wrapper:after {
 	background: -webkit-linear-gradient(left, transparent 0%, rgba(0, 0, 0, 0.1) 17%, rgba(0, 0, 0, 0.1) 83%, transparent 100%);
 	background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.1) 17%, rgba(0, 0, 0, 0.1) 83%, transparent 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000',GradientType=1 );
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000',GradientType=1);
 	content: "";
 	height: 1px;
 	width: 100%;
@@ -121,6 +149,7 @@ h1 {
 <script type="text/javascript">
 const SS_PAGENUM = "ss_pgnum";
 const ITEM_RATIO = .56271;
+const ITEM_INFOBAR_HEIGHT_RATE = (3/8);
 var gItemsList, gMaxItemCountPerCol, gPageCur;
 
 
@@ -159,6 +188,32 @@ function itemPos(thisPageItemList, itemIdx, itemWidth, itemHeight, itemMargin, c
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+function htmlRating(rating) {
+	var i, retHtml = "", tmpRating = rating;
+
+	function measure(mx, cur) {
+		if (cur >= mx) return 1;
+		if ((cur + 1.0) <= mx) return -1;
+		return 0;
+	}
+
+	for (i = 5; i > 0; i--) {
+		var r = measure(i, tmpRating);
+
+		if (r > 0) {
+			retHtml = "<i class='fas fa-star'></i>" + retHtml;
+		} else if (r < 0) {
+			retHtml = "<i class='far fa-star'></i>" + retHtml;
+		} else {
+			retHtml = "<i class='fas fa-star-half-alt'></i>" + retHtml;
+		}
+	}
+
+	return retHtml;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 async function getOneItemData(elItem) {
 	return new Promise(resolve => {
 		$.ajax({
@@ -171,7 +226,7 @@ async function getOneItemData(elItem) {
 			},
 			datatype: 'json',
 			success: function(response) {
-//				console.log(response);
+				//console.log(response);
 
 				// Always set the item as loaded, even if there was an error!
 				elItem.attr('data-loaded', "true");
@@ -180,9 +235,22 @@ async function getOneItemData(elItem) {
 					// We are confident that response is a json object (returned gracefully from server)
 
 					var resurl = "/resources/get?dir=" + encodeURIComponent(response.retdata.folder);
+
+					// Clear the inner html, and create new elements
+					elItem.html(
+						"<img />" +
+						"<div class='infobar-title'></div>" +
+						"<div class='infobar-btmsec'>" +
+						"   <div class='btmsec-rating'></div>" +
+						"   <div class='btmsec-control'></div>" +
+						"</div>"
+					);
+
 					elItem.children("img").attr("src", resurl + "&typ=1&res=" + encodeURIComponent(response.retdata.thumbnail));
+					elItem.children("div.infobar-title").text(response.retdata.title);
+					elItem.children("div.infobar-btmsec").children("div.btmsec-rating").html(htmlRating(parseFloat(response.retdata.rating)));
 				}
-			
+
 				resolve(); // Allow the Promise object to allow next object to execute
 			} // Received response
 		}); // JQ.Ajax()
@@ -192,8 +260,6 @@ async function getOneItemData(elItem) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 async function loadItems() {
-//	console.log('started loading item');
-
 	// This routine will be called always, so it must check for newly added items only and load their data
 	// So, it works for both cases: When the current page is just refreshed (all items are new), and when
 	// the client's window was resized (in one of three cases, a new items are being created and need to load data)
@@ -211,7 +277,7 @@ async function loadItems() {
 function setThisPageItems(create) {
 	var elCont = $('#items-container'), thisPageItemList;
 	var widthContainer = elCont[0].getBoundingClientRect().width;
-	var itemWidth, itemHeight, itemMargin, colCount, pageCount;
+	var itemWidth, imgHeight, infobarHeight, itemHeight, itemMargin, colCount, pageCount;
 
 
 	// Config column & margins
@@ -251,12 +317,14 @@ function setThisPageItems(create) {
 
 	// Calculate needed variables
 	itemWidth = (widthContainer - ((colCount - 1) * itemMargin))  / colCount;
-	itemHeight = Math.floor(itemWidth * ITEM_RATIO);
+	imgHeight = Math.floor(itemWidth * ITEM_RATIO);
 	itemWidth = Math.floor(itemWidth);
 	if (itemWidth > widthContainer) {
 		itemWidth = widthContainer;
-		itemHeight = Math.floor(itemWidth * ITEM_RATIO); // Again
+		imgHeight = Math.floor(itemWidth * ITEM_RATIO); // Again
 	}
+	infobarHeight = Math.floor(imgHeight * ITEM_INFOBAR_HEIGHT_RATE);
+	itemHeight = imgHeight + infobarHeight;
 
 	// Adjust the container's height
 	var rowCount = Math.ceil(thisPageItemList.length / colCount), plusHeight = 0;
@@ -279,7 +347,7 @@ function setThisPageItems(create) {
 		var thisItemPos = itemPos(thisPageItemList, idx, itemWidth, itemHeight, itemMargin, widthContainer, colCount), itemHTML = "";
 
 		itemHTML += "<div class='item-container' data-index='" + idx + "' data-internal='" + thisPageItemList[idx].rowid + "' data-loaded='false'>";
-		itemHTML += "   <img alt='Loading...' src='" + BASE_URI + "/img/item_empty.png" + "'>";
+		itemHTML += "   <i class='fas fa-3x fa-fan fa-spin'></i><div>Loading...</div>";
 		itemHTML += "</div>";
 
 		$(itemHTML).css({

@@ -106,7 +106,7 @@ a.link {
 	align-items: center;
 	margin: 0.25rem 0;
 }
-a.link svg {
+a.link i {
 	margin-right: 3px;
 }
 a.link:hover {
@@ -114,14 +114,14 @@ a.link:hover {
 }
 
 a.link.white { color: #c3c3c3; }
-a.link.white svg { fill: rgb(121, 121, 121); }
+a.link.white i { fill: rgb(121, 121, 121); }
 a.link.white:hover { color: #eee; }
-a.link.white:hover svg { fill: #999; }
+a.link.white:hover i { fill: #999; }
 
 a.link.blue { color: hsl(193deg 99% 47%); }
-a.link.blue svg { fill: #01baef; }
+a.link.blue i { fill: #01baef; }
 a.link.blue:hover { color: hsl(193deg 99% 77%); }
-a.link.blue:hover svg { fill: #b3eeff; }
+a.link.blue:hover i { fill: #b3eeff; }
 
 
 
@@ -151,7 +151,7 @@ Edit inputs
 	border: 1px solid #aaa;
 	z-index: 1;
 }
-.editinput svg {
+.editinput i {
 	color: #999;
 	position: absolute;
 	transition: all 333ms ease; /* Same as siblings and parent */
@@ -181,7 +181,7 @@ Edit inputs
 	height: 2.5rem;
 	font-size: 1rem;
 }
-.editinput.size-l svg {
+.editinput.size-l i {
 	margin-left: 0.85rem;
 	font-size: 1.1rem;
 }
@@ -202,7 +202,7 @@ Edit inputs
 	border-color: rgba(239, 1, 1, 0.5);
 	box-shadow: 0 0px 4px 0px rgba(239, 1, 1, 0.5);
 }
-.editinput.error input ~ svg {
+.editinput.error input ~ i {
 	color: rgb(239 1 1 / 60%);
 }
 .editinput.error .errmsg {
@@ -213,7 +213,7 @@ Edit inputs
 .editinput input:focus {
 	border-color: rgb(1, 186, 239);
 }
-.editinput input:focus ~ svg {
+.editinput input:focus ~ i {
 	color: rgb(1, 186, 239);
 }
 .editinput.size-l input:focus {

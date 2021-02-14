@@ -14,7 +14,7 @@ class ProdItems extends Model {
 	protected $useSoftDeletes = false;
 	
 	protected $allowedFields = [
-		'added_on', 'title', 'prod_by', 'description', 'tags', 'folder_name', 'previmg_small', 'previmg_full', 'prevvid_small', 'prevvid_full',
+		'added_on', 'title', 'description', 'tags', 'folder_name', 'previmg_small', 'previmg_full', 'prevvid_small', 'prevvid_full',
 		'add_audios', 'add_previmgs', 'add_prevvids', 'proditem', 'price', 'license', 'rating', 'ratescount', 'downsalecount'
 	];
 

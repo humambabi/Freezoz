@@ -329,6 +329,8 @@ class Requests extends BaseController {
 		if ($param_dtype == "home") {
 			$itemdata['folder'] = $dbrow['folder_name'];
 			$itemdata['thumbnail'] = $dbrow['previmg_small'];
+			$itemdata['title'] = $dbrow['title'];
+			$itemdata['rating'] = $dbrow['rating'];
 		} else
 		if ($param_dtype == "itempage") {
 

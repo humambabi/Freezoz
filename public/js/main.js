@@ -281,10 +281,11 @@ $(".foot-gototop").click(function() {
 
 // When the overlay (overlay-full) is clicked
 $("#overlay-full").click(function(ev) {
-	// Consider it a "click" only if clicked on the overlay or the spinner (maybe "svg" or "path" tags) (think of event propagation too)
+	// Consider it a "click" only if clicked on the overlay or the spinner (maybe "i", "svg", or "path" tags) (think of event propagation too)
 	if ((ev.target == this) ||
 			((ev.target.nodeName.toUpperCase() == "PATH") && (ev.target.parentNode.nodeName.toUpperCase() == "SVG") && (ev.target.parentNode.parentNode == this)) ||
-			((ev.target.nodeName.toUpperCase() == "SVG") && (ev.target.parentNode == this))) {
+			((ev.target.nodeName.toUpperCase() == "SVG") && (ev.target.parentNode == this)) ||
+			((ev.target.nodeName.toUpperCase() == "I") && (ev.target.parentNode == this))) {
 		// Also prevent Click event when not allowed to close on click
 		if ($(this).data("can-close-on-click")) {
 			// Call the function needed to close the opened form
@@ -306,10 +307,11 @@ $("#overlay-full").click(function(ev) {
 
 // When the overlay (overlay-body) is clicked
 $("#overlay-body").click(function(ev) {
-	// Consider it a "click" only if clicked on the overlay or the spinner (maybe "svg" or "path" tags) (think of event propagation too)
+	// Consider it a "click" only if clicked on the overlay or the spinner (maybe "i", "svg", or "path" tags) (think of event propagation too)
 	if ((ev.target == this) ||
 			((ev.target.nodeName.toUpperCase() == "PATH") && (ev.target.parentNode.nodeName.toUpperCase() == "SVG") && (ev.target.parentNode.parentNode == this)) ||
-			((ev.target.nodeName.toUpperCase() == "SVG") && (ev.target.parentNode == this))) {
+			((ev.target.nodeName.toUpperCase() == "SVG") && (ev.target.parentNode == this)) ||
+			((ev.target.nodeName.toUpperCase() == "I") && (ev.target.parentNode == this))) {
 		// Also prevent Click event when not allowed to close on click
 		if ($(this).data("can-close-on-click")) {
 			// Call the function needed to close the opened form
