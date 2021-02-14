@@ -197,7 +197,7 @@ $("#register-regbtn").click(function() {
 	}
 
 	$.ajax({
-		url: BASE_URI + "/requests/user_register",
+		url: "/requests/user_register",
 		type: 'post',
 		headers: {'X-Requested-With': 'XMLHttpRequest'},
 		data: {

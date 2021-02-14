@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\Users;
+use App\Models\ProdItems;
 
 class Requests extends BaseController {
 	################################################################################################
@@ -287,10 +288,10 @@ class Requests extends BaseController {
 		if ($this->request->getMethod() != 'post') return "Bad method!";
 
 		// Return the rowids of all items (that match a specific query criteria [categories, serach word, etc])
-		$itemslist = [];
-		for ($i = 0; $i < 25; $i++) { // ASSUMPTION!
-			array_push($itemslist, rand(1, 99));
-		}
+		$db_proditems = new ProdItems();
+
+		$query = $db_proditems->query('SELECT `rowid` FROM `proditems`');
+		$itemslist = $query->getResult();
 
 		return $this->response->setJSON([
 			'retcode' => STATUS_SUCCESS,
@@ -303,27 +304,37 @@ class Requests extends BaseController {
 
 	################################################################################################
 	# Get the data that belongs to a single item (differentiate between data to be shown on the home page, or that to be shown on the item's page)
-	# params: rid (orig: rowid), dtype (orig: datatype)
+	# params: rid (orig: rowid), dtype (orig: datatype): ["home", "itempage"]
 	################################################################################################
 	public function item_getdata() {
 		if (!$this->request->isAJAX()) return "Bad request!";
 		if ($this->request->getMethod() != 'post') return "Bad method!";
 
+		# Check parameters
+		$db_proditems = new ProdItems();
 
+		$param_rid = intval($this->request->getPost('rid', FILTER_SANITIZE_NUMBER_INT));
+		if ($db_proditems->where('rowid', $param_rid)->first() == null) {
+			return $this->response->setJSON(['retcode' => STATUS_GENERROR, 'retdata' => "Bad internal itemid!"]);
+		}
+		$param_dtype = $this->request->getPost('dtype', FILTER_SANITIZE_STRING);
+		if ((strcmp($param_dtype, "home") != 0) && (strcmp($param_dtype, "itempage") != 0)) {
+			return $this->response->setJSON(['retcode' => STATUS_GENERROR, 'retdata' => "Bad item dtype!"]);
+		}
 
+		# Get needed data
 		$itemdata = [];
-		// Should be loaded from the DB (using the rid param)
+		$dbrow = $db_proditems->where('rowid', $param_rid)->first();
 
-		if ($this->request->getPost('dtype') == "home") { // Should be sanitized
-			$itemdata['imgelThumbnail'] = "<img title='Title of the item' alt='Title of the item' src='https://picsum.photos/seed/" . rand(10000, 99999) . "/590/332' />";
-
-
+		if ($param_dtype == "home") {
+			$itemdata['folder'] = $dbrow['folder_name'];
+			$itemdata['thumbnail'] = $dbrow['previmg_small'];
+		} else
+		if ($param_dtype == "itempage") {
 
 		}
 
-		return $this->response->setJSON([
-			'retcode' => STATUS_SUCCESS,
-			'retdata' => $itemdata
-		]);
+		# Return the needed data
+		return $this->response->setJSON(['retcode' => STATUS_SUCCESS, 'retdata' => $itemdata]);
 	}
 }

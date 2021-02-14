@@ -207,7 +207,7 @@ function user_signout() {
 	$("#overlay-full").html(ELM_SPINNER);
 
 	// Send the request
-	$.post(BASE_URI + "/requests/sign_out", function(response) {
+	$.post("/requests/sign_out", function(response) {
 		if (!isJson(response) || response.retcode != STATUS_SUCCESS) {
 			console.log(response);
 			return;

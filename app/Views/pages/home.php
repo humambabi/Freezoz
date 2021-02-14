@@ -5,60 +5,33 @@ h1 {
 }
 
 #items-container {
-	/*display: flex;
-	flex-direction: row;*/
 	position: relative;
 }
 
 .item-container {
 	position: absolute;
-	transition: all .250s ease;
 
-
-	border: 1px solid blue;
-}
-
-
-
-/*
-.items-column {
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
-	position: relative;
-}
-
-.item-container {
-	max-width: 590px;
-	max-height: 332px;
-	box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
 	border-radius: 5px;
-	background-color: #fff;
-	transition: all .5s ease;
 	overflow: hidden;
-	cursor: pointer;
 
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 5rem;
-	color: #ccc;
+	background-color: white;
+	transform: translate3d(0, 0, 0);
+	box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
+	transition: all .3s ease;
 }
+.item-container:hover {
+	cursor: pointer;
+	transform: translate3d(0, -4px, 0);
+	box-shadow: 0 14px 30px rgb(0 0 0 / 20%);
+}
+
 .item-container img {
 	width: 100%;
 	height: 100%;
-	transition: all .333s ease;
 }
 
-.item-container:hover {
-	color: #000;
-	box-shadow: 0 10px 15px -3px rgba(0,0,0,0.25), 0 4px 6px -2px rgba(0,0,0,0.05), 0 0 5px rgba(0,0,0,0.1);
-}
 
-.item-container:hover img {
-	opacity: .5;
-}
-*/
+
 
 
 #pagination {
@@ -123,7 +96,6 @@ h1 {
 	padding-bottom: .5rem;
 	letter-spacing: .15rem;
 }
-
 </style>
 
 
@@ -182,6 +154,55 @@ function itemPos(thisPageItemList, itemIdx, itemWidth, itemHeight, itemMargin, c
 				y: plusHeight +  ((itemHeight + itemMargin) * rowIdx)
 			};
 		}
+	}
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+async function getOneItemData(elItem) {
+	return new Promise(resolve => {
+		$.ajax({
+			url: "/requests/item_getdata",
+			type: 'post',
+			headers: {'X-Requested-With': 'XMLHttpRequest'},
+			data: {
+				rid: elItem.attr('data-internal'),
+				dtype: "home"
+			},
+			datatype: 'json',
+			success: function(response) {
+//				console.log(response);
+
+				// Always set the item as loaded, even if there was an error!
+				elItem.attr('data-loaded', "true");
+				
+				if (isJson(response)) {
+					// We are confident that response is a json object (returned gracefully from server)
+
+					var resurl = "/resources/get?dir=" + encodeURIComponent(response.retdata.folder);
+					elItem.children("img").attr("src", resurl + "&typ=1&res=" + encodeURIComponent(response.retdata.thumbnail));
+				}
+			
+				resolve(); // Allow the Promise object to allow next object to execute
+			} // Received response
+		}); // JQ.Ajax()
+	}); // Promise
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+async function loadItems() {
+//	console.log('started loading item');
+
+	// This routine will be called always, so it must check for newly added items only and load their data
+	// So, it works for both cases: When the current page is just refreshed (all items are new), and when
+	// the client's window was resized (in one of three cases, a new items are being created and need to load data)
+
+	for (var i = 0; i < $("div.item-container").length; i++) {
+		var elItem =  $("div.item-container[data-index='" + i + "']");
+
+		if (elItem.attr('data-loaded') == "true") continue;
+		await getOneItemData(elItem);
 	}
 }
 
@@ -253,23 +274,33 @@ function setThisPageItems(create) {
 
 	adjust_footerPos(); // From main.js
 
+	// Create a local function for creating new items
+	function createOneItem(idx) {
+		var thisItemPos = itemPos(thisPageItemList, idx, itemWidth, itemHeight, itemMargin, widthContainer, colCount), itemHTML = "";
+
+		itemHTML += "<div class='item-container' data-index='" + idx + "' data-internal='" + thisPageItemList[idx].rowid + "' data-loaded='false'>";
+		itemHTML += "   <img alt='Loading...' src='" + BASE_URI + "/img/item_empty.png" + "'>";
+		itemHTML += "</div>";
+
+		$(itemHTML).css({
+			"width": itemWidth + "px",
+			"height": itemHeight + "px",
+			"left": thisItemPos.x + "px",
+			"top": thisItemPos.y + "px"
+		}).appendTo(elCont);
+	}
+
+	// Decide whether to create new items, modify existing, delete the additionals...etc
 	if (create) {
 		// Create items
 		for (var i = 0; i < thisPageItemList.length; i++) {
-			var thisItemPos = itemPos(thisPageItemList, i, itemWidth, itemHeight, itemMargin, widthContainer, colCount);
-
-			$("<div class='item-container' data-itemidx='" + i + "'></div>").css({
-				"width": itemWidth + "px",
-				"height": itemHeight + "px",
-				"left": thisItemPos.x + "px",
-				"top": thisItemPos.y + "px"
-			}).appendTo(elCont);
+			createOneItem(i);
 		}
 	} else {
 		// Set items, and delete the additionals (if any), and create new ones (if needed)
 		var largestCount = thisPageItemList.length > $("div.item-container").length ? thisPageItemList.length : $("div.item-container").length;
 		for (var i = 0; i < largestCount; i++) {
-			var elItem = $("div.item-container[data-itemidx='" + i + "']");
+			var elItem = $("div.item-container[data-index='" + i + "']");
 			var thisItemPos = itemPos(thisPageItemList, i, itemWidth, itemHeight, itemMargin, widthContainer, colCount);
 
 			if (elItem.length) {
@@ -287,18 +318,16 @@ function setThisPageItems(create) {
 				}
 			} else {
 				// Create
-				$("<div class='item-container' data-itemidx='" + i + "'></div>").css({
-					"width": itemWidth + "px",
-					"height": itemHeight + "px",
-					"left": thisItemPos.x + "px",
-					"top": thisItemPos.y + "px"
-				}).appendTo(elCont);
+				createOneItem(i);
 			}
 		}
 	}
 
 	// Show/hide the pagination and set its distant from the most bottom item
 	setPagination(gPageCur, pageCount);
+
+	// Get item data (checks for new items only: means it works for both a new page load, and a resize with creating a new items)
+	loadItems();
 }
 
 
@@ -385,10 +414,11 @@ function gotoPage(page, allPageCount) {
 	window.location.reload();
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function itemsGetList() {
 	$.ajax({
-		url: BASE_URI + "/requests/items_getlist",
+		url: "/requests/items_getlist",
 		type: 'post',
 		headers: {'X-Requested-With': 'XMLHttpRequest'},
 		data: {
@@ -427,7 +457,6 @@ function itemsGetList() {
 		} // Received response
 	}); // JQ.Ajax()
 }
-
 
 
 // General Section ////////////////////////////////////////////////////////////////////////////////

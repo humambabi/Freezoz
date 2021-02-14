@@ -20,7 +20,7 @@ $routes->setDefaultController('Pages');
 $routes->setDefaultMethod('home');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override('App\Controllers\Pages::err404');
-$routes->setAutoRoute(false); // Use only the defined routes
+$routes->setAutoRoute(false); // Only use the defined routes
 
 /**
  * --------------------------------------------------------------------
@@ -44,13 +44,15 @@ $routes->get('/admincp',										'Pages::admincp');
 $routes->get('/assets/signin_form', 						'Assets::signin_form');
 $routes->get('/assets/categories_form', 					'Assets::categories_form');
 
-$routes->post('/requests/user_register',					'Requests::user_register');
-$routes->post('/requests/sign_in',							'Requests::sign_in');
-$routes->post('/requests/sign_out',							'Requests::sign_out');
-$routes->post('/requests/forgot_pw',						'Requests::forgot_pw');
-$routes->post('/requests/reset_pw',							'Requests::reset_pw');
-$routes->post('/requests/items_getlist',					'Requests::items_getlist');
-$routes->post('/requests/item_getdata',					'Requests::item_getdata');
+$routes->post('requests/user_register',					'Requests::user_register');
+$routes->post('requests/sign_in',							'Requests::sign_in');
+$routes->post('requests/sign_out',							'Requests::sign_out');
+$routes->post('requests/forgot_pw',							'Requests::forgot_pw');
+$routes->post('requests/reset_pw',							'Requests::reset_pw');
+$routes->post('requests/items_getlist',					'Requests::items_getlist');
+$routes->post('requests/item_getdata',						'Requests::item_getdata');
+
+$routes->get('/resources/get', 								'Resources::get');
 
 
 /**

@@ -66,8 +66,7 @@
 	echo PHP_EOL;
 	?>
 
-
-<?php # Convert PHP constants to JS (Password's min & max limits are defined in the sign-in form)
+	<?php # Convert PHP constants to JS (Password's min & max limits are defined in the sign-in form)
 	echo "<script type='text/javascript'>" . PHP_EOL;
 	echo "\tconst BASE_URI = '" . base_url() . "';" . PHP_EOL;
 	echo "\tconst FORM_USERNAME_MINLENGTH = " . FORM_USERNAME_MINLENGTH . ";" . PHP_EOL;
@@ -87,6 +86,6 @@
 	echo "\tconst STATUS_BAD_REMEMBERME = " . STATUS_BAD_REMEMBERME . ";" . PHP_EOL;
 	echo "\tconst STATUS_RESETPWCODE_INVALID = " . STATUS_RESETPWCODE_INVALID . ";" . PHP_EOL;
 	echo "</script>" . PHP_EOL;
-?>
+	?>
 </head>
 <body>
