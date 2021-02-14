@@ -43,15 +43,14 @@
 	<!-- Canonical links -->
 	<!--<link rel="canonical" href="https://www.filezigzag.com/online-converter" />-->
 
-	<!-- Global site tag (gtag.js) - Google Analytics ->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130660809-3"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-S5S0GBS4WT"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
+		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
-		gtag('config', 'UA-130660809-3');
+		gtag('config', 'G-S5S0GBS4WT');
 	</script>
-	-->
 
 	<?php # Include JQuery library
 	if (env('CI_ENVIRONMENT') == 'development') {
