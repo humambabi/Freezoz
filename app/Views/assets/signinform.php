@@ -55,7 +55,7 @@
 <script type="text/javascript">
 function postData() {
 	$.ajax({
-		url: "/requests/sign_in",
+		url: BASE_URI + "/requests/sign_in",
 		type: 'post',
 		headers: {'X-Requested-With': 'XMLHttpRequest'},
 		data: {

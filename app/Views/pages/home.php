@@ -39,28 +39,209 @@ h1 {
 	transform: translate3d(0, -4px, 0);
 	box-shadow: 0 14px 30px rgb(0 0 0 / 20%);
 }
-.item-container[data-loaded='true'] img {
-	width: 100%;
-	height: auto;
+.item-container .media-container {
+	position: relative;
+	display: flex;
 }
-.item-container[data-loaded='true'] .infobar-title {
-	border: 1px solid red;
+
+.media-hidden { /* ONLY for img & video inside .media-container */
+	opacity: 0;
+	position: absolute;
+	left: 100%;
+}
+
+@media (pointer:coarse) and (hover:none) {
+	.media-container video { display: none }
+	i#itemctl-mute { opacity: 0 }
+}
+
+.item-container[data-loaded='true'] .media-container .imgshadow {
+	position: absolute;
+	background-image: linear-gradient(to top, rgba(0, 0, 0, .75), rgba(0, 0, 0, 0));
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: all .3s ease;
+}
+.item-container[data-loaded='true']:hover .media-container .imgshadow {
+	opacity: 1;
+}
+
+.pricetag {
+	position: absolute;
+	z-index: 1;
+	color: #664e00;
+	background-color: #f9bf00;
+	font-size: .9rem;
+	font-weight: bold;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	transform: rotate(-45deg);
+	transform-origin: 0 0 0;
+	-ms-transform: rotate(-45deg); /* IE 9 */
+	-ms-transform-origin: 0 0 0; /* IE 9 */
+	width: 85px;
+	height: 20px;
+	left: -15px;
+	top: 46px;
+}
+
+.shadow-ctlbar {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	bottom: 0;
+	padding: .5rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.shadow-ctlbar i {
+	cursor: pointer;
+	font-size: 1.75rem;
+	color: rgba(255, 255, 255, .5);
+	transition: all .3s ease;
+}
+.shadow-ctlbar i:hover {
+	color: rgba(255, 255, 255, .75);
+}
+
+.infobar-title {
 	font-size: 1.1rem;
 	line-height: 1.1rem;
-	padding: .5rem .5rem;
-	height: calc(1.1rem + (2 * .5rem)); /* line-height + padding.vert */
+	padding: .5rem .5rem 0 .5rem;
+	height: calc(1.1rem + .5rem); /* line-height + padding.vert (top only )*/
 	font-weight: bold;
 	white-space: nowrap;
 	width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.infobar-btmsec {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.btmsec-rating {
+	display: flex;
+	flex-direction: row;
+}
+.rating-stars {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: .1rem .5rem; /* Horizontal padding must be the same as the title's */
+}
+.rating-stars i {
+	font-size: 1rem;
+	color: #f9bf00;
+}
+.rating-ratescount {
+	color: #757575;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-size: .75rem;
+}
+.rating-downsales {
+	color: #a1a1a1;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-size: .9rem;
+	font-weight: bold;
+	margin-left: .5rem;
+}
+.btmsec-control {
+	display: flex;
+	flex-direction: row;
+	padding: .5rem .5rem .5rem 0; /* Right and bottom padding must be equal to the title's padding */
+}
 
-
-
-
-
-
+/* Adjust InfoBar's contents size -> indirectly height via js */
+@media all and (max-width: 1345px) {
+	.infobar-title { font-size: 1rem; line-height: 1rem; padding: .4rem .4rem 0 .4rem; height: calc(1rem + .4rem); font-weight: bold; }
+	.rating-stars { padding: .1rem .4rem; }
+	.rating-stars i { font-size: .9rem; }
+	.rating-ratescount { font-size: .65rem; }
+	.rating-downsales { font-size: .8rem; margin-left: .4rem; }
+	.btmsec-control { padding: .4rem .4rem .4rem 0; }
+	.btmsec-control button { padding: .2rem .5rem; font-size: .8rem; }
+	.pricetag { font-size: .8rem; height: 18px; }
+	.shadow-ctlbar i { font-size: 1.5rem; }
+@media all and (max-width: 1130px) {
+	.infobar-title { font-size: .8rem; line-height: .8rem; padding: .3rem .3rem 0 .3rem; height: calc(.8rem + .3rem); font-weight: bold; }
+	.rating-stars { padding: .1rem .3rem; } /* Horizontal padding must be the same as the title's */
+	.rating-stars i { font-size: .7rem; }
+	.rating-ratescount { font-size: .55rem; }
+	.rating-downsales { font-size: .7rem; margin-left: .3rem; }
+	.btmsec-control { padding: .3rem .3rem .3rem 0; } /* Right and bottom padding must be equal to the title's padding */
+	.btmsec-control button { padding: .15rem .4rem; font-size: .7rem; }
+	.pricetag { font-size: .7rem; height: 15px; }
+	.shadow-ctlbar i { font-size: 1.15rem; }
+}
+@media all and (max-width: 980px) { /* 963 */
+	.infobar-title { font-size: 1rem; line-height: 1rem; padding: .4rem .4rem 0 .4rem; height: calc(1rem + .4rem); font-weight: bold; }
+	.rating-stars { padding: .1rem .4rem; } /* Horizontal padding must be the same as the title's */
+	.rating-stars i { font-size: .9rem; }
+	.rating-ratescount { font-size: .65rem; }
+	.rating-downsales { font-size: .8rem; margin-left: .4rem; }
+	.btmsec-control { padding: .4rem .4rem .4rem 0; } /* Right and bottom padding must be equal to the title's padding */
+	.btmsec-control button { padding: .2rem .5rem; font-size: .8rem; }
+	.pricetag { font-size: .8rem; height: 18px; }
+	.shadow-ctlbar i { font-size: 1.5rem; }
+}
+@media all and (max-width: 700px) {
+	.infobar-title { font-size: .8rem; line-height: .8rem; padding: .3rem .3rem 0 .3rem; height: calc(.8rem + .3rem); font-weight: bold; }
+	.rating-stars { padding: .1rem .3rem; } /* Horizontal padding must be the same as the title's */
+	.rating-stars i { font-size: .7rem; }
+	.rating-ratescount { font-size: .5rem; }
+	.rating-downsales { font-size: .6rem; margin-left: .25rem; }
+	.btmsec-control { padding: .3rem .3rem .3rem 0; } /* Right and bottom padding must be equal to the title's padding */
+	.btmsec-control button { padding: .15rem .4rem; font-size: .6rem; }
+	.pricetag { font-size: .7rem; height: 15px; }
+	.shadow-ctlbar i { font-size: 1.15rem; }
+}
+@media all and (max-width: 550px) { /* 533 */
+	.infobar-title { font-size: 1.1rem; line-height: 1.1rem; padding: .5rem .5rem 0 .5rem; height: calc(1.1rem + .5rem); font-weight: bold; }
+	.rating-stars { padding: .1rem .5rem; } /* Horizontal padding must be the same as the title's */
+	.rating-stars i { font-size: 1rem; }
+	.rating-ratescount { font-size: .75rem; }
+	.rating-downsales { font-size: .9rem; margin-left: .5rem; }
+	.btmsec-control { padding: .5rem .5rem .5rem 0; } /* Right and bottom padding must be equal to the title's padding */
+	.btmsec-control button { padding: .35rem .7rem; font-size: .9rem; }
+	.pricetag { font-size: .9rem; height: 20px; }
+	.shadow-ctlbar i { font-size: 1.75rem; }
+}
+@media all and (max-width: 407px) { /* 400 */
+	.infobar-title { font-size: 1rem; line-height: 1rem; padding: .4rem .4rem 0 .4rem; height: calc(1rem + .4rem); font-weight: bold; }
+	.rating-stars { padding: .1rem .4rem; } /* Horizontal padding must be the same as the title's */
+	.rating-stars i { font-size: .9rem; }
+	.rating-ratescount { font-size: .65rem; }
+	.rating-downsales { font-size: .8rem; margin-left: .4rem; }
+	.btmsec-control { padding: .4rem .4rem .4rem 0; } /* Right and bottom padding must be equal to the title's padding */
+	.btmsec-control button { padding: .2rem .5rem; font-size: .8rem; }
+	.pricetag { font-size: .8rem; height: 18px; }
+	.shadow-ctlbar i { font-size: 1.5rem; }
+}
+@media all and (max-width: 360px) { /* 350 */
+	.infobar-title { font-size: .8rem; line-height: .8rem; padding: .3rem .3rem 0 .3rem; height: calc(.8rem + .3rem); font-weight: bold; }
+	.rating-stars { padding: .1rem .3rem; } /* Horizontal padding must be the same as the title's */
+	.rating-stars i { font-size: .7rem; }
+	.rating-ratescount { font-size: .55rem; }
+	.rating-downsales { font-size: .7rem; margin-left: .3rem; }
+	.btmsec-control { padding: .3rem .3rem .3rem 0; } /* Right and bottom padding must be equal to the title's padding */
+	.btmsec-control button { padding: .15rem .4rem; font-size: .7rem; }
+	.pricetag { font-size: .7rem; height: 15px; }
+	.shadow-ctlbar i { font-size: 1.15rem; }
+}
 
 #pagination {
 	display: flex;
@@ -149,8 +330,23 @@ h1 {
 <script type="text/javascript">
 const SS_PAGENUM = "ss_pgnum";
 const ITEM_RATIO = .56271;
-const ITEM_INFOBAR_HEIGHT_RATE = (3/8);
 var gItemsList, gMaxItemCountPerCol, gPageCur;
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function getInfobarHeight() {
+	// Using window.innerWidth here, to easily synchronize it with css
+	var winWidth = window.innerWidth;
+
+	if (winWidth > 1345) return 76;
+	if (winWidth > 1130) return 63;
+	if (winWidth > 980) return 52; // Two columns (gets bigger) // 963
+	if (winWidth > 700) return 63;
+	if (winWidth > 550) return 50; // One column // 533
+	if (winWidth > 407) return 76; // 400
+	if (winWidth > 360) return 63; // 350
+	return 52;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -217,7 +413,7 @@ function htmlRating(rating) {
 async function getOneItemData(elItem) {
 	return new Promise(resolve => {
 		$.ajax({
-			url: "/requests/item_getdata",
+			url: BASE_URI + "/requests/item_getdata",
 			type: 'post',
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			data: {
@@ -234,24 +430,80 @@ async function getOneItemData(elItem) {
 				if (isJson(response)) {
 					// We are confident that response is a json object (returned gracefully from server)
 
-					var resurl = "/resources/get?dir=" + encodeURIComponent(response.retdata.folder);
+					var resUrl = BASE_URI + "/resources/get?dir=" + encodeURIComponent(response.retdata.folder);
+					var imgSrc = resUrl + "&typ=1&res=" + encodeURIComponent(response.retdata.thumbnail);
+					var vidSrc = resUrl + "&typ=2&res=" + encodeURIComponent(response.retdata.prevvid);
+					var itemTitle = response.retdata.title, itemFree = parseInt(response.retdata.price) > 0 ? false : true;
 
 					// Clear the inner html, and create new elements
 					elItem.html(
-						"<img />" +
-						"<div class='infobar-title'></div>" +
+						"<div class='pricetag'>" + (itemFree ? "Free" : "<i class='fas fa-crown'></i>") + "</div>" +
+						"<div class='media-container'>" +
+						"   <img width='100%' height='auto' alt='" + itemTitle + "' src='" + imgSrc + "'/>" +
+						"   <video width='100%' height='auto' playsinline='playsinline' muted='muted' loop='loop' poster='" + imgSrc + "' preload='metadata'>" +
+						"      <source src='" + vidSrc + "' type='" + response.retdata.prevvidhtmltagtype + "'>" +
+						"      Sorry!, your borowser doesn't support the video tag. Consider upgrading." +
+						"   </video>" +
+						"   <div class='imgshadow'>" +
+						"      <div class='shadow-ctlbar'>" +
+						"         <i id='itemctl-mute' title='Mute' class='fas fa-volume-mute'></i>" +
+						"         <i id='itemctl-like' title='Add to favorites' class='far fa-heart'></i>" +
+						"      </div>" +
+						"   </div>" +
+						"</div>" +
+						"<div class='infobar-title'>" + itemTitle + "</div>" +
 						"<div class='infobar-btmsec'>" +
-						"   <div class='btmsec-rating'></div>" +
-						"   <div class='btmsec-control'></div>" +
+						"   <div class='btmsec-rating'>" +
+						"      <div class='rating-stars'>" + htmlRating(parseFloat(response.retdata.rating)) + "</div>" +
+						"      <div class='rating-ratescount'>(" + response.retdata.ratescount + ")</div>" +
+						"      <div class='rating-downsales'>" + (itemFree ? "Downloads" : "Sales") + ": " + response.retdata.downsalecount + "</div>" +
+						"   </div>" +
+						"   <div class='btmsec-control'>" +
+						"      <button type='button' class='solid green medium'>DETAILS</button>" +
+						"   </div>" +
 						"</div>"
 					);
 
-					elItem.children("img").attr("src", resurl + "&typ=1&res=" + encodeURIComponent(response.retdata.thumbnail));
-					elItem.children("div.infobar-title").text(response.retdata.title);
-					elItem.children("div.infobar-btmsec").children("div.btmsec-rating").html(htmlRating(parseFloat(response.retdata.rating)));
+					elItem.mouseenter(function() {
+						var elImg = elItem.find(".media-container img"), elVid = elItem.find(".media-container video");
+						
+						if (elVid.css("display") == "none") {
+							elImg.removeClass("media-hidden");
+							elVid.addClass("media-hidden");
+						} else {
+							elImg.addClass("media-hidden");
+							elVid.removeClass("media-hidden");
+							elVid[0].play().then(function() { elVid.attr("playing", true); });
+						}
+					});
+					elItem.mouseleave(function() {
+						var elImg = elItem.find(".media-container img"), elVid = elItem.find(".media-container video");
+
+						elImg.removeClass("media-hidden");
+						elVid.addClass("media-hidden");
+
+						if (elVid.css("display") != "none") {
+							if (elVid.attr("playing")) {
+								elVid[0].pause();
+								elVid.attr("playing", false);
+							}
+						}
+					});
+					elItem.find("i#itemctl-mute").click(function() {
+						var elVid = elItem.find(".media-container video");
+
+						if (elVid[0].muted) {
+							elVid[0].muted = false;
+							elVid[0].volume = 0.1;
+							elItem.find("i#itemctl-mute")[0].className = "fas fa-volume-up";
+						} else {
+							elVid[0].muted = true;
+							elItem.find("i#itemctl-mute")[0].className = "fas fa-volume-mute";
+						}
+					});
 				}
 
-				resolve(); // Allow the Promise object to allow next object to execute
+				/*setTimeout(function() {*/ resolve(); /*}, 250);*/ // Allow the Promise object to allow next object to execute
 			} // Received response
 		}); // JQ.Ajax()
 	}); // Promise
@@ -323,7 +575,7 @@ function setThisPageItems(create) {
 		itemWidth = widthContainer;
 		imgHeight = Math.floor(itemWidth * ITEM_RATIO); // Again
 	}
-	infobarHeight = Math.floor(imgHeight * ITEM_INFOBAR_HEIGHT_RATE);
+	infobarHeight = getInfobarHeight();
 	itemHeight = imgHeight + infobarHeight;
 
 	// Adjust the container's height
@@ -486,7 +738,7 @@ function gotoPage(page, allPageCount) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 function itemsGetList() {
 	$.ajax({
-		url: "/requests/items_getlist",
+		url: BASE_URI + "/requests/items_getlist",
 		type: 'post',
 		headers: {'X-Requested-With': 'XMLHttpRequest'},
 		data: {

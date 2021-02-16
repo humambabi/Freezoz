@@ -28,8 +28,14 @@ class Resources extends BaseController {
 
 		$ParamType = intval($this->request->getGet('typ', FILTER_SANITIZE_NUMBER_INT));
 		if (empty($ParamType)) return NULL; # Not allowed to be "0"
-		if ($ParamType == 1) { // Image (jpg, jpeg, png, gif, bmp)
+		if ($ParamType == 1) { // Image (jpg)    //, jpeg, png, gif, bmp)
 			if (strtoupper(substr($ParamResName, -4)) != '.JPG' &&
+					1) {
+				return NULL;
+			}
+		}
+		if ($ParamType == 2) { // Video (mp4)
+			if (strtoupper(substr($ParamResName, -4)) != '.MP4' &&
 					1) {
 				return NULL;
 			}

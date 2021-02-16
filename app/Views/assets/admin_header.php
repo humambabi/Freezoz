@@ -17,7 +17,7 @@
 
 	<!-- STYLES -->
 	<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="<?= '/vendor/fontawesome-free/css/all.' . (env('CI_ENVIRONMENT') == 'development' ? 'min.' : '') . 'css' ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url() . '/vendor/fontawesome-free/css/all.' . (env('CI_ENVIRONMENT') == 'development' ? 'min.' : '') . 'css' ?>">
 	
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/main.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/burger.css">

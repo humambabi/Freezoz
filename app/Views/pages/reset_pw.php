@@ -222,7 +222,7 @@
 		}
 
 		$.ajax({
-			url: "/requests/reset_pw",
+			url: BASE_URI + "/requests/reset_pw",
 			type: 'post',
 			headers: {'X-Requested-With': 'XMLHttpRequest'},
 			data: {

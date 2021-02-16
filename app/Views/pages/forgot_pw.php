@@ -157,7 +157,7 @@ $("#forgotpw_submit").click(function() {
 
 	// Send data
 	$.ajax({
-		url: "/requests/forgot_pw",
+		url: BASE_URI + "/requests/forgot_pw",
 		type: 'post',
 		headers: {'X-Requested-With': 'XMLHttpRequest'},
 		data: {

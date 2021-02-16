@@ -329,8 +329,13 @@ class Requests extends BaseController {
 		if ($param_dtype == "home") {
 			$itemdata['folder'] = $dbrow['folder_name'];
 			$itemdata['thumbnail'] = $dbrow['previmg_small'];
+			$itemdata['prevvid'] = $dbrow['prevvid_small'];
+			$itemdata['prevvidhtmltagtype'] = ((strtoupper(substr($dbrow['prevvid_small'], -4)) == '.MP4') ? "video/mp4" : "");
 			$itemdata['title'] = $dbrow['title'];
 			$itemdata['rating'] = $dbrow['rating'];
+			$itemdata['ratescount'] = $dbrow['ratescount'];
+			$itemdata['price'] = $dbrow['price'];
+			$itemdata['downsalecount'] = $dbrow['downsalecount'];
 		} else
 		if ($param_dtype == "itempage") {
 

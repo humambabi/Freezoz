@@ -28,8 +28,16 @@ button.solid {
 	outline-style: none;
 	transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
 }
+button.green {
+	border-color: #20bf55;
+	background-color: #20bf55;
+}
 button.solid:hover {
 	color: #01baef;
+	background-color: transparent;
+}
+button.solid.green:hover {
+	color: #20bf55;
 	background-color: transparent;
 }
 
