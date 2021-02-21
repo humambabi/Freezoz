@@ -3,11 +3,11 @@
 class Assets extends BaseController {
 	##############################################
 	public function signin_form() {
-    	return view('assets/signinform');
+    	return view('assets/public/signinform');
 	}
 
 	##############################################
 	public function categories_form() {
-		return view('assets/categories');
+		return view('assets/public/categories');
 	}
 }

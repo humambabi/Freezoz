@@ -281,7 +281,7 @@ class Requests extends BaseController {
 
 	################################################################################################
 	# Get a list of items (to be shown on the home page) (the FULL list of rowids)
-	# params: none
+	# params: none (should be some filter)
 	################################################################################################
 	public function items_getlist() {
 		if (!$this->request->isAJAX()) return "Bad request!";

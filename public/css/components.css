@@ -237,3 +237,6 @@ Edit inputs
 	display: flex;
 	align-items: flex-start;
 }
+
+/* Form-specific */
+#signinform .edit-container { width: 80%; }

@@ -3,6 +3,30 @@
 use App\Models\Users;
 
 ###################################################################################################
+if (!function_exists('include_css')) {
+	#
+	# Include CSS
+	#
+	# Inserts an HTML <link> tag for a local css file, along with its modification
+	# time (as a uri parameter), to prevent caching of *modified* file
+	#
+	# @param string $filename File name
+	#
+	# @return null
+	#
+	function include_css($filename) {
+		try {
+			$str = "<link rel='stylesheet' type='text/css' href='" .  base_url() . "$filename";
+			$str .= "?t=" . filemtime(FCPATH . "$filename") . "'>" . PHP_EOL . "\t";
+			echo $str;
+		} catch (\Throwable $e) {
+			return;
+		}
+	}
+}
+
+
+###################################################################################################
 if (!function_exists('include_jscript')) {
 	#
 	# Include JScript
@@ -16,8 +40,8 @@ if (!function_exists('include_jscript')) {
 	#
 	function include_jscript($filename) {
 		try {
-			$str = "<script type='text/javascript' src='" . base_url() . "/js/$filename";
-			$str .= "?t=" . filemtime(FCPATH . "/js/$filename") . "'></script>" . PHP_EOL;
+			$str = "<script type='text/javascript' src='" . base_url() . "$filename";
+			$str .= "?t=" . filemtime(FCPATH . "$filename") . "'></script>" . PHP_EOL;
 			echo $str;
 		} catch (\Throwable $e) {
 			return;

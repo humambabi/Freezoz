@@ -39,7 +39,7 @@ $routes->get('/privacy',										'Pages::privacy');
 $routes->get('/activation/(:segment)/(:segment)',		'Pages::activation/$1/$2');
 $routes->get('/forgot_pw',										'Pages::forgot_pw');
 $routes->get('/reset_pw/(:segment)/(:segment)',			'Pages::reset_pw/$1/$2');
-$routes->get('/admincp',										'Pages::admincp');
+$routes->get('/admincp/(:segment)',							'Pages::admincp/$1');
 
 $routes->get('/assets/signin_form', 						'Assets::signin_form');
 $routes->get('/assets/categories_form', 					'Assets::categories_form');
