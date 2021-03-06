@@ -184,9 +184,7 @@ class Pages extends BaseController {
 		}
 		
 		# Set the special page body, css & js
-		$page_body = "";
-		$add_css = array();
-		$add_js = array();
+		$page_body = ""; $add_css = []; $add_js = []; $add_data = [];
 
 		switch ($page) {
 			case "dashboard": {
@@ -195,7 +193,43 @@ class Pages extends BaseController {
 			}
 
 			case "items" : {
+				$add_css = ["/css/admin/items.css"];
 				$page_body = "items";
+				$add_js = ["/js/admin/items.js"];
+
+				$itemfile_inputaccept = ""; $itemfile_descaccept = "";
+				$itemimage_inputaccept = ""; $itemvideo_inputaccept = "";
+
+				// Item's file
+				for ($i = 0; $i < count(ITEMS_ITEMFILE_ACCEPTEDFILETYPES); $i++) {
+					$itemfile_inputaccept .= "." . strtolower(ITEMS_ITEMFILE_ACCEPTEDFILETYPES[$i]);
+					$itemfile_inputaccept .= ($i != (count(ITEMS_ITEMFILE_ACCEPTEDFILETYPES) - 1) ? ", " : "");
+
+					$itemfile_descaccept .= strtoupper(ITEMS_ITEMFILE_ACCEPTEDFILETYPES[$i]);
+					if ($i < (count(ITEMS_ITEMFILE_ACCEPTEDFILETYPES) - 2)) {
+						$itemfile_descaccept .= ", ";
+					} else if ($i < (count(ITEMS_ITEMFILE_ACCEPTEDFILETYPES) - 1)) {
+						$itemfile_descaccept .= " or ";
+					}
+				}
+
+				// Item's image
+				for ($i = 0; $i < count(ITEMS_IMAGE_ACCEPTEDFILETYPES); $i++) {
+					$itemimage_inputaccept .= "." . strtolower(ITEMS_IMAGE_ACCEPTEDFILETYPES[$i]);
+					$itemimage_inputaccept .= ($i != (count(ITEMS_IMAGE_ACCEPTEDFILETYPES) - 1) ? ", " : "");
+				}
+
+				// Item's video
+				for ($i = 0; $i < count(ITEMS_VIDEO_ACCEPTEDFILETYPES); $i++) {
+					$itemvideo_inputaccept .= "." . strtolower(ITEMS_VIDEO_ACCEPTEDFILETYPES[$i]);
+					$itemvideo_inputaccept .= ($i != (count(ITEMS_VIDEO_ACCEPTEDFILETYPES) - 1) ? ", " : "");
+				}
+
+
+				$add_data['ItemFileInputAccept'] = $itemfile_inputaccept;
+				$add_data['ItemFileDescAccept'] = $itemfile_descaccept;
+				$add_data['ItemImageAccept'] = $itemimage_inputaccept;
+				$add_data['ItemVideoAccept'] = $itemvideo_inputaccept;
 				break;
 			}
 		}
@@ -203,7 +237,7 @@ class Pages extends BaseController {
 		# Output the html
 		echo view('assets/admin/header', array('add_css' => $add_css));
 		echo view('assets/admin/navbar', array('page' => $page_body));
-		echo view('pages/admin/' . $page_body);
+		echo view('pages/admin/' . $page_body, $add_data);
 		echo view('assets/admin/footer', array('add_js' => $add_js));
 	}
 }

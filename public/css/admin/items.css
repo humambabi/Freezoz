@@ -1,0 +1,94 @@
+/*
+Items page
+*/
+
+#itemtable-container {
+	border: 1px solid #757575;
+	width: 100%;
+	height: calc(3 * (5px + (120px + .9rem + (2 * .5rem) + .5rem)) + 1px + 5px + 1px);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	overflow-y: scroll;
+	padding-top: 5px;
+	padding-left: 5px;
+	margin-bottom: 1rem;
+}
+
+#itemtable-container.empty {
+	align-items: center;
+	justify-content: center;
+}
+
+.imgdims, .viddims {
+	background-color: rgba(255,255,255,.5);
+	position: absolute;
+	bottom: 2px;
+	left: 17px;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 0 5px;
+	display: none;
+}
+.viddims {
+	bottom: 9px;
+}
+
+
+/* Modifications for Bootstrap */
+.card, .card img, .form-check-input, .form-check-label {
+	cursor: pointer;
+}
+
+.card {
+	width: calc(213px + 2px);
+	height: calc(120px + .9rem + (2 * .5rem) + .5rem);
+	margin-right: 5px;
+	margin-bottom: 5px;
+	overflow: hidden;
+}
+
+.card-body {
+	padding: .5rem;
+}
+
+.card[data-loaded=false] {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: #aaa;
+}
+.card[data-loaded=false] i {
+	font-size: 1.5rem;
+}
+
+.form-check-label {
+	font-size: .9rem;
+	font-weight: bold;
+	line-height: .9rem;
+	height: .9rem;
+	width: calc(100% - (2 * 20px)); /* bs's padding */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.badge:not([type=none]) {
+	display: inline-flex;
+	align-items: center;
+	padding: 0 .25rem 0 .45rem;
+	margin: .1rem;
+}
+
+.badge button.close {
+	margin-left: .25rem;
+}
+
+/* Modifications for SummerNote */
+.note-editor {
+	width: 100%;
+	height: 100%;
+	overflow: visible; /* For the menues */
+}

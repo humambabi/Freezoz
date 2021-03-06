@@ -22,6 +22,7 @@
 	# Vendor
 	include_css("/vendor/fontawesome-free/css/all." . (env('CI_ENVIRONMENT') == "development" ? "" : "min.") . "css");
 	include_css("/vendor/bootstrap-4.6.0-dist/css/bootstrap." . (env('CI_ENVIRONMENT') == 'development' ? '' : 'min.') . "css");
+	include_css("/vendor/summernote-0.8.18-dist/summernote-bs4." . (env('CI_ENVIRONMENT') == 'development' ? '' : 'min.') . "css");
 
 	# Common
 	include_css("/css/main.css");
@@ -40,6 +41,7 @@
 	<?php # Convert PHP constants to JS (Password's min & max limits are defined in the sign-in form)
 	echo "<script type='text/javascript'>" . PHP_EOL;
 	echo "\tconst BASE_URI = '" . base_url() . "';" . PHP_EOL;
+	echo "\tconst STATUS_SUCCESS = " . STATUS_SUCCESS . ";" . PHP_EOL;
 	echo "</script>" . PHP_EOL;
 	?>
 </head>

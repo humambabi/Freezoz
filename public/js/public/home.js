@@ -442,6 +442,7 @@ function itemsGetList() {
 
 			// We are confident that response is a json object (returned gracefully from server), and there is at least one item
 			//console.log(response);
+			$('#items-container').html(""); // Empty it, to be filled with fresh items
 
 			gMaxItemCountPerCol = response.retdata.maxitemcountpercol;
 			gItemsList = response.retdata.itemlist;
