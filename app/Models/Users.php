@@ -23,7 +23,7 @@ class Users extends Model {
 	# Check user name availability
 	################################################################################################
 	public function username_exists($name) {
-		if ($this->where('name', $name)->first() == null) return FALSE; else return TRUE;
+		if ($this->where('name', $name)->first()) return TRUE; else return FALSE;
 	}
 
 
@@ -31,7 +31,7 @@ class Users extends Model {
 	# Check email availability
 	################################################################################################
 	public function email_exists($email) {
-		if ($this->where('email', $email)->first() == null) return FALSE; else return TRUE;
+		if ($this->where('email', $email)->first()) return TRUE; else return FALSE;
 	}
 
 
@@ -117,7 +117,7 @@ class Users extends Model {
 			"todaydn_count"			=> 0,
 			"todaydn_datetime"		=> gmdate('Y-m-d H:i:s'),
 			"is_active"					=> FALSE,
-			"activation_datetime"	=> gmdate('Y-m-d H:i:s'),
+			"activation_datetime"	=> gmdate('Y-m-d H:i:s'), // This is the time the act. email was sent. So it's used to determine the expiry datetime.
 			"activation_code"			=> $activation_code,
 			"resetpw_datetime"		=> NULL,
 			"resetpw_code"				=> NULL,

@@ -31,6 +31,7 @@ class BaseController extends Controller
 	protected $session = NULL;				# Session variable
 	protected $bLoggedIn = FALSE;			# Is the user logged in?
 	protected $bAdmin = FALSE;				# Is the user an admin?
+	protected $bActive = FALSE;			# Is the user's account activated?
 
 
 	/* 
@@ -47,6 +48,7 @@ class BaseController extends Controller
 		$login_data = user_loggedin();
 		$this->bLoggedIn = $login_data['is_loggedin'];
 		$this->bAdmin = $login_data['is_admin'];
+		$this->bActive = $login_data['is_active'];
 
 
 

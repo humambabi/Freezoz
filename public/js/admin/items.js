@@ -62,7 +62,7 @@ async function loadItems() {
 		if ($(this).is(':checked')) {
 			var rowid = $(this).attr("id").substr(4);
 
-			console.log(rowid);
+			//console.log(rowid);
 
 			$(".card-body input.form-check-input").each(function() {
 				if (rowid != $(this).attr("id").substr(4)) $(this).prop('checked', false);
@@ -113,7 +113,7 @@ function itemsGetList() {
 		datatype: 'json',
 		success: function(response) {
 			if (!isJson(response) || (isJson(response) && (response.retcode != STATUS_SUCCESS || response.retdata.itemlist.length < 1))) {
-				console.info(response);
+				//console.info(response);
 
 				// Show that there are no more items!
 				$('#itemtable-container').addClass("empty");
@@ -255,7 +255,7 @@ function tagAdd() {
 		// Append the tag element
 		elCurTags.append(
 			"<span class='badge badge-primary' type='tag'>" +
-				strText +
+				"<div class='tagtext'>" + strText + "</div>" +
 				"<button type='button' class='close' aria-label='Close' onclick='tagRemove($(this))'><span aria-hidden='true'>&times;</span></button>" +
 			"</span>"
 		);
@@ -270,11 +270,230 @@ function tagAdd() {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+function getTagList() {
+	var tList = [];
+
+	$("span.badge[type=tag]").each(function() {
+		tList.push($(this).children("div.tagtext").text());
+	});
+
+	return tList;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 function tagRemove(sender) {
 	sender.parent().remove();
 
 	// If there are no more tags
 	if (!$("span.badge[type=tag]").length) $("#curTags").append("<span class='badge badge-secondary' type='none'>None</span>");
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function modalItemAdd_Clear() {
+	const INPUT_EMPTY_LABEL = "Choose file";
+	
+	$("#staticModalItemAdd").html('Add a New Item');
+	$("#staticModalItemAdd").siblings('button').removeClass('d-none');
+	$("#formItemAdd").removeClass("d-none");
+	$("#formItemUpload").addClass("d-none");
+	$("#formItemNewFooter").removeClass("d-none");
+	
+	$("#chkToday").prop('checked', true);
+	$("#dateAddition")
+		.attr('disabled', true)
+		.val(getFormattedTodayDate())
+	;
+
+	$("#textItemTitle")
+		.val('')
+		.removeClass("is-invalid")
+	;
+
+	$('#textItemDesc').summernote('reset');
+
+	$("#fileItemFile").val('');
+	$("#fileItemFile").siblings("label").text(INPUT_EMPTY_LABEL);
+
+	$("span.badge[type=tag]").remove();
+	$("#curTags").html("<small>Current tags:</small>&nbsp;<span class='badge badge-secondary' type='none'>None</span>");
+
+	$("#filePrevImgSmall").val('');
+	$("#filePrevImgSmall").siblings("label").text(INPUT_EMPTY_LABEL);
+	readImgURL($("#filePrevImgSmall")[0], 'imgPrevImgSmall');
+
+	$("#filePrevImgFull").val('');
+	$("#filePrevImgFull").siblings("label").text(INPUT_EMPTY_LABEL);
+	readImgURL($("#filePrevImgFull")[0], 'imgPrevImgFull');
+
+	$("#filePrevVidSmall").val('');
+	$("#filePrevVidSmall").siblings("label").text(INPUT_EMPTY_LABEL);
+	readVidURL($("#filePrevVidSmall")[0], 'vidPrevVidSmall'); // Includes freeing URL data object
+
+	$("#filePrevVidFull").val('');
+	$("#filePrevVidFull").siblings("label").text(INPUT_EMPTY_LABEL);
+	readVidURL($("#filePrevVidFull")[0], 'vidPrevVidFull'); // Includes freeing URL data object
+
+	$("#fileAddImages").val('');
+	$("#fileAddImages").siblings("label").text(INPUT_EMPTY_LABEL);
+	
+	$("#fileAddVideos").val('');
+	$("#fileAddVideos").siblings("label").text(INPUT_EMPTY_LABEL);
+
+	$("#fileAddAudios").val('');
+	$("#fileAddAudios").siblings("label").text(INPUT_EMPTY_LABEL);
+
+	$("#textItemPrice").val('');
+
+	$("#selectPrice").val('0');
+
+	$("#selectLicense").val(0)
+
+	// Progress form
+	$("#progressItemUpload").attr('aria-valuenow', 0);
+	$("#progressItemUpload").css('width', '0');
+	$("#labelItemUpload").html("Uploaded: <strong>0%</strong>");
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function modalItemAdd_Validate() {
+	var invalid = null;
+
+	// Date (no validation)
+
+	// Title (required)
+	if ($("#textItemTitle").val().trim().length < 1) {
+		$("#textItemTitle").addClass("is-invalid");
+		$("#textItemTitle").on("input", function() { $("#textItemTitle").removeClass("is-invalid"); });
+		invalid = "#textItemTitle";
+	}
+
+	// Description (required)
+	if ($('#textItemDesc').summernote('isEmpty')) {
+		$("#desc-invalidlabel").removeClass("d-none"); // set as invalid
+		$('#textItemDesc').on("summernote.change", function (e) {
+			$("#desc-invalidlabel").addClass("d-none"); // remove invalid flag
+		});
+		if (!invalid) invalid = ".note-btn";
+	}
+
+	// Item's compressed file (required)
+	if (!$("#fileItemFile").val()) {
+		$("#fileItemFile").addClass("is-invalid");
+		$("#fileItemFile").on("input", function() { $("#fileItemFile").removeClass("is-invalid"); });
+		if (!invalid) invalid = "#fileItemFile";
+	}
+
+	// Tags (at least one)
+	if ($("span.badge[type=tag]").length < 1) {
+		$("#textItemTags").addClass("is-invalid");
+		$("#textItemTags").on("input", function() { $("#textItemTags").removeClass("is-invalid"); });
+		$("#btnTagAdd").on("click", function() { $("#textItemTags").removeClass("is-invalid"); });
+		if (!invalid) invalid = "#textItemTags";
+	}
+
+	// Image-small
+	if (!$("#filePrevImgSmall").val() ||
+			$("#imgPrevImgSmall").attr("data-width") != ITEMS_IMAGE_SMALL_DIMENSIONS.width ||
+			$("#imgPrevImgSmall").attr("data-height") != ITEMS_IMAGE_SMALL_DIMENSIONS.height) {
+		$("#filePrevImgSmall").addClass("is-invalid");
+		$("#filePrevImgSmall").on("input", function() { $("#filePrevImgSmall").removeClass("is-invalid"); });
+		if (!invalid) invalid = "#filePrevImgSmall";
+	}
+
+	// Image-full
+	if (!$("#filePrevImgFull").val() ||
+			$("#imgPrevImgFull").attr("data-width") != ITEMS_IMAGE_FULL_DIMENSIONS.width ||
+			$("#imgPrevImgFull").attr("data-height") != ITEMS_IMAGE_FULL_DIMENSIONS.height) {
+		$("#filePrevImgFull").addClass("is-invalid");
+		$("#filePrevImgFull").on("input", function() { $("#filePrevImgFull").removeClass("is-invalid"); });
+		if (!invalid) invalid = "#filePrevImgFull";
+	}
+
+	// Video-small
+	if (!$("#filePrevVidSmall").val() ||
+			$("#vidPrevVidSmall").attr("data-width") != ITEMS_VIDEO_SMALL_DIMENSIONS.width ||
+			$("#vidPrevVidSmall").attr("data-height") != ITEMS_VIDEO_SMALL_DIMENSIONS.height) {
+		$("#filePrevVidSmall").addClass("is-invalid");
+		$("#filePrevVidSmall").on("input", function() { $("#filePrevVidSmall").removeClass("is-invalid"); });
+		if (!invalid) invalid = "#filePrevVidSmall";
+	}
+
+	// Video-full
+	if (!$("#filePrevVidFull").val() ||
+			$("#vidPrevVidFull").attr("data-width") != ITEMS_VIDEO_FULL_DIMENSIONS.width ||
+			$("#vidPrevVidFull").attr("data-height") != ITEMS_VIDEO_FULL_DIMENSIONS.height) {
+		$("#filePrevVidFull").addClass("is-invalid");
+		$("#filePrevVidFull").on("input", function() { $("#filePrevVidFull").removeClass("is-invalid"); });
+		if (!invalid) invalid = "#filePrevVidFull";
+	}
+
+	// Additional images (no validation)
+	// Additional videos (no validation)
+	// Additional audios (no validation)
+
+	// Price (must be typed, even if '0')
+	if ($("#textItemPrice").val().trim().length < 1) {
+		$("#textItemPrice").addClass("is-invalid");
+		$("#textItemPrice").on("input", function() { $("#textItemPrice").removeClass("is-invalid"); });
+		if (!invalid) invalid = "#textItemPrice";
+	}
+
+	// License (must be selected, anything except "Select a license...")
+	if ($("#selectLicense option:selected").val() < 1) {
+		$("#selectLicense").addClass("is-invalid");
+		$("#selectLicense").on("input", function() { $("#selectLicense").removeClass("is-invalid"); });
+		if (!invalid) invalid = "#selectLicense";
+	}
+
+	if (invalid) $(invalid).focus();
+	return (invalid ? false : true);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function deleteCheckedItem() {
+	var elmChecked = $("#itemtable-container").find("input:checked");
+	var elmTitle = elmChecked.siblings("label"), elmCard = elmChecked.parents(".card");
+	var itemRowID = elmCard.attr("data-internal"), itemTitle = elmTitle.html();
+
+	// Check
+	if ((itemRowID < 1) || (itemTitle.length < 1)) return;
+
+	// Consent
+	swal({
+		title: "Are you sure?",
+		text: "All files associated with the template item will be deleted permanently, and cannot be recovered!\r\n\r\nItem title:\r\n" + itemTitle,
+		icon: "warning",
+		buttons: true,
+		dangerMode: true
+	})
+	.then((confirmDelete) => {
+		if (confirmDelete) {
+			$.post(BASE_URI + "/requests/admin_items_delete", {rowid: itemRowID}, function(response) {
+				if (!isJson(response)) {
+					console.log(response);
+					swal({text: "Sorry, an error occurred!", icon: "warning"}).then(function() {
+						itemsGetList();
+						return;
+					});
+				}
+
+				// Deleted
+				swal({
+					text: response.retdata,
+					icon: (response.retcode == STATUS_SUCCESS) ? "success" : "warning"
+				}).then(function() {
+					itemsGetList();
+					return;
+				});
+			}); // Ajax: Delete item
+		} else {
+			return; // User cancelled the deletion
+		}
+	});
 }
 
 
@@ -292,11 +511,10 @@ $(document).ready(function () {
 			['insert', ['link', 'hr']],
 			['view', ['fullscreen', 'codeview']],
 		],
-		placeholder: "Type the item's description (e.g. features, properties, requirements, version, etc.)"
+		placeholder: "Type the item's description (e.g. features, properties, requirements, version, etc.)",
+		height: 150
 	});
 });
-
-// $('#summernote').summernote('isEmpty')
 
 $("#filePrevImgSmall").change(function() { readImgURL(this, 'imgPrevImgSmall'); });
 $("#filePrevImgFull").change(function() { readImgURL(this, 'imgPrevImgFull'); });
@@ -308,11 +526,123 @@ $("#chkToday").click(function() {
 $("#btnTagAdd").click(function() { tagAdd(); });
 $("#filePrevVidSmall").change(function() { readVidURL(this, 'vidPrevVidSmall'); });
 $("#filePrevVidFull").change(function() { readVidURL(this, 'vidPrevVidFull'); });
+$("#itemDelete").click(function() { deleteCheckedItem(); });
 
-itemsGetList(); // Includes a call to setThisPageItems()
+// "AddItem" modal's events
+$("#modalItemAdd").click(function(e) {
+	if ($(e.target).parent().attr("data-dismiss")) {
+		modalItemAdd_Clear(); // Frees the videos URL data objects
+	}
+	else if ($(e.target).hasClass("btn-secondary")) {
+		modalItemAdd_Clear(); // Frees the videos URL data objects
+	}
+});
 
 
-/*
-on 'cancel', clear the form's user input
-on 'cancel' or 'save', free the videos URL data object
-*/
+/************************************************
+* Save
+************************************************/
+$("#btnSave").click(function() {
+	if (modalItemAdd_Validate()) {
+		// Just one very important check before uploading: check that the item title is unique (will become the folder name)
+		$.post(BASE_URI + "/requests/admin_items_checktitle", {itemtitle: $("#textItemTitle").val().trim()}, function(response) {
+			if (!isJson(response)) {
+				console.log(response);
+				return;
+			}
+			if (response.retcode != STATUS_SUCCESS) {
+				swal({text: response.retdata, icon: "warning"}).then(function() {
+					$("#textItemTitle").addClass("is-invalid");
+					$("#textItemTitle").on("input", function() { $("#textItemTitle").removeClass("is-invalid"); });
+					$("#textItemTitle").focus();
+				});
+				return;
+			}
+			
+			// If control reached here, this means that the title is good to go.
+			// Continue uploading the item data after receiving the responce.
+
+			// Set UI mode to ItemUpload
+			$("#staticModalItemAdd").html('Uploading item components...');
+			$("#staticModalItemAdd").siblings('button').addClass('d-none');
+			$("#formItemAdd").addClass('d-none');
+			$("#formItemUpload").removeClass("d-none");
+			$("#formItemNewFooter").addClass("d-none");
+
+			// Upload the components
+			var iC, itemData = new FormData();
+
+			itemData.set('date', $("#dateAddition").val());
+			itemData.set('title', $("#textItemTitle").val().trim());
+			itemData.set('description', $('#textItemDesc').summernote('code'));
+			itemData.set('fileItem', $("#fileItemFile")[0].files[0]); // Only one file
+			itemData.set('tags', getTagList()); // Will be converted to a string (items separated by commas)
+			itemData.set('imgSmall', $("#filePrevImgSmall")[0].files[0]); // Only one file
+			itemData.set('imgFull', $("#filePrevImgFull")[0].files[0]); // Only one file
+			itemData.set('vidSmall', $("#filePrevVidSmall")[0].files[0]); // Only one file
+			itemData.set('vidFull', $("#filePrevVidFull")[0].files[0]); // Only one file
+			itemData.set('addImagesCount', $("#fileAddImages")[0].files.length);
+			for (iC = 0; iC < $("#fileAddImages")[0].files.length; iC++) {
+				itemData.append("addImages-" + iC, $("#fileAddImages")[0].files[iC]);
+			}
+			itemData.set('addVideosCount', $("#fileAddVideos")[0].files.length);
+			for (iC = 0; iC < $("#fileAddVideos")[0].files.length; iC++) {
+				itemData.append("addVideos-" + iC, $("#fileAddVideos")[0].files[iC]);
+			}
+			itemData.set('addAudiosCount', $("#fileAddAudios")[0].files.length);
+			for (iC = 0; iC < $("#fileAddAudios")[0].files.length; iC++) {
+				itemData.append("addAudios-" + iC, $("#fileAddAudios")[0].files[iC]);
+			}
+			itemData.set('price', $("#textItemPrice").val());
+			itemData.set('license', $("#selectLicense option:selected").val());
+
+			$.ajax({
+				url: BASE_URI + "/requests/admin_items_add",
+				xhr: function() {
+					var xhr = new window.XMLHttpRequest();
+					xhr.upload.addEventListener("progress", function(evt) {
+						if (evt.lengthComputable) {
+							var fPercentComplete = Number(((evt.loaded / evt.total) * 100).toFixed(1)), iPercentComplete = Math.ceil(fPercentComplete);
+							$("#progressItemUpload").attr('aria-valuenow', iPercentComplete);
+							$("#progressItemUpload").css('width', iPercentComplete + '%');
+							$("#labelItemUpload").html("Uploaded: <strong>" + fPercentComplete + '%</strong>');
+						}
+					}, false);
+					return xhr;
+				},
+				type: 'post',
+				headers: {'X-Requested-With': 'XMLHttpRequest'},
+				data: itemData,
+				datatype: 'json',
+				contentType: false,
+				processData: false,
+				success: function(response) {
+					if (!isJson(response)) {
+						console.log(response);
+
+						$('#modalItemAdd').modal("hide");
+						modalItemAdd_Clear(); // Frees the videos URL data objects
+						
+						swal({text: "Some error occurred!", icon: "warning"});
+						return;
+					}
+
+					// If code reached here, the addition MUST have been succeeded
+					//console.log(response);
+
+					setTimeout(function() {
+						$('#modalItemAdd').modal("hide");
+						modalItemAdd_Clear(); // Frees the videos URL data objects
+
+						swal({text: "Item was added successfully!", icon: "success"}).then(function() {
+							itemsGetList();
+						});
+					}, 1000);
+				} // Received response
+			}); // JQ.Ajax() (sending all the item's data)
+		}); // JQ.Post() (Checking the item's title)
+	} // Form validated
+});
+
+
+itemsGetList();

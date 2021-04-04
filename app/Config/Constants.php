@@ -91,6 +91,7 @@ defined('FREEZOZ_EMAIL_SUPPORT')							|| define('FREEZOZ_EMAIL_SUPPORT', "suppo
 defined('VALIDATION_EMAILCODE_LENGTH')					|| define('VALIDATION_EMAILCODE_LENGTH', 15); # Character count of the email validation codes
 defined('ACTIVATION_EMAIL_VALIDITY_MINUTES')			|| define('ACTIVATION_EMAIL_VALIDITY_MINUTES', 60 * 24); # Activation email link validity deadline (minutes)
 defined('RESETPW_EMAIL_VALIDITY_MINUTES')				|| define('RESETPW_EMAIL_VALIDITY_MINUTES', 60 * 1); # Activation email link validity deadline (minutes)
+defined('ACTIVATION_EMAIL_GAP_MINUTES')				|| define('ACTIVATION_EMAIL_GAP_MINUTES', 5); # Gap (in minutes) between sending activation email(s)
 
 # Forms constants
 defined('FORM_USERNAME_MINLENGTH')						|| define('FORM_USERNAME_MINLENGTH', 3); # UserName minimum length
@@ -127,11 +128,13 @@ defined('STATUS_RECAPTCHA_INVALID')						|| define('STATUS_RECAPTCHA_INVALID', 1
 defined('STATUS_ACTEMAIL_FAILED')						|| define('STATUS_ACTEMAIL_FAILED', 19); # Status: Sending activation email failed
 defined('STATUS_BAD_REMEMBERME')							|| define('STATUS_BAD_REMEMBERME', 20); # Status: Sending activation email failed
 defined('STATUS_RESETPWCODE_INVALID')					|| define('STATUS_RESETPWCODE_INVALID', 21); # Status: Invalid code for reset password
+defined('STATUS_ITEMTITLE_EXISTS')						|| define('STATUS_ITEMTITLE_EXISTS', 22); # Status: While adding new item in admin panel: item title exists
 
 # Home page constants
 defined('HOMEPAGE_MAXITEMROWCOUNT')						|| define('HOMEPAGE_MAXITEMROWCOUNT', 7); # Maximum item row count per page
 
 # Items-related constants
+defined('ITEMS_ROOT')                              || define('ITEMS_ROOT', WRITEPATH . ((substr(WRITEPATH, -1) == "/") || (substr(WRITEPATH, -1) == "\\") ? "" : "/") . "ProdItems");
 defined('ITEMS_ITEMFILE_ACCEPTEDFILETYPES')			|| define('ITEMS_ITEMFILE_ACCEPTEDFILETYPES', ["ZIP", "RAR"]); # Accepted filetypes for the item's file
 defined('ITEMS_IMAGE_ACCEPTEDFILETYPES')				|| define('ITEMS_IMAGE_ACCEPTEDFILETYPES', ["JPG", "PNG"]); # Accepted filetypes for the images
 defined('ITEMS_IMAGE_SMALL_DIMENSIONS')				|| define('ITEMS_IMAGE_SMALL_DIMENSIONS', ["width" => 590, "height" => 332]); # Small image dimensions
@@ -140,3 +143,8 @@ defined('ITEMS_VIDEO_ACCEPTEDFILETYPES')				|| define('ITEMS_VIDEO_ACCEPTEDFILET
 defined('ITEMS_VIDEO_SMALL_DIMENSIONS')				|| define('ITEMS_VIDEO_SMALL_DIMENSIONS', ["width" => 590, "height" => 332]); # Small video dimensions
 defined('ITEMS_VIDEO_FULL_DIMENSIONS')					|| define('ITEMS_VIDEO_FULL_DIMENSIONS', ["width" => 1920, "height" => 1080]); # Full-size video dimensions
 defined('ITEMS_AUDIO_ACCEPTEDFILETYPES')				|| define('ITEMS_AUDIO_ACCEPTEDFILETYPES', ["MP3"]); # Accepted filetypes for the audios
+defined('ITEMS_LICENSES')									|| define('ITEMS_LICENSES', [
+   ["index" => 1,		"name" => "CC0-1.0",				"description" => "Creative Commons Zero v1.0 Universal"],
+	["index" => 2,		"name" => "MIT",					"description" => "MIT License"]
+]); # Item license types
+defined('ITEMS_TITLE_MAXLENGTH')                   || define('ITEMS_TITLE_MAXLENGTH', 99); # Maximum length for item's name (also its folder name)

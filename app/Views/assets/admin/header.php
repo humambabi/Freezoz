@@ -42,6 +42,10 @@
 	echo "<script type='text/javascript'>" . PHP_EOL;
 	echo "\tconst BASE_URI = '" . base_url() . "';" . PHP_EOL;
 	echo "\tconst STATUS_SUCCESS = " . STATUS_SUCCESS . ";" . PHP_EOL;
+	echo "\tconst ITEMS_IMAGE_SMALL_DIMENSIONS = {width:" . ITEMS_IMAGE_SMALL_DIMENSIONS['width'] . ", height:" . ITEMS_IMAGE_SMALL_DIMENSIONS['height'] . "};" . PHP_EOL;
+	echo "\tconst ITEMS_IMAGE_FULL_DIMENSIONS = {width:" . ITEMS_IMAGE_FULL_DIMENSIONS['width'] . ", height:" . ITEMS_IMAGE_FULL_DIMENSIONS['height'] . "};" . PHP_EOL;
+	echo "\tconst ITEMS_VIDEO_SMALL_DIMENSIONS = {width:" . ITEMS_VIDEO_SMALL_DIMENSIONS['width'] . ", height:" . ITEMS_VIDEO_SMALL_DIMENSIONS['height'] . "};" . PHP_EOL;
+	echo "\tconst ITEMS_VIDEO_FULL_DIMENSIONS = {width:" . ITEMS_VIDEO_FULL_DIMENSIONS['width'] . ", height:" . ITEMS_VIDEO_FULL_DIMENSIONS['height'] . "};" . PHP_EOL;
 	echo "</script>" . PHP_EOL;
 	?>
 </head>

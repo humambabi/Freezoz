@@ -290,7 +290,7 @@ function pageRegisterScripts() {
 	$("#regform-pwconfirm").keyup(function() {
 		if ($("#regform-pwconfirm").parent().hasClass("error")) $("#regform-pwconfirm").parent().removeClass("error");
 	});
-}
+} // pageRegisterScripts()
 
 
 // Load <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>

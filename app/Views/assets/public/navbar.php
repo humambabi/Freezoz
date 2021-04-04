@@ -36,7 +36,7 @@
 	<div class="usermenu-item"><i class="fas fa-user"></i>My Account</div>
 	<div class="usermenu-item" type="separator"><div class="usermenu-separator"></div></div>
 	<?php if ($is_admin) { ?>
-		<div class="usermenu-item" onclick="window.location.href = BASE_URI + '/admincp/dashboard'"><i class="fas fa-tools"></i>Admin's Panel</div>
+		<div class="usermenu-item" onclick="window.location.href = BASE_URI + '/admincp/items'"><i class="fas fa-tools"></i>Admin's Panel</div>
 		<div class="usermenu-item" type="separator"><div class="usermenu-separator"></div></div>
 	<?php } ?>
 	<div class="usermenu-item" id="usermenu_signout"><i class="fas fa-sign-out-alt"></i>Sign Out</div>

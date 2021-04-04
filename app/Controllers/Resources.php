@@ -12,8 +12,6 @@ class Resources extends BaseController {
 	# Params: dir (directory name), typ (resource type), res (file name)
 	#
 	public function get() {
-		define('ITEMS_ROOT', WRITEPATH . ((substr(WRITEPATH, -1) == "/") || (substr(WRITEPATH, -1) == "\\") ? "" : "/") . "ProdItems");
-
 		/*
 		Quoted from php.net
 		The superglobals $_GET and $_REQUEST are already decoded. Using urldecode() on an element in $_GET or $_REQUEST could have unexpected and dangerous results.

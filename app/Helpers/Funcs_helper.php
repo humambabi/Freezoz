@@ -172,7 +172,7 @@ if (!function_exists('user_loggedin')) {
 		$db_users = new Users();
 		$session = \Config\Services::session();
 		helper('cookie');
-		$retdata = ['is_loggedin' => FALSE, 'is_admin' => FALSE]; // Initially
+		$retdata = ['is_loggedin' => FALSE, 'is_admin' => FALSE, 'is_active' => FALSE]; // Initially
 
 		$userid_ss = $session->get(SESSION_USERID);
 		$userid_ck = get_cookie(COOKIE_USERID, true); ### XSS-Clean
@@ -186,7 +186,11 @@ if (!function_exists('user_loggedin')) {
 			$dbrow = $db_users->where('rowid', $rowid_ss)->first();
 			if (empty($dbrow)) return $retdata; // It's FALSE
 			
-			$retdata = ['is_loggedin' => TRUE, 'is_admin' => empty($dbrow['is_admin']) ? FALSE : TRUE];
+			$retdata = [
+				'is_loggedin'	=> TRUE,
+				'is_admin'		=> empty($dbrow['is_admin']) ? FALSE : TRUE,
+				'is_active'		=> empty($dbrow['is_active']) ? FALSE : TRUE
+			];
 			return $retdata;
 		}
 
@@ -198,13 +202,18 @@ if (!function_exists('user_loggedin')) {
 
 			// Cookie is OK, Session is empty => create a session variable, and return OK (Previous sign-in)
 			$session->set([SESSION_USERID => $userid_ck]);
-			$retdata = ['is_loggedin' => TRUE, 'is_admin' => empty($dbrow['is_admin']) ? FALSE : TRUE];
+			$retdata = [
+				'is_loggedin'	=> TRUE,
+				'is_admin'		=> empty($dbrow['is_admin']) ? FALSE : TRUE,
+				'is_active'		=> empty($dbrow['is_active']) ? FALSE : TRUE
+			];
 		}
 
 		// Cookies and Session don't contain user_id !
 		return $retdata; // It's FALSE
 	}
 }
+
 
 ###################################################################################################
 if (!function_exists('user_signout')) {
@@ -237,6 +246,7 @@ if (!function_exists('user_signout')) {
 		return user_loggedin()['is_loggedin'];
 	}
 }
+
 
 ###################################################################################################
 if (!function_exists('sendemail_resetpassword')) {
@@ -284,5 +294,32 @@ if (!function_exists('sendemail_resetpassword')) {
 		);
 
 		return $email->send();
+	}
+
+
+	###################################################################################################
+	if (!function_exists('filter_foldername')) {
+		#
+		# Filter a folder name
+		#
+		# Remove bad characters and makes the name filesystem-ready.
+		#
+		# @param string $foldername Folder name
+		#
+		# @return filtered folder name
+		#
+		function filter_foldername($foldername) {
+			$foldername = strip_tags($foldername); 
+			$foldername = preg_replace('/[\r\n\t ]+/', ' ', $foldername);
+			$foldername = preg_replace('/[\"\*\/\:\<\>\?\'\|]+/', ' ', $foldername);
+			$foldername = strtolower($foldername);
+			$foldername = html_entity_decode($foldername, ENT_QUOTES, "utf-8" );
+			$foldername = htmlentities($foldername, ENT_QUOTES, "utf-8");
+			$foldername = preg_replace("/(&)([a-z])([a-z]+;)/i", '$2', $foldername);
+			$foldername = str_replace(' ', '-', $foldername);
+			$foldername = rawurlencode($foldername);
+			$foldername = str_replace('%', '-', $foldername);
+			return $foldername;
+		}
 	}
 }

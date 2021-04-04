@@ -13,6 +13,21 @@ class Pages extends BaseController {
 
 
 	################################################################################################
+	public function needs_activation() {
+		// If user is logged-in OR is activated, don't show this page, redirect to the home page
+		if (!$this->bLoggedIn || $this->bActive) {
+			header('Location: ' . base_url());
+			exit();
+		}
+		
+		echo view('assets/public/header', array('add_css' => ["/css/public/needs_activation.css"]));
+		echo view('assets/public/navbar', array('is_home' => FALSE, 'user_loggedin' => $this->bLoggedIn, 'is_admin' => $this->bAdmin));
+		echo view('pages/public/needs_activation');
+		echo view('assets/public/footer', array('is_home' => FALSE, 'add_js' => ["/js/public/needs_activation.js"]));
+	}
+
+
+	################################################################################################
 	public function home() {
 		echo view('assets/public/header', array('add_css' => ["/css/public/home.css"]));
 		echo view('assets/public/navbar', array('is_home' => TRUE, 'user_loggedin' => $this->bLoggedIn, 'is_admin' => $this->bAdmin));
@@ -84,7 +99,7 @@ class Pages extends BaseController {
 			// Check for activation code expiry
 			$expired = TRUE;
 			$deadline = strtotime($row['activation_datetime'] . " +0000 + " . strval(ACTIVATION_EMAIL_VALIDITY_MINUTES) . " minutes");
-			$remaining = $deadline - time(); # time() is timezone independent (=UTC)
+			$remaining = $deadline - time(); # time() is timezone independent (=UTC) (in seconds)
 			if ($remaining >= 0) $expired = FALSE; # Not expired yet (when there are positive number of seconds remaining)
 			if ($remaining > (ACTIVATION_EMAIL_VALIDITY_MINUTES * 60)) {
 				// Remaining MUST not exceed the valid period itself - that would be a programming error!
@@ -198,7 +213,9 @@ class Pages extends BaseController {
 				$add_js = ["/js/admin/items.js"];
 
 				$itemfile_inputaccept = ""; $itemfile_descaccept = "";
-				$itemimage_inputaccept = ""; $itemvideo_inputaccept = "";
+				$itemimage_inputaccept = ""; $itemimage_descaccept = "";
+				$itemvideo_inputaccept = ""; $itemvideo_descaccept = "";
+				$itemaudio_inputaccept = ""; $itemaudio_descaccept = "";
 
 				// Item's file
 				for ($i = 0; $i < count(ITEMS_ITEMFILE_ACCEPTEDFILETYPES); $i++) {
@@ -217,19 +234,45 @@ class Pages extends BaseController {
 				for ($i = 0; $i < count(ITEMS_IMAGE_ACCEPTEDFILETYPES); $i++) {
 					$itemimage_inputaccept .= "." . strtolower(ITEMS_IMAGE_ACCEPTEDFILETYPES[$i]);
 					$itemimage_inputaccept .= ($i != (count(ITEMS_IMAGE_ACCEPTEDFILETYPES) - 1) ? ", " : "");
+
+					$itemimage_descaccept .= strtoupper(ITEMS_IMAGE_ACCEPTEDFILETYPES[$i]);
+					if ($i < (count(ITEMS_IMAGE_ACCEPTEDFILETYPES) - 2)) {
+						$itemimage_descaccept .= ", ";
+					} else if ($i < (count(ITEMS_IMAGE_ACCEPTEDFILETYPES) - 1)) {
+						$itemimage_descaccept .= " or ";
+					}
 				}
 
 				// Item's video
 				for ($i = 0; $i < count(ITEMS_VIDEO_ACCEPTEDFILETYPES); $i++) {
 					$itemvideo_inputaccept .= "." . strtolower(ITEMS_VIDEO_ACCEPTEDFILETYPES[$i]);
 					$itemvideo_inputaccept .= ($i != (count(ITEMS_VIDEO_ACCEPTEDFILETYPES) - 1) ? ", " : "");
+
+					$itemvideo_descaccept .= strtoupper(ITEMS_VIDEO_ACCEPTEDFILETYPES[$i]);
+					if ($i < (count(ITEMS_VIDEO_ACCEPTEDFILETYPES) - 2)) {
+						$itemvideo_descaccept .= ", ";
+					} else if ($i < (count(ITEMS_VIDEO_ACCEPTEDFILETYPES) - 1)) {
+						$itemvideo_descaccept .= " or ";
+					}
 				}
 
+				// Item's audio
+				for ($i = 0; $i < count(ITEMS_AUDIO_ACCEPTEDFILETYPES); $i++) {
+					$itemaudio_inputaccept .= "." . strtolower(ITEMS_AUDIO_ACCEPTEDFILETYPES[$i]);
+					$itemaudio_inputaccept .= ($i != (count(ITEMS_AUDIO_ACCEPTEDFILETYPES) - 1) ? ", " : "");
+				
+					$itemaudio_descaccept .= strtoupper(ITEMS_AUDIO_ACCEPTEDFILETYPES[$i]);
+					if ($i < (count(ITEMS_AUDIO_ACCEPTEDFILETYPES) - 2)) {
+						$itemaudio_descaccept .= ", ";
+					} else if ($i < (count(ITEMS_AUDIO_ACCEPTEDFILETYPES) - 1)) {
+						$itemaudio_descaccept .= " or ";
+					}
+				}
 
-				$add_data['ItemFileInputAccept'] = $itemfile_inputaccept;
-				$add_data['ItemFileDescAccept'] = $itemfile_descaccept;
-				$add_data['ItemImageAccept'] = $itemimage_inputaccept;
-				$add_data['ItemVideoAccept'] = $itemvideo_inputaccept;
+				$add_data['ItemFileInputAccept'] = $itemfile_inputaccept; $add_data['ItemFileDescAccept'] = $itemfile_descaccept;
+				$add_data['ItemImageAccept'] = $itemimage_inputaccept; $add_data['ItemImageDescAccept'] = $itemimage_descaccept;
+				$add_data['ItemVideoAccept'] = $itemvideo_inputaccept; $add_data['ItemVideoDescAccept'] = $itemvideo_descaccept;
+				$add_data['ItemAudioAccept'] = $itemaudio_inputaccept; $add_data['ItemAudioDescAccept'] = $itemaudio_descaccept;
 				break;
 			}
 		}

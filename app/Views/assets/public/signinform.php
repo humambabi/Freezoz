@@ -95,11 +95,13 @@ function postData() {
 				return;
 			}
 
-			// OK, sign the user in
-//			$("#overlay-full").html('<i style="color:#20bf55;border-radius:50%;background-color:rgb(255 255 255 / 0.75);" class="far fa-5x fa-check-circle"></i>');
-//			setTimeout(function() {
+			if (!response.retdata) {
+				// User's account is not activated yet
+				window.location.href = BASE_URI + "/needs_activation";
+			} else {
+				// OK, user has signed in, and is activated. Refresh the current page
 				window.location.reload();
-//			}, 1000);
+			}
 		} // Received response
 	}); // JQ.Ajax()
 }

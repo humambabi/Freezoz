@@ -30,29 +30,34 @@ $routes->setAutoRoute(false); // Only use the defined routes
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/',													'Pages::home');
-$routes->get('/index',											'Pages::home');
-$routes->get('/home',											'Pages::home');
-$routes->get('/register',										'Pages::register');
-$routes->get('/terms',											'Pages::terms');
-$routes->get('/privacy',										'Pages::privacy');
-$routes->get('/activation/(:segment)/(:segment)',		'Pages::activation/$1/$2');
-$routes->get('/forgot_pw',										'Pages::forgot_pw');
-$routes->get('/reset_pw/(:segment)/(:segment)',			'Pages::reset_pw/$1/$2');
-$routes->get('/admincp/(:segment)',							'Pages::admincp/$1');
+$routes->get('/',														'Pages::home');
+$routes->get('/index',												'Pages::home');
+$routes->get('/home',												'Pages::home');
+$routes->get('/register',											'Pages::register');
+$routes->get('/terms',												'Pages::terms');
+$routes->get('/privacy',											'Pages::privacy');
+$routes->get('/activation/(:segment)/(:segment)',			'Pages::activation/$1/$2');
+$routes->get('/forgot_pw',											'Pages::forgot_pw');
+$routes->get('/reset_pw/(:segment)/(:segment)',				'Pages::reset_pw/$1/$2');
+$routes->get('/needs_activation',								'Pages::needs_activation');
+$routes->get('/admincp/(:segment)',								'Pages::admincp/$1');
 
-$routes->get('/assets/signin_form', 						'Assets::signin_form');
-$routes->get('/assets/categories_form', 					'Assets::categories_form');
+$routes->get('/assets/signin_form', 							'Assets::signin_form');
+$routes->get('/assets/categories_form', 						'Assets::categories_form');
 
-$routes->post('requests/user_register',					'Requests::user_register');
-$routes->post('requests/sign_in',							'Requests::sign_in');
-$routes->post('requests/sign_out',							'Requests::sign_out');
-$routes->post('requests/forgot_pw',							'Requests::forgot_pw');
-$routes->post('requests/reset_pw',							'Requests::reset_pw');
-$routes->post('requests/items_getlist',					'Requests::items_getlist');
-$routes->post('requests/item_getdata',						'Requests::item_getdata');
+$routes->post('requests/user_register',						'Requests::user_register');
+$routes->post('requests/sign_in',								'Requests::sign_in');
+$routes->post('requests/sign_out',								'Requests::sign_out');
+$routes->post('requests/forgot_pw',								'Requests::forgot_pw');
+$routes->post('requests/reset_pw',								'Requests::reset_pw');
+$routes->post('requests/items_getlist',						'Requests::items_getlist');
+$routes->post('requests/item_getdata',							'Requests::item_getdata');
+$routes->post('requests/send_activationcode',				'Requests::send_activationcode');
+$routes->post('requests/admin_items_add',						'Requests::admin_items_add');
+$routes->post('requests/admin_items_checktitle',			'Requests::admin_items_checktitle');
+$routes->post('requests/admin_items_delete',					'Requests::admin_items_delete');
 
-$routes->get('/resources/get', 								'Resources::get');
+$routes->get('/resources/get', 									'Resources::get');
 
 
 /**

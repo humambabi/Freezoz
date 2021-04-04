@@ -133,7 +133,7 @@ async function getOneItemData(elItem) {
 						"      <div class='rating-downsales'>" + (itemFree ? "Downloads" : "Sales") + ": " + response.retdata.downsalecount + "</div>" +
 						"   </div>" +
 						"   <div class='btmsec-control'>" +
-						"      <button type='button' class='solid green medium'>DETAILS</button>" +
+						"      <button type='button' class='solid green medium' onclick='swal(`Comming soon!\r\n\r\n😊`)'>DETAILS</button>" +
 						"   </div>" +
 						"</div>"
 					);
