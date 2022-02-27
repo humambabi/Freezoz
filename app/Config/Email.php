@@ -47,21 +47,21 @@ class Email extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $SMTPHost = 'mail.freezoz.com';
+	public $SMTPHost = '';
 
 	/**
 	 * SMTP Username
 	 *
 	 * @var string
 	 */
-	public $SMTPUser = 'support@freezoz.com';
+	public $SMTPUser = '';
 
 	/**
 	 * SMTP Password
 	 *
 	 * @var string
 	 */
-	public $SMTPPass = '1fz*bhmail';
+	public $SMTPPass = '';
 
 	/**
 	 * SMTP Port
